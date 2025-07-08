@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="web.dao.face.BoardDao">
+    
+    <select id ="selectCntall" resultType="int">
+    	SELECT count(*) FROM board
+    </select>
+    
+    <select id="selectList" resultType="Board" parameterType="Paging">
+    	SELECT * FROM (
+			SELECT rownum rnum, B.* FROM (
+				SELECT
+					boardno, title, content , userid
+					, username, hit, writedate
+				FROM joinboard
+				ORDER BY boardno DESC
+			) B
+		) BOARD
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }   
+    </select>
+    
+    <select id="testList">
+		SELECT empno FROM emp
+		WHERE empno = 100
+    </select>
+    
+    
+    </mapper>
