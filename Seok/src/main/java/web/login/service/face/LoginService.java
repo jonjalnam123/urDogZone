@@ -6,4 +6,6 @@ public interface LoginService {
 
 	public void insertMember(UserDTO userDTO);
 
+	public String selectUserIdCheck(String userId);
+
 }

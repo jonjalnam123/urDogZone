@@ -5,26 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>자체 회원가입</title>
-<style>
-  table {
-    border-collapse: collapse;
-    width: 400px;
-    margin: 20px auto;
-  }
-  td {
-    padding: 10px;
-  }
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="date"] {
-    width: 100%;
-    padding: 5px;
-  }
-  .submit-row {
-    text-align: center;
-  }
-</style>
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -36,9 +16,9 @@ $(document).ready(function(){
 		var params = queryString;
 		var dataType = 'json'
 	 	ajaxStart(url, params, dataType); */
-	})
+	});
 	
-	// 등록버튼 이벤트
+	// 아이디 중복검사 이벤트
 	$('#idChkBtn').on('click', function () {
  		var userId = $("#userId").val();
 		var url = '/join/selectUserIdCheck.do';
@@ -46,8 +26,18 @@ $(document).ready(function(){
 				userId : userId
 		}
 		var dataType = 'json'
-	 	ajaxStart(url, params, dataType);
-	})
+	 	ajaxStart(url, params, dataType, function(data) {
+	        if (data.resultId === 'Y' ) {
+	            alert("사용 불가능한 아이디 입니다.");
+	        } else {
+	            alert("사용 가능한 아이디입니다.");
+	        }
+		});
+	});
+	
+	$('#delBtn').on('click', function() {
+		window.location.href = '/';
+	});
 	
 });
 </script>
@@ -57,6 +47,10 @@ $(document).ready(function(){
 
   <form action="/join/insertMember.do" method="post" id="joinForm">
     <table border="1">
+      <tr>
+        <td>이름</td>
+        <td><input type="text" name="userNm" id="userNm"></td>
+      </tr>
       <tr>
         <td>아이디</td>
         <td>
@@ -73,8 +67,8 @@ $(document).ready(function(){
         <td><input type="password" name="userPwCheck" id="userPwCheck"></td>
       </tr>
       <tr>
-        <td>이름</td>
-        <td><input type="text" name="userNm" id="userNm"></td>
+        <td>핸드폰</td>
+        <td><input type="text" name="userPhone" id="userPhone" placeholder=" '-' 없이 숫자만 입력해주세요."></td>
       </tr>
       <tr>
         <td>이메일</td>
@@ -89,6 +83,15 @@ $(document).ready(function(){
         <td>
           <label><input type="radio" name="userGen" value="M"> 남성</label>
           <label><input type="radio" name="userGen" value="F"> 여성</label>
+        </td>
+      </tr>
+      <tr>
+        <td>우편번호</td>
+        <td>
+        	<input type="text" id="userPostcode" placeholder="우편번호">
+       	  	<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
+       	  	<input type="text" id="userAd" placeholder="도로명주소">
+       	  	<input type="text" id="userAdd" placeholder="상세주소">
         </td>
       </tr>
       <tr>
@@ -114,7 +117,10 @@ $(document).ready(function(){
       </tr>
       <tr>
         <td>약관 동의</td>
-        <td><label><input type="checkbox" name="agree" required> 동의합니다</label></td>
+        <td>
+        	<textarea rows="" cols="" readonly="readonly">봉사 중 찍힌 사진은 SNS에 활용될수있습니다.</textarea><br>
+        	<label><input type="checkbox" name="agree" required> 동의합니다</label>
+        </td>
       </tr>
     </table>
     <div>

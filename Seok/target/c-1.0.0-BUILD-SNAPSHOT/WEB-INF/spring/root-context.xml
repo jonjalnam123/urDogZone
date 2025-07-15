@@ -5,11 +5,18 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+<!-- 	<bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
 		<property name="username" value="scott" />
 		<property name="password" value="tiger123!@#" /> 
+	</bean> -->
+	
+	<bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3307/urDogZone?serverTimezone=Asia/Seoul&amp;characterEncoding=UTF-8&amp;useSSL=false" />
+		<property name="username" value="root" />
+		<property name="password" value="your_password" />
 	</bean>
 	
 	<!-- 마이바티스 로그 객체 설정 -->

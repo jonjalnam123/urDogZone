@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,13 @@ public class LoginController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	private LoginService loginService;
+	@Autowired LoginService loginService;
+	
+	@RequestMapping(value="/selectJoinMethod.do")
+	public String selectJoinMethod() {
+		logger.info("=== 회원가입 방법 선택 진입 ===");  
+		return "login/joinMethod.page";
+	}
 	
 	@RequestMapping(value="/getJoinPage.do")
 	public String join() {
@@ -44,10 +51,12 @@ public class LoginController {
 	@RequestMapping(value="/selectUserIdCheck.do")
 	@ResponseBody
 	public Map<String, Object> selectUserIdCheck( @RequestParam("userId") String userId ) {
-		
+		logger.info("=== 아이디 중복검사 진행 === ");
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
+			String resultId = loginService.selectUserIdCheck(userId);
 			result.put("result", "SUCCESS");
+			result.put("resultId", resultId);
 		} catch (Exception e) {
 			result.put("result", "FAIL");
 		}

@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<footer class="footer">
-	<small>환영합니다</small>
+<footer>
+  <p>© 2025 유아독존 | 모두의 보호가, 모두의 가족이 됩니다.</p>
 </footer>
-
-</div><!-- .wrap -->
-
-</body>
-</html>

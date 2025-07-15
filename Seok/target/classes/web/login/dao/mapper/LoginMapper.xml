@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 마이바티스 3 Mapper DTD -->
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="web.login.dao.face.LoginDao">
 
-	
+	<select id="selectUserIdCheck" parameterType="String" resultType="UserDTO">
+		SELECT * FROM tb_user_info
+		WHERE USER_ID = #{userId}
+	</select>
+
 </mapper>

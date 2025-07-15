@@ -23,6 +23,7 @@
 	<typeAliases>
 		<package name="web.sample.dto"/>
 		<package name="web.main.dto"/>
+		<package name="web.login.dto"/>
 		<package name="web.util"/>
 	</typeAliases>
 	

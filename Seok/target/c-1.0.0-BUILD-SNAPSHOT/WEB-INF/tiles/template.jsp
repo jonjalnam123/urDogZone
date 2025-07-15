@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>유아독존 타일즈 레이아웃</title>
+<title>URDOGZONE</title>
 <style>
 	#header{            
 	    width:100%;

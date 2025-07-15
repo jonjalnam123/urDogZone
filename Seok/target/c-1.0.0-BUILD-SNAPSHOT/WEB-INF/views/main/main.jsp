@@ -12,7 +12,7 @@
 $(document).ready(function(){
 	
 	$('#joinBtn').on('click', function() {
-		window.location.href = '/join/member.do'
+		window.location.href = '/join/selectJoinMethod.do'
 	})
 	
 	$('#loginBtn').on('click', function() {

@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+/* === 기본 변수 설정 === */
+:root {
+  --main-color: #d35400;      /* 어두운 주황색 */
+  --accent-color: #e67e22;    /* 밝은 주황 포인트 */
+  --bg-color: #ffffff;
+  --text-color: #333;
+  --border-color: #ddd;
+  --font-default: 'Noto Sans KR', sans-serif;
+}
+
+/* === 초기화 === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: var(--font-default);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* === 레이아웃 === */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+header, footer {
+  background-color: var(--main-color);
+  color: white;
+  padding: 20px;
+}
+header h1, footer p {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+/* === 버튼 === */
+.btn {
+  padding: 10px 20px;
+  background-color: var(--main-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+.btn:hover {
+  background-color: var(--accent-color);
+}
+
+/* === 카드 박스 === */
+.card {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+/* === 유틸리티 === */
+.text-center { text-align: center; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.w-full { width: 100%; }
+
+/* === 반응형 === */
+@media (max-width: 768px) {
+  main {
+    padding: 16px 10px;
+  }
+
+  header h1, footer p {
+    font-size: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    font-size: 15px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  width: 400px;
+  margin: 20px auto;
+}
+td {
+  padding: 10px;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
+  width: 100%;
+  padding: 5px;
+}
+.submit-row {
+  text-align: center;
+}

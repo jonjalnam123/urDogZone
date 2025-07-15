@@ -1,7 +1,8 @@
 /**
  * 공통 기능 JS
  */
- 
+
+// AJAX 통신 함수
 function ajaxStart(url, params, dataType) {
 	
 	$.ajax({
@@ -10,11 +11,17 @@ function ajaxStart(url, params, dataType) {
     data : params,
     dataType : dataType,
     success: function (data, status, xhr) {
-		console.log('성공 데이터====' + data)
+
     },
     error: function (data, status, err) {
-		console.log('실패 데이터====' + data)
+
     }
 });
 	
+}
+
+// 현재 서버 URI 구하기
+function getNowUri() {
+	const fullUrl = window.location.origin;
+	return fullUrl;
 }

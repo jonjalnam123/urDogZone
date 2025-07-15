@@ -41,5 +41,5 @@
 <div class="wrap">
 
 <header class="header">
-	<h1><a href="/">유아독존</h1></a>
+	<h1><a href="/">유아독존</a></h1>
 </header>
