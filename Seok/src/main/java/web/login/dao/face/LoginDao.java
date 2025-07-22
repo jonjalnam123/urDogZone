@@ -9,4 +9,8 @@ public interface LoginDao {
 
 	UserDTO selectUserIdCheck(String userId);
 
+	int insertMember(UserDTO userDTO);
+
+	UserDTO selectUserInfo(UserDTO userDTO);
+
 }

@@ -12,7 +12,7 @@ $(document).ready(function(){
 	
 	// 등록버튼 이벤트
 	$('#joinBtn').on('click', function () {
-		window.location.href = '/join/getJoinPage.do'
+		goToUri('/join/getJoinAgreePage.do');
 	})
 	
 	window.Kakao.init('a594e9d0378896fcec9e7b2822bf6977');

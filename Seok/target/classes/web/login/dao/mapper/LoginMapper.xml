@@ -8,8 +8,92 @@
 <mapper namespace="web.login.dao.face.LoginDao">
 
 	<select id="selectUserIdCheck" parameterType="String" resultType="UserDTO">
-		SELECT * FROM tb_user_info
-		WHERE USER_ID = #{userId}
+		/* LoginDao.selectUserIdCheck */
+		SELECT USER_ID
+				 , USER_PW
+				 , USER_NM
+				 , USER_POSTCODE
+				 , USER_AD
+				 , USER_ADD
+				 , USER_PHONE
+				 , USER_BIRTH
+				 , USER_CAR_YN
+				 , USER_VOL_EXP_YN
+				 , USER_CAR_POOL_YN
+				 , USER_TERMS_F
+				 , USER_TERMS_S
+				 , REG_ID
+				 , REG_DT
+				 , UPD_ID
+				 , UPD_DT 
+		   FROM TB_USER_INFO
+		  WHERE USER_ID = #{userId}
+	</select>
+	
+	<insert id="insertMember" parameterType="UserDTO"> 
+		/* LoginDao.insertMember */
+		INSERT INTO TB_USER_INFO (
+	       USER_ID
+		 , USER_PW
+		 , USER_NM
+		 , USER_POSTCODE
+		 , USER_AD
+		 , USER_ADD
+		 , USER_PHONE
+		 , USER_BIRTH
+		 , USER_CAR_YN
+		 , USER_VOL_EXP_YN
+		 , USER_CAR_POOL_YN
+		 , USER_TERMS_F
+		 , USER_TERMS_S
+		 , REG_ID
+		 , REG_DT
+		 , UPD_ID
+		 , UPD_DT
+		) 
+		VALUES (
+		   #{userId}
+		 , #{userPw}
+		 , #{userNm}
+		 , #{userPostcode}
+		 , #{userAd}
+		 , #{userAdd}
+		 , #{userPhone}
+		 , #{userBirth}
+		 , #{userCarYn}
+		 , #{userVolExpYn}
+		 , #{userCarPoolYn}
+		 , #{userTermsF}
+		 , #{userTermsS}
+		 , #{regId}
+		 , SYSDATE()
+		 , #{updId}
+		 , SYSDATE()
+		)
+	</insert>
+	
+	<select id="selectUserInfo" parameterType="UserDTO" resultType="UserDTO">
+		/* LoginDao.selectUserInfo */
+		SELECT USER_ID
+				 , USER_PW
+				 , USER_NM
+				 , USER_POSTCODE
+				 , USER_AD
+				 , USER_ADD
+				 , USER_PHONE
+				 , USER_BIRTH
+				 , USER_CAR_YN
+				 , USER_VOL_EXP_YN
+				 , USER_CAR_POOL_YN
+				 , USER_TERMS_F
+				 , USER_TERMS_S
+				 , REG_ID
+				 , REG_DT
+				 , UPD_ID
+				 , UPD_DT 
+		   FROM TB_USER_INFO
+		  WHERE USER_ID = #{userId}
+		     AND USER_PW = #{userPw}
 	</select>
 
 </mapper>

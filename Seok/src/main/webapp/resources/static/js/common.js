@@ -1,8 +1,14 @@
-/**
- * 공통 기능 JS
- */
+/*
+* 공통 JS
+*/
 
-// AJAX 통신 함수
+
+/*************************************************************
+* 작성자 : 최정석
+* 작성날짜 : 2025.07.22
+* 내용 : 공통 AJAX 통신 함수
+* 파라미터 : URL, PARAMS, DATATYPE, CALLBACK
+**************************************************************/
 function ajaxStart(url, params, dataType, callback) {
 	$.ajax({
 	    url: url,
@@ -10,7 +16,7 @@ function ajaxStart(url, params, dataType, callback) {
 	    data : params,
 	    dataType : dataType,
 	    success: function (data, status, xhr) {
-	        if (typeof callback === 'function') {
+	        if (typeof callback === 'function' && callback !== null ) {
 				console.log('data>>>>', data);
 	            callback(data);
 	        } else {
@@ -23,13 +29,23 @@ function ajaxStart(url, params, dataType, callback) {
 	});
 }
 
-// 현재 서버 URI 구하기
+/*************************************************************
+* 작성자 : 최정석
+* 작성날짜 : 2025.07.22
+* 내용 : 현재서버 URI 확인
+* 파라미터 : 
+**************************************************************/
 function getNowUri() {
 	const fullUrl = window.location.origin;
 	return fullUrl;
 }
 
-// kakao 주소 API
+/*************************************************************
+* 작성자 : 최정석
+* 작성날짜 : 2025.07.22
+* 내용 : kakao 주소 찾기 함수
+* 파라미터 : 
+**************************************************************/
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -57,22 +73,41 @@ function execDaumPostcode() {
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('userPostcode').value = data.zonecode;
             document.getElementById("userAd").value = roadAddr;
-            
-            var guideTextBox = document.getElementById("guide");
-            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-            if(data.autoRoadAddress) {
-                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                guideTextBox.style.display = 'block';
-
-            } else if(data.autoJibunAddress) {
-                var expJibunAddr = data.autoJibunAddress;
-                guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                guideTextBox.style.display = 'block';
-            } else {
-                guideTextBox.innerHTML = '';
-                guideTextBox.style.display = 'none';
-            }
         }
     }).open();
 }
+
+/*************************************************************
+* 작성자 : 최정석
+* 작성날짜 : 2025.07.22
+* 내용 : 빈 값 확인 함수
+* 파라미터 : param ( value 값 )
+**************************************************************/
+function isEmpty(param) {
+	if ( param === '' || param === null || param === undefined ) {
+		return false;
+	} else {
+		return true;
+	}
+};
+
+/*************************************************************
+* 작성자 : 최정석
+* 작성날짜 : 2025.07.22
+* 내용 : 라디오 버튼 체크 값 구하기 함수
+* 파라미터 : name ( name 태그 값 )
+**************************************************************/
+function getCheckedVal(name) {
+	const value = $('input[name=' + name + ']:checked').val();
+	return value;
+};
+
+/*************************************************************
+* 작성자 : 최정석
+* 작성날짜 : 2025.07.22
+* 내용 : URI 경로 이동 함수
+* 파라미터 : uri ( 호출경로 )
+**************************************************************/
+function goToUri(uri) {
+	window.location.href = uri;
+};
