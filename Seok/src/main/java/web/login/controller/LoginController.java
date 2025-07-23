@@ -28,14 +28,14 @@ public class LoginController {
 	@Autowired LoginService loginService;
 	
 	/**
-	 ******************************************
+	******************************************
 	* @MethodName    : selectJoinMethod
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.22
 	* @Comment : 회원가입 방법 선택 화면 조회
 	* @return
 	*******************************************
-	 */
+	*/
 	@RequestMapping(value="/selectJoinMethod.do")
 	public String selectJoinMethod() {
 		logger.info("=== 회원가입 방법 선택 화면 컨트롤러 진입 ===");  
@@ -43,14 +43,14 @@ public class LoginController {
 	}
 	
 	/**
-	 ******************************************
+	******************************************
 	* @MethodName    : getJoinAgreePage
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.22
 	* @Comment : 약관동의 화면 조회
 	* @return
 	*******************************************
-	 */
+	*/
 	@RequestMapping(value = "/getJoinAgreePage.do")
 	public String getJoinAgreePage() {
 		logger.info("=== 약관동의 화면 컨트롤러 진입 ===");  
@@ -58,7 +58,7 @@ public class LoginController {
 	}
 	
 	/**
-	 ******************************************
+	******************************************
 	* @MethodName    : getJoinPage
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.22
@@ -68,7 +68,7 @@ public class LoginController {
 	* @param terms2
 	* @return
 	*******************************************
-	 */
+	*/
 	@RequestMapping(value="/getJoinPage.do")
 	public String getJoinPage( Model model, @RequestParam("terms1") String terms1, @RequestParam("terms2") String terms2) {
 		logger.info("=== 회원가입 화면 컨트롤러 진입 ===");  
@@ -80,7 +80,7 @@ public class LoginController {
 	}
 	
 	/**
-	 ******************************************
+	******************************************
 	* @MethodName    : selectUserIdCheck
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.22
@@ -88,7 +88,7 @@ public class LoginController {
 	* @param userId
 	* @return
 	*******************************************
-	 */
+	*/
 	@RequestMapping(value="/selectUserIdCheck.do")
 	@ResponseBody
 	public Map<String, Object> selectUserIdCheck( @RequestParam("userId") String userId ) {
@@ -107,7 +107,7 @@ public class LoginController {
 	}
 	
 	/**
-	 ******************************************
+	******************************************
 	* @MethodName    : insertMember
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.22
@@ -116,7 +116,7 @@ public class LoginController {
 	* @param session
 	* @return
 	*******************************************
-	 */
+	*/
 	@RequestMapping(value="/insertMember.do")
 	public String insertMember( @ModelAttribute UserDTO userDTO, HttpSession session) {
 		String uri = "";
@@ -124,9 +124,9 @@ public class LoginController {
 			logger.info("=== 회원가입 컨트롤러 실행 === ");
 			int result = loginService.insertMember(userDTO, session);
 			if ( result == 1 ) {
-				uri = "login/loginSuccess.page";
+				uri = "redirect:/join/getJoinSuccessPage.do";
 			} else {
-				uri = "login/loginFail.page";
+				uri = "redirect:/join/getJoinFailPage.do";
 			}
 		} catch (Exception e) {  
 			logger.info("=== 회원가입 컨트롤러 실패 === ");
@@ -135,7 +135,35 @@ public class LoginController {
 	}
 	
 	/**
-	 ******************************************
+	******************************************
+	* @MethodName    : getJoinSuccessPage
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.23
+	* @Comment : 회원가입 성공 화면 호출
+	* @return
+	*******************************************
+	*/
+	@RequestMapping(value="/getJoinSuccessPage.do")
+	public String getJoinSuccessPage() {
+	    return "login/joinSuccess.page";
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : getJoinFailPage
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.23
+	* @Comment : 회원가입 실패 화면 호출
+	* @return
+	*******************************************
+	*/
+	@RequestMapping(value="/getJoinFailPage.do")
+	public String getJoinFailPage() {
+	    return "login/joinFail.page";
+	}
+	
+	/**
+	******************************************
 	* @MethodName    : login
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.22
@@ -145,7 +173,7 @@ public class LoginController {
 	* @param redirectAttributes
 	* @return
 	*******************************************
-	 */
+	*/
 	@RequestMapping(value="/login.do")
 	@ResponseBody
 	public Map<String,Object> login(@ModelAttribute UserDTO userDTO, HttpSession session, RedirectAttributes redirectAttributes) {
@@ -165,7 +193,7 @@ public class LoginController {
 	}
 	
 	/**
-	 ******************************************
+	******************************************
 	* @MethodName    : logout
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.22
@@ -173,7 +201,7 @@ public class LoginController {
 	* @param session
 	* @return
 	*******************************************
-	 */
+	*/
 	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) {
 		logger.info("=== 로그아웃 컨트롤러 진입 === ");

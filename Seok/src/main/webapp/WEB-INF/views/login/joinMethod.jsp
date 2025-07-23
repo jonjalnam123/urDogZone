@@ -1,11 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원가입 방법 선택</title>
-</head>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -56,9 +49,6 @@ function kakaoLogout() {
 }
 
 </script>
-<body>
 <button type="button" onclick="kakaoLogout()"> 로그아웃</button>
 <button type="button" id="kakaoJoinBtn">카카오 로그인</button>
 <button type="button" id="joinBtn">회원가입</button>
-</body>
-</html>

@@ -111,3 +111,22 @@ function getCheckedVal(name) {
 function goToUri(uri) {
 	window.location.href = uri;
 };
+
+/*************************************************************
+* 작성자 : 최정석
+* 작성날짜 : 2025.07.22
+* 내용 : Confirm 호출 함수
+* 파라미터 : conMsg
+**************************************************************/
+function callConfirm(conMsg) {
+	
+	var result = '';
+	
+	if(confirm(conMsg)){
+		result = 'Y'
+	}else{
+		result = 'N'
+	}
+
+	return result
+};
