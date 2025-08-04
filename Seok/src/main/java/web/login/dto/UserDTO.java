@@ -44,6 +44,9 @@ public class UserDTO {
 	//사용자 약관동의 2
 	private String userTermsS;
 	
+	//사용자 분류
+	private String userType;
+	
 	//등록자 아이디
 	private String regId;
 	

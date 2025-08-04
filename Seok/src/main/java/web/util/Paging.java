@@ -15,6 +15,8 @@ public class Paging {
 	private int startNo; //화면에 보이는 게시글의 시작 번호
 	private int endNo; //화면에 보이는 게시글의 끝 번호
 	
+	private String uri;
+	
 	
 	//디폴트 생성자 - 페이징 로직이 처리되지 않는다
 	public Paging() {}
@@ -152,5 +154,12 @@ public class Paging {
 	}
 	public void setEndNo(int endNo) {
 		this.endNo = endNo;
+	}
+	
+	public String getUri() {
+		return uri;
+	}
+	public void setUri(String uri) {
+		this.uri = uri;
 	}
 }

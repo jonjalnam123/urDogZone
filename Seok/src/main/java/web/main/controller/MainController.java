@@ -15,4 +15,10 @@ public class MainController {
 		logger.info("===[main] 진입===");
 		return "main/main.page";
 	}
+	
+	@RequestMapping(value="/admin.do")
+	public String adminMain() {
+		logger.info("===[adminMain] 진입===");
+		return "admmain/admMain.admin";
+	}
 }

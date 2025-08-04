@@ -201,3 +201,51 @@ input[type="date"] {
 .submit-row {
   text-align: center;
 }
+
+/* === Volunteer 테이블 기본 스타일 === */
+.volunteer-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 14px;
+  min-width: 900px; /* 가로 스크롤을 위한 최소 폭 */
+}
+
+.volunteer-table th,
+.volunteer-table td {
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+  word-break: break-word;
+}
+
+.volunteer-table thead {
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+.volunteer-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.volunteer-table tbody tr:hover {
+  background-color: #ffe6cc;
+}
+
+/* === 테이블 반응형 === */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* === 모바일에서 카드 내부 패딩 감소 === */
+@media (max-width: 768px) {
+  .card {
+    padding: 10px;
+  }
+
+  .volunteer-table {
+    font-size: 13px;
+  }
+}

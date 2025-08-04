@@ -27,6 +27,8 @@
         </ul>
       </li>
       <li><a href="#">문의하기</a></li>
+      <!-- 관리자 로그인 버튼 추가 -->
+      <li class="admin-login"><a href="/admLogin/getAdminLogin.do">관리자 로그인</a></li>
     </ul>
   </nav>
 </header>

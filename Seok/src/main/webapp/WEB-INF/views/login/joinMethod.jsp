@@ -5,7 +5,7 @@ $(document).ready(function(){
 	
 	// 등록버튼 이벤트
 	$('#joinBtn').on('click', function () {
-		goToUri('/join/getJoinAgreePage.do');
+		goToUri('/login/getJoinAgreePage.do');
 	})
 	
 	window.Kakao.init('a594e9d0378896fcec9e7b2822bf6977');
@@ -18,7 +18,7 @@ $(document).ready(function(){
 
 function kakaoLogin() {
 	
-	const returnUrl = getNowUri() + '/join/getJoinPage.do';
+	const returnUrl = getNowUri() + '/login/getJoinPage.do';
 	
 	window.Kakao.Auth.login({
 		  scope : 'profile_nickname, profile_image, account_email'

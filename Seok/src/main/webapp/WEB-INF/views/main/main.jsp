@@ -4,14 +4,14 @@
 $(document).ready(function(){
 	
 	$('#joinBtn').on('click', function() {
-		goToUri('/join/selectJoinMethod.do');
+		goToUri('/login/selectJoinMethod.do');
 	})
 	
 	$('#loginBtn').on('click', function() {
 		var userId = $('#userId').val()
 		var userPw = $('#userPw').val()
 		
-		var url = '/join/login.do';
+		var url = '/login/userLogin.do';
 		var params = {
 				  userId : userId
 				, userPw : userPw
@@ -29,14 +29,14 @@ $(document).ready(function(){
 	});
 	
 	$('#logoutBtn').on('click', function() {
-		goToUri('/join/logout.do');
+		goToUri('/login/logout.do');
 	})
 	
 });
 </script>
 <c:choose>
 	<c:when test="${userId eq '' || userId eq null || empty userId}">
-	<form action="/join/login.do" method="post" id="loginForm">
+	<form action="/login/login.do" method="post" id="loginForm">
 		<div>
 			<input id="userId" name="userId" type="text" placeholder="아이디"><br>
 			<input id="userPw" name="userPw" type="password"  placeholder="비밀번호" ><br>

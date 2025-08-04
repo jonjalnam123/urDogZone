@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import web.admlogin.dto.AdminDTO;
 import web.login.dao.face.LoginDao;
 import web.login.dto.UserDTO;
 import web.login.service.face.LoginService;
@@ -19,22 +20,39 @@ public class LoginServiceImpl implements LoginService{
 	
 	@Autowired LoginDao loginDao;
 	
+	/**
+	******************************************
+	* @MethodName    : selectUserIdCheck
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.22
+	* @Comment : 아이디 중복검사
+	* @param userId
+	* @return
+	*******************************************
+	*/
 	@Override
 	public String selectUserIdCheck(String userId) {
-		
-		UserDTO userDto = loginDao.selectUserIdCheck(userId);
+		int resultCnt = loginDao.selectUserIdCheck(userId);
 		String result = "";
-		
-		if ( userDto == null ) {
-			result = "N";
-		} else {
+		if ( resultCnt < 0 ) {
 			result = "Y";
+		} else {
+			result = "N";
 		}
-		
 		return result;
-		
 	}
 	
+	/**
+	******************************************
+	* @MethodName    : insertMember
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.22
+	* @Comment : 회원가입 진행
+	* @param userDTO
+	* @param session
+	* @return
+	*******************************************
+	*/
 	@Override
 	public int insertMember(UserDTO userDTO, HttpSession session) {
 		
@@ -64,8 +82,19 @@ public class LoginServiceImpl implements LoginService{
 		
 	}
 	
+	/**
+	******************************************
+	* @MethodName    : userLogin
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.22
+	* @Comment : 로그인
+	* @param userDTO
+	* @param session
+	* @return
+	*******************************************
+	*/
 	@Override
-	public String selectUserInfo(UserDTO userDTO, HttpSession session) {
+	public String userLogin(UserDTO userDTO, HttpSession session) {
 		String result = "";
 		String userPwOrg = userDTO.getUserPw();
 		
@@ -73,13 +102,19 @@ public class LoginServiceImpl implements LoginService{
 		String encryPassword = Sha256.encrypt(userPwOrg);
 		userDTO.setUserPw(encryPassword); 
 				
-		UserDTO userDto = loginDao.selectUserInfo(userDTO);
+		UserDTO userDto = loginDao.userLogin(userDTO);
 		
 		if ( userDto != null ) {
 			String userId = userDto.getUserId();
 			String userNm = userDto.getUserNm();
+			String userType = userDto.getUserType();
+			Object adminId = session.getAttribute("adminId");
+			if ( adminId != null ) {
+				session.invalidate();
+			}
 			session.setAttribute("userId", userId);
 			session.setAttribute("userNm", userNm);
+			session.setAttribute("userType", userType);
 			result = "Y";
 		} else {
 			result = "N";
@@ -87,5 +122,4 @@ public class LoginServiceImpl implements LoginService{
 		
 		return result;
 	}
-
 }

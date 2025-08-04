@@ -2,7 +2,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	$('#goToMainBtn').on('click', function() {
-		window.location.href = '/';
+		goToUri('/');
 	})
 });
 </script>

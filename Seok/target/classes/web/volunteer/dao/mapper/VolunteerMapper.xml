@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="web.volunteer.dao.face.VolunteerDao">
+
+    <select id ="selectCntall" resultType="int">
+    	SELECT COUNT(*) FROM TB_VOLUNTEER_INFO
+    </select>
+
+	<select id="getVolunteerList" parameterType="Paging" resultType="VolunteerDTO">
+		/* VolunteerDao.getVolunteerList */
+		SELECT VOLUNTEER_CD
+				, PLACE_CD
+				, VOLUNTEER_TITLE
+				, VOLUNTEER_NOTE
+				, VOLUNTEER_MAX_CNT
+				, VOLUNTEER_DT
+				, REG_ID
+				, REG_DT
+				, UPD_ID
+				, UPD_DT
+		  FROM TB_VOLUNTEER_INFO
+		 ORDER BY VOLUNTEER_DT DESC
+		  LIMIT #{startNo}, #{endNo}
+	</select>
+	
+    <select id ="selectCntallNew" resultType="int" parameterType="SearchDTO">
+		SELECT COUNT(*) 
+		  FROM TB_VOLUNTEER_INFO
+		 WHERE VOLUNTEER_TITLE LIKE CONCAT('%', #{param}, '%')
+    </select>
+    
+   	<select id="getVolunteerListNew" parameterType="map" resultType="VolunteerDTO">
+		/* VolunteerDao.getVolunteerListNew */
+		SELECT VOLUNTEER_CD
+				, PLACE_CD
+				, VOLUNTEER_TITLE
+				, VOLUNTEER_NOTE
+				, VOLUNTEER_MAX_CNT
+				, VOLUNTEER_DT
+				, REG_ID
+				, REG_DT
+				, UPD_ID
+				, UPD_DT
+		  FROM TB_VOLUNTEER_INFO
+	     WHERE VOLUNTEER_TITLE LIKE CONCAT('%', #{param}, '%')
+		 ORDER BY VOLUNTEER_DT DESC
+		  LIMIT #{paging.startNo}, #{paging.endNo}
+	</select>
+
+
+</mapper>

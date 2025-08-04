@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import web.admlogin.dto.AdminDTO;
 import web.login.dto.UserDTO;
 import web.login.service.face.LoginService;
  
 @Controller
-@RequestMapping("/join")
+@RequestMapping("/login")
 public class LoginController { 
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -124,9 +125,9 @@ public class LoginController {
 			logger.info("=== 회원가입 컨트롤러 실행 === ");
 			int result = loginService.insertMember(userDTO, session);
 			if ( result == 1 ) {
-				uri = "redirect:/join/getJoinSuccessPage.do";
+				uri = "redirect:/login/getJoinSuccessPage.do";
 			} else {
-				uri = "redirect:/join/getJoinFailPage.do";
+				uri = "redirect:/login/getJoinFailPage.do";
 			}
 		} catch (Exception e) {  
 			logger.info("=== 회원가입 컨트롤러 실패 === ");
@@ -164,24 +165,22 @@ public class LoginController {
 	
 	/**
 	******************************************
-	* @MethodName    : login
+	* @MethodName    : userLogin
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.22
 	* @Comment : 로그인
 	* @param userDTO
 	* @param session
-	* @param redirectAttributes
 	* @return
 	*******************************************
 	*/
-	@RequestMapping(value="/login.do")
+	@RequestMapping(value="/userLogin.do")
 	@ResponseBody
-	public Map<String,Object> login(@ModelAttribute UserDTO userDTO, HttpSession session, RedirectAttributes redirectAttributes) {
+	public Map<String,Object> userLogin(@ModelAttribute UserDTO userDTO, HttpSession session) {
 		Map<String, Object> result = new HashMap<String,Object>();
 		try {
 			logger.info("=== 로그인 컨트롤러 진입 === ");
-			System.out.println("userDTO===" + userDTO);
-			String resultVal = loginService.selectUserInfo(userDTO, session);
+			String resultVal = loginService.userLogin(userDTO, session);
 			result.put("result", "SUCCESS");
 			result.put("resultVal", resultVal);
 		} catch (Exception e) {

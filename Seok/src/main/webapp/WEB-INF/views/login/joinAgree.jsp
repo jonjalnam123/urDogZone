@@ -12,7 +12,7 @@ $(document).ready(function(){
 		const terms1Agreed = $('#terms1').is(':checked') ? 'Y' : 'N';
 		const terms2Agreed = $('#terms2').is(':checked') ? 'Y' : 'N';
 		
-		window.location.href = '/join/getJoinPage.do?terms1=' + terms1Agreed + '&terms2=' + terms2Agreed;
+		goToUri('/login/getJoinPage.do?terms1=' + terms1Agreed + '&terms2=' + terms2Agreed);
 	});
 	
 	// 전체 동의 클릭 시
