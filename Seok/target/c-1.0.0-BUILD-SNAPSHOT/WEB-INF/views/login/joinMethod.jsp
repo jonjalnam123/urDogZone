@@ -1,18 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원가입 방법 선택</title>
-</head>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	
 	// 등록버튼 이벤트
 	$('#joinBtn').on('click', function () {
-		window.location.href = '/join/getJoinPage.do'
+		goToUri('/login/getJoinAgreePage.do');
 	})
 	
 	window.Kakao.init('a594e9d0378896fcec9e7b2822bf6977');
@@ -25,7 +18,7 @@ $(document).ready(function(){
 
 function kakaoLogin() {
 	
-	const returnUrl = getNowUri() + '/join/getJoinPage.do';
+	const returnUrl = getNowUri() + '/login/getJoinPage.do';
 	
 	window.Kakao.Auth.login({
 		  scope : 'profile_nickname, profile_image, account_email'
@@ -56,9 +49,6 @@ function kakaoLogout() {
 }
 
 </script>
-<body>
 <button type="button" onclick="kakaoLogout()"> 로그아웃</button>
 <button type="button" id="kakaoJoinBtn">카카오 로그인</button>
 <button type="button" id="joinBtn">회원가입</button>
-</body>
-</html>

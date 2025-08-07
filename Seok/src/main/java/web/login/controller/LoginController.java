@@ -1,6 +1,7 @@
 package web.login.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -14,9 +15,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import web.admlogin.dto.AdminDTO;
+import web.comm.dto.CommDTO;
+import web.comm.service.face.CommService;
 import web.login.dto.UserDTO;
 import web.login.service.face.LoginService;
  
@@ -27,6 +28,7 @@ public class LoginController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired LoginService loginService;
+	@Autowired CommService commService;
 	
 	/**
 	******************************************
@@ -74,8 +76,13 @@ public class LoginController {
 	public String getJoinPage( Model model, @RequestParam("terms1") String terms1, @RequestParam("terms2") String terms2) {
 		logger.info("=== 회원가입 화면 컨트롤러 진입 ===");  
 		
-		model.addAttribute("terms1", terms1); //약관동의1
-		model.addAttribute("terms2", terms2); //약관동의2
+		// 약관동의
+		model.addAttribute("terms1", terms1); 
+		model.addAttribute("terms2", terms2); 
+		
+		// 이메일 공통 코드
+		List<CommDTO> emailList = commService.getEmailCd("1");
+		model.addAttribute("emailList", emailList);
 		
 		return "login/join.page";
 	}
@@ -206,5 +213,33 @@ public class LoginController {
 		logger.info("=== 로그아웃 컨트롤러 진입 === ");
 	    session.invalidate();
 	    return "redirect:/";
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : mailCheck
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.22
+	* @Comment : 이메일 인증
+	* @param email
+	* @return
+	*******************************************
+	*/
+	@RequestMapping(value="mailCheck.do")
+	@ResponseBody
+	public Map<String, Object> mailCheck(@RequestParam("email") String email) {
+		Map<String, Object> result = new HashMap<String,Object>();
+		try {
+			logger.info("=== 이메일 인증 컨트롤러 진입 === ");
+			String emailCode = loginService.mailCheck(email);
+			System.out.println("이메일 인증 요청이 들어옴!");
+			System.out.println("이메일 인증 이메일 : " + email);
+			result.put("result", "SUCCESS");
+			result.put("emailCode", emailCode);
+		} catch (Exception e) {
+			logger.info("=== 이메일 인증 컨트롤러 실패 === ");
+			result.put("result", "FAIL");
+		}
+		return result;
 	}
 }

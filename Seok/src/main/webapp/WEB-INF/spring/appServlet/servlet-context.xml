@@ -66,7 +66,8 @@
 														, web.main.controller, web.main.service
 														, web.login.controller, web.login.service
 														, web.volunteer.controller, web.volunteer.service
-														, web.admlogin.controller, web.admlogin.service" />
+														, web.admlogin.controller, web.admlogin.service
+														, web.comm.controller, web.comm.service" />
 	
 	<!-- Tiles 뷰 리졸버 -->
 	<beans:bean id="tielsViewResolver"
@@ -84,5 +85,5 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
-	
+		
 </beans:beans>

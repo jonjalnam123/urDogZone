@@ -31,6 +31,8 @@
 		 , USER_CAR_POOL_YN
 		 , USER_TERMS_F
 		 , USER_TERMS_S
+		 , USER_DEL_YN
+		 , USER_TYPE
 		 , REG_ID
 		 , REG_DT
 		 , UPD_ID
@@ -50,6 +52,8 @@
 		 , #{userCarPoolYn}
 		 , #{userTermsF}
 		 , #{userTermsS}
+		 , 'N'
+		 , 'U'
 		 , #{regId}
 		 , SYSDATE()
 		 , #{updId}
@@ -60,25 +64,26 @@
 	<select id="userLogin" parameterType="UserDTO" resultType="UserDTO">
 		/* LoginDao.userLogin */
 		SELECT USER_ID
-				 , USER_NM
-				 , USER_POSTCODE
-				 , USER_AD
-				 , USER_ADD
-				 , USER_PHONE
-				 , USER_BIRTH
-				 , USER_CAR_YN
-				 , USER_VOL_EXP_YN
-				 , USER_CAR_POOL_YN
-				 , USER_TERMS_F
-				 , USER_TERMS_S
-				 , REG_ID
-				 , REG_DT
-				 , UPD_ID
-				 , UPD_DT 
-		   FROM TB_USER_INFO
-		  WHERE USER_ID = #{userId}
-		     AND USER_PW = #{userPw}
-		     AND USER_DEL_YN = 'N'
+				, USER_NM
+				, USER_POSTCODE
+				, USER_AD
+				, USER_ADD
+				, USER_PHONE
+				, USER_BIRTH
+				, USER_CAR_YN
+				, USER_VOL_EXP_YN
+				, USER_CAR_POOL_YN
+				, USER_TERMS_F
+				, USER_TERMS_S
+				, USER_TYPE
+				, REG_ID
+				, REG_DT
+				, UPD_ID
+				, UPD_DT 
+		  FROM TB_USER_INFO
+		 WHERE USER_ID = #{userId}
+		    AND USER_PW = #{userPw}
+		    AND USER_DEL_YN = 'N'
 	</select>
 
 </mapper>

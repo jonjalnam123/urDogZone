@@ -2,7 +2,6 @@
 * 공통 JS
 */
 
-
 /*************************************************************
 * 작성자 : 최정석
 * 작성날짜 : 2025.07.22
@@ -15,6 +14,9 @@ function ajaxStart(url, params, dataType, callback) {
 	    method: 'post',
 	    data : params,
 	    dataType : dataType,
+	  	beforeSend: function() {
+	    	$('#loadingSpinner').show();
+	 	},
 	    success: function (data, status, xhr) {
 	        if (typeof callback === 'function' && callback !== null ) {
 				console.log('data>>>>', data);
@@ -22,6 +24,9 @@ function ajaxStart(url, params, dataType, callback) {
 	        } else {
 	            console.warn("callback이 function이 아닙니다:", callback);
 	        }
+	    },
+	    complete: function() {
+	    	$('#loadingSpinner').hide();
 	    },
 	    error: function (data, status, err) {
 			console.error("AJAX 에러", err);

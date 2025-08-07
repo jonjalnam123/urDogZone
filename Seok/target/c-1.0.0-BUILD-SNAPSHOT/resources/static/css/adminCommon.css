@@ -1,0 +1,231 @@
+@charset "UTF-8";
+
+/* === 관리자용 변수 설정 === */
+:root {
+  --main-color: #2c3e50;      /* 짙은 남색 */
+  --accent-color: #3498db;    /* 밝은 하늘색 */
+  --bg-color: #f4f6f8;        /* 연한 회색 배경 */
+  --text-color: #222;         /* 진회색 텍스트 */
+  --border-color: #ccc;       /* 연한 회색 테두리 */
+  --font-default: 'Noto Sans KR', sans-serif;
+}
+
+/* === 초기화 === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: var(--font-default);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* === 레이아웃 === */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+header, footer {
+  background-color: var(--main-color);
+  color: white;
+  padding: 20px;
+}
+header h1, footer p {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+/* === 버튼 === */
+.btn {
+  padding: 10px 20px;
+  background-color: var(--main-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+.btn:hover {
+  background-color: var(--accent-color);
+}
+
+/* === 카드 박스 === */
+.card {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+/* === 유틸리티 === */
+.text-center { text-align: center; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.w-full { width: 100%; }
+
+/* === 반응형 === */
+@media (max-width: 768px) {
+  main {
+    padding: 16px 10px;
+  }
+
+  header h1, footer p {
+    font-size: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    font-size: 15px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+}
+
+/* === 트리형 메뉴 === */
+nav {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  display: inline-flex;
+  gap: 20px;
+  background-color: var(--main-color);
+}
+
+.menu > li {
+  position: relative;
+}
+
+.menu a {
+  display: block;
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.menu a:hover {
+  background-color: var(--accent-color);
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  background-color: var(--main-color);
+  padding: 0;
+  min-width: 160px;
+  z-index: 100;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.submenu li a {
+  padding: 10px;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+.menu li:hover .submenu {
+  display: block;
+}
+
+/* === 트리 메뉴 반응형 === */
+@media (max-width: 768px) {
+  .menu {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .menu > li {
+    width: 100%;
+  }
+
+  .menu a {
+    text-align: left;
+    padding: 12px;
+  }
+
+  .submenu {
+    position: static;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .submenu li a {
+    padding-left: 30px;
+  }
+}
+
+/* === 관리자 테이블 스타일 === */
+.volunteer-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 14px;
+  min-width: 900px;
+}
+
+.volunteer-table th,
+.volunteer-table td {
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+  word-break: break-word;
+}
+
+.volunteer-table thead {
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+.volunteer-table tbody tr:nth-child(even) {
+  background-color: #eef1f5;
+}
+
+.volunteer-table tbody tr:hover {
+  background-color: #d6eaf8;
+}
+
+/* === 테이블 반응형 === */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* === 모바일에서 카드 내부 패딩 감소 === */
+@media (max-width: 768px) {
+  .card {
+    padding: 10px;
+  }
+
+  .volunteer-table {
+    font-size: 13px;
+  }
+}

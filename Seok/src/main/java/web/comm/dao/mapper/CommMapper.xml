@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="web.comm.dao.face.CommDao">
+
+	<select id="getEmailCd" parameterType="String" resultType="CommDTO">
+		/* CommDao.getEmailCd */
+		SELECT COMM_CD
+				, COMM_UPPER_CD
+				, COMM_NM
+				, COMM_DEL_YN
+				, REG_ID
+				, REG_DT
+				, UPD_ID
+				, UPD_DT
+		  FROM TB_COMM_CD
+		 WHERE COMM_DEL_YN = 'N'
+		    AND COMM_UPPER_CD = #{code}
+	</select>
+
+</mapper>

@@ -64,7 +64,9 @@
 	
 	<context:component-scan base-package="web.sample.controller, web.sample.service
 														, web.main.controller, web.main.service
-														, web.login.controller, web.login.service" />
+														, web.login.controller, web.login.service
+														, web.volunteer.controller, web.volunteer.service
+														, web.admlogin.controller, web.admlogin.service" />
 	
 	<!-- Tiles 뷰 리졸버 -->
 	<beans:bean id="tielsViewResolver"
@@ -82,5 +84,7 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
+	
+   <context:property-placeholder location="classpath:/db-config/email.properties" />
 	
 </beans:beans>

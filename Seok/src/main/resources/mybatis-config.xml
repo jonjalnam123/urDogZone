@@ -25,6 +25,7 @@
 		<package name="web.admlogin.dto"/>
 		<package name="web.volunteer.dto"/>
 		<package name="web.util"/>
+		<package name="web.comm"/>
 	</typeAliases>
 	
 </configuration>
