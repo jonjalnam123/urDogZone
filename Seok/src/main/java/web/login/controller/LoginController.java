@@ -232,8 +232,6 @@ public class LoginController {
 		try {
 			logger.info("=== 이메일 인증 컨트롤러 진입 === ");
 			String emailCode = loginService.mailCheck(email);
-			System.out.println("이메일 인증 요청이 들어옴!");
-			System.out.println("이메일 인증 이메일 : " + email);
 			result.put("result", "SUCCESS");
 			result.put("emailCode", emailCode);
 		} catch (Exception e) {

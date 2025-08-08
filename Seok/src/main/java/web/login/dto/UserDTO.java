@@ -23,6 +23,9 @@ public class UserDTO {
 	//사용자 상세주소
 	private String userAdd;
 	
+	//사용자 이메일
+	private String userEmail;
+	
 	//사용자 핸드폰
 	private String userPhone;
 	
@@ -46,6 +49,9 @@ public class UserDTO {
 	
 	//사용자 분류
 	private String userType;
+	
+	//사용자 봉사 횟 수
+	private String userVolCnt;
 	
 	//등록자 아이디
 	private String regId;

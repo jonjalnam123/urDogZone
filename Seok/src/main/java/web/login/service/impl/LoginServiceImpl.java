@@ -59,28 +59,30 @@ public class LoginServiceImpl implements LoginService{
 	* @return
 	*******************************************
 	*/
-	@Override
-	public String mailCheck(String email) {
-		makeRandomNumber();
-		String setFrom = "jeongseogc26@gmail.com"; // email-config에 설정한 자신의 이메일 주소를 입력 
-		String toMail = email;
-		String title = "유아독존 가입 인증 이메일 입니다.";
-		String content = 
-				"유아독존을 방문해주셔서 감사합니다." +
-                "<br><br>" + 
-			    "인증 번호는 " + authNumber + "입니다." + 
-			    "<br>" + 
-			    "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
-		mailSend(setFrom, toMail, title, content);
-		return Integer.toString(authNumber);
-	}
 	
+	//랜덤번호 추출 메소드
 	public void makeRandomNumber() {
 		logger.info("=== makeRandomNumber 진입 ===");
 		Random r = new Random();
 		int checkNum = r.nextInt(888888) + 111111;
 		logger.info("인증번호 : " + checkNum);
 		authNumber = checkNum;
+	}
+	
+	@Override
+	public String mailCheck(String email) {
+		makeRandomNumber();
+		String setFrom = "jeongseogc26@gmail.com";
+		String toMail = email;
+		String title = "🐶유아독존 가입 인증 이메일 입니다.";
+		String content = 
+				"안녕하세요. 유아독존을 방문해주셔서 감사합니다. 멍!" +
+                "<br><br>" + 
+			    "인증 번호는 " + authNumber + "입니다. 멍!" + 
+			    "<br>" + 
+			    "해당 인증번호를 인증번호 확인란에 기입하여 주세요. 멍멍!";
+		mailSend(setFrom, toMail, title, content);
+		return Integer.toString(authNumber);
 	}
 	
 	//이메일 전송 메소드

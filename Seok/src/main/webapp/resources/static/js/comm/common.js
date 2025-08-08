@@ -124,14 +124,23 @@ function goToUri(uri) {
 * 파라미터 : conMsg
 **************************************************************/
 function callConfirm(conMsg) {
-	
 	var result = '';
-	
 	if(confirm(conMsg)){
-		result = 'Y'
+		result = 'Y';
 	}else{
-		result = 'N'
+		result = 'N';
 	}
+	return result;
+};
 
-	return result
+/*************************************************************
+* 작성자 : 최정석
+* 작성날짜 : 2025.08.08
+* 내용 : 숫자만 입력 정규식
+* 파라미터 : id
+**************************************************************/	
+function checkNum(id){
+	var idVal = '#' + id;
+	var result = $(idVal).val().replace(/[^0-9]/g,"");
+	return result;
 };

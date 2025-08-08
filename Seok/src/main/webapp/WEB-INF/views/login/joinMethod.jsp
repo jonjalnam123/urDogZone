@@ -30,7 +30,7 @@ function kakaoLogin() {
 				, success : res => {
 					const kakao_account = res.kakao_account;
 					console.log('kakao_account====', kakao_account);
-					//window.location.href = returnUrl;
+					window.location.href = '/';
 				}
 			});
 		}
@@ -49,6 +49,21 @@ function kakaoLogout() {
 }
 
 </script>
-<button type="button" onclick="kakaoLogout()"> 로그아웃</button>
-<button type="button" id="kakaoJoinBtn">카카오 로그인</button>
-<button type="button" id="joinBtn">회원가입</button>
+
+<div class="login-container">
+  <h2>로그인 / 회원가입</h2>
+  
+  <button type="button" id="kakaoJoinBtn" class="btn kakao-btn btn-block">
+    <img src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_narrow.png" 
+         alt="카카오 로그인" style="height:20px; vertical-align:middle; margin-right:6px;">
+    카카오로 시작하기
+  </button>
+  
+  <button type="button" id="joinBtn" class="btn btn-block">
+    이메일로 회원가입
+  </button>
+  
+  <button type="button" onclick="kakaoLogout()" class="btn logout-btn btn-block">
+    로그아웃
+  </button>
+</div>
