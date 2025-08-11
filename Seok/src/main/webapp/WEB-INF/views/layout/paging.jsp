@@ -28,11 +28,15 @@
 	</c:when>
 	</c:choose> --%>
 	
-	<%-- 이전 페이지로 가기 --%>
+<%-- 	<c:set var="searchQuery"
+       value="&param=${searchDTO.param}
+              &param1=${searchDTO.param1}" />
+	
+	이전 페이지로 가기
 	<c:if test="${paging.curPage > 1 }">
 	<c:choose>
 		<c:when test="${not empty param.param}">
-			<li><a href="${paging.uri}?curPage=${paging.curPage - 1 }&param=${param.param}">&lt;</a></li>
+			<li><a href="${paging.uri}?curPage=${paging.curPage - 1 }${searchQuery}">&lt;</a></li>
 		</c:when>
 		<c:otherwise>
 			<li><a href="${paging.uri}?curPage=${paging.curPage - 1 }">&lt;</a></li>
@@ -42,12 +46,12 @@
 	
 	
 	
-	<%-- 페이징 리스트 --%>
+	페이징 리스트
 	<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
 	<c:if test="${paging.curPage eq i }">
 	<c:choose>
 		<c:when test="${not empty param.param}">
-			<li class="active"><a href="${paging.uri}?curPage=${i }&param=${param.param}">${i }</a></li>
+			<li class="active"><a href="${paging.uri}?curPage=${i }${searchQuery}">${i }</a></li>
 		</c:when>
 		<c:otherwise>
 			<li class="active"><a href="${paging.uri}?curPage=${i }">${i }</a></li>
@@ -57,7 +61,7 @@
 	<c:if test="${paging.curPage ne i }">
 		<c:choose>
 			<c:when test="${not empty param.param}">
-				<li><a href="${paging.uri}?curPage=${i }&param=${param.param}">${i }</a></li>
+				<li><a href="${paging.uri}?curPage=${i }${searchQuery}">${i }</a></li>
 			</c:when>
 			<c:otherwise>
 				<li><a href="${paging.uri}?curPage=${i }">${i }</a></li>
@@ -68,17 +72,17 @@
 
 	
 	
-	<%-- 다음 페이지로 가기 --%>
+	다음 페이지로 가기
 	<c:if test="${paging.curPage < paging.totalPage }">
 		<c:choose>
 			<c:when test="${not empty param.param}">
-				<li><a href="${paging.uri}?curPage=${paging.curPage + 1 }&param=${param.param}">&gt;</a></li>
+				<li><a href="${paging.uri}?curPage=${paging.curPage + 1 }${searchQuery}">&gt;</a></li>
 			</c:when>
 			<c:otherwise>
 				<li><a href="${paging.uri}?curPage=${paging.curPage + 1 }">&gt;</a></li>
 			</c:otherwise>
 		</c:choose>
-	</c:if>
+	</c:if> --%>
 	
 	<%-- 다음 페이징 리스트로 이동
 	<c:choose>
@@ -94,6 +98,33 @@
 	<c:if test="${paging.curPage ne paging.totalPage }">
 		<li><a href="${paging.uri}?curPage=${paging.totalPage }">끝 &rarr;</a></li>	
 	</c:if> --%>
+	
+	
+	
+	<c:set var="searchQuery"
+       value="&param=${searchDTO.param}&param1=${searchDTO.param1}" />
+
+	<!-- 이전 페이지 -->
+	<c:if test="${paging.curPage > 1 }">
+	    <li><a href="${paging.uri}?curPage=${paging.curPage - 1}${searchQuery}">&lt;</a></li>
+	</c:if>
+	
+	<!-- 페이징 리스트 -->
+	<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i">
+	    <c:choose>
+	        <c:when test="${paging.curPage eq i}">
+	            <li class="active"><a href="${paging.uri}?curPage=${i}${searchQuery}">${i}</a></li>
+	        </c:when>
+	        <c:otherwise>
+	            <li><a href="${paging.uri}?curPage=${i}${searchQuery}">${i}</a></li>
+	        </c:otherwise>
+	    </c:choose>
+	</c:forEach>
+	
+	<!-- 다음 페이지 -->
+	<c:if test="${paging.curPage < paging.totalPage }">
+	    <li><a href="${paging.uri}?curPage=${paging.curPage + 1}${searchQuery}">&gt;</a></li>
+	</c:if>
 	
 	</ul>
 </div>

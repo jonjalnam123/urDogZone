@@ -53,11 +53,11 @@ function kakaoLogout() {
 <div class="login-container">
   <h2>로그인 / 회원가입</h2>
   
-  <button type="button" id="kakaoJoinBtn" class="btn kakao-btn btn-block">
+<!--   <button type="button" id="kakaoJoinBtn" class="btn kakao-btn btn-block">
     <img src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_narrow.png" 
          alt="카카오 로그인" style="height:20px; vertical-align:middle; margin-right:6px;">
     카카오로 시작하기
-  </button>
+  </button> -->
   
   <button type="button" id="joinBtn" class="btn btn-block">
     이메일로 회원가입

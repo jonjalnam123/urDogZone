@@ -13,43 +13,51 @@
 
 	<select id="getVolunteerList" parameterType="Paging" resultType="VolunteerDTO">
 		/* VolunteerDao.getVolunteerList */
-		SELECT VOLUNTEER_CD
-				, PLACE_CD
-				, VOLUNTEER_TITLE
-				, VOLUNTEER_NOTE
-				, VOLUNTEER_MAX_CNT
-				, VOLUNTEER_DT
-				, REG_ID
-				, REG_DT
-				, UPD_ID
-				, UPD_DT
-		  FROM TB_VOLUNTEER_INFO
-		 ORDER BY VOLUNTEER_DT DESC
+		SELECT A.VOLUNTEER_CD
+				, A.PLACE_CD
+		        , B.PLACE_NM
+				, A.VOLUNTEER_TITLE
+				, A.VOLUNTEER_NOTE
+				, A.VOLUNTEER_MAX_CNT
+				, A.VOLUNTEER_DT
+				, A.REG_ID
+				, A.REG_DT
+				, A.UPD_ID
+				, A.UPD_DT
+		  FROM TB_VOLUNTEER_INFO A
+		  INNER JOIN TB_PLACE_INFO B
+		     ON A.PLACE_CD = B.PLACE_CD
+		 ORDER BY A.VOLUNTEER_DT DESC
 		  LIMIT #{startNo}, #{endNo}
 	</select>
 	
     <select id ="selectCntallNew" resultType="int" parameterType="SearchDTO">
 		SELECT COUNT(*) 
 		  FROM TB_VOLUNTEER_INFO
-		 WHERE VOLUNTEER_TITLE LIKE CONCAT('%', #{param}, '%')
+		 WHERE VOLUNTEER_LOCATE_CITY_CD LIKE CONCAT('%', #{param}, '%') 
+		 	AND VOLUNTEER_TITLE LIKE CONCAT('%', #{param1}, '%')
     </select>
     
    	<select id="getVolunteerListNew" parameterType="map" resultType="VolunteerDTO">
 		/* VolunteerDao.getVolunteerListNew */
-		SELECT VOLUNTEER_CD
-				, PLACE_CD
-				, VOLUNTEER_TITLE
-				, VOLUNTEER_NOTE
-				, VOLUNTEER_MAX_CNT
-				, VOLUNTEER_DT
-				, REG_ID
-				, REG_DT
-				, UPD_ID
-				, UPD_DT
-		  FROM TB_VOLUNTEER_INFO
-	     WHERE VOLUNTEER_TITLE LIKE CONCAT('%', #{param}, '%')
-		 ORDER BY VOLUNTEER_DT DESC
-		  LIMIT #{paging.startNo}, #{paging.endNo}
+		SELECT A.VOLUNTEER_CD
+				, A.PLACE_CD
+		        , B.PLACE_NM
+				, A.VOLUNTEER_TITLE
+				, A.VOLUNTEER_NOTE
+				, A.VOLUNTEER_MAX_CNT
+				, A.VOLUNTEER_DT
+				, A.REG_ID
+				, A.REG_DT
+				, A.UPD_ID
+				, A.UPD_DT
+		  FROM TB_VOLUNTEER_INFO A
+		  INNER JOIN TB_PLACE_INFO B
+		     ON A.PLACE_CD = B.PLACE_CD
+	    WHERE A.VOLUNTEER_LOCATE_CITY_CD LIKE CONCAT('%', #{searchDTO.param}, '%') 
+	       AND A.VOLUNTEER_TITLE LIKE CONCAT('%', #{searchDTO.param1}, '%')
+		ORDER BY A.VOLUNTEER_DT DESC
+		 LIMIT #{paging.startNo}, #{paging.endNo}
 	</select>
 
 

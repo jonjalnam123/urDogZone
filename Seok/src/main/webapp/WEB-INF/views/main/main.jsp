@@ -4,7 +4,7 @@
 $(document).ready(function(){
 	
 	$('#joinBtn').on('click', function() {
-		goToUri('/login/selectJoinMethod.do');
+		goToUri('/login/getJoinAgreePage.do');
 	})
 	
 	$('#loginBtn').on('click', function() {

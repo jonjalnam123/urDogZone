@@ -27,7 +27,7 @@ public class VolunteerController {
 	@Autowired VolunteerService volunteerService;
 	
 	@RequestMapping(value = "/getVolunteerList.do")  
-	public String getInsertService( Model model, @RequestParam(defaultValue = "0") int curPage) {
+	public String getVolunteerList( Model model, @RequestParam(defaultValue = "0") int curPage) {
 		logger.info("=== 봉사목록 화면 컨트롤러 진입 ===");  
 		
 		Paging paging = volunteerService.getPaging(curPage);
@@ -43,21 +43,22 @@ public class VolunteerController {
 	@RequestMapping(value = "/volunteerList.do")
 	public String volunteerList( Model model
 								  , @RequestParam(defaultValue = "0") int curPage 
-								  , @ModelAttribute SearchDTO searchDTO) { /*@RequestParam("param") String param*/
+								  , @ModelAttribute SearchDTO searchDTO) {
 		logger.info("=== 봉사목록 화면 컨트롤러 진입 ===");  
-
+		System.out.println("searchDTO===" + searchDTO);
 		Paging paging = volunteerService.getPaging(curPage, searchDTO);
 		paging.setUri("/service/volunteerList.do");
 		model.addAttribute("paging", paging);
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("paging", paging);
-		searchDTO.setParam1("test1");
-		searchDTO.setParam2("test2");
 		paramMap.put("searchDTO", searchDTO);
 		
 		List<VolunteerDTO> volunteerList = volunteerService.getVolunteerListNew(paramMap);
 		model.addAttribute("volunteerList", volunteerList);
+		model.addAttribute("searchDTO", searchDTO);
+		model.addAttribute("param", searchDTO.getParam());
+		model.addAttribute("param1", searchDTO.getParam1());
 		
 		
 		/*
