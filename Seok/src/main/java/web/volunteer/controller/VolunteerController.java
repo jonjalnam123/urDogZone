@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import web.comm.service.face.CommService;
 import web.util.Paging;
 import web.volunteer.dto.SearchDTO;
 import web.volunteer.dto.VolunteerDTO;
@@ -24,53 +25,94 @@ public class VolunteerController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	@Autowired CommService commService;
 	@Autowired VolunteerService volunteerService;
 	
+	/**
+	******************************************
+	* @MethodName    : getVolunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 봉사 목록 화면 조회
+	* @return
+	*******************************************
+	*/
 	@RequestMapping(value = "/getVolunteerList.do")  
 	public String getVolunteerList( Model model, @RequestParam(defaultValue = "0") int curPage) {
 		logger.info("=== 봉사목록 화면 컨트롤러 진입 ===");  
 		
-		Paging paging = volunteerService.getPaging(curPage);
+		// 페이징 처리
+		String tbNm = "TB_VOLUNTEER_INFO";
+		Paging paging = commService.getPaging(curPage, tbNm);
 		paging.setUri("/service/getVolunteerList.do");
 		model.addAttribute("paging", paging);
 		
+		// 목록 조회
 		List<VolunteerDTO> volunteerList = volunteerService.getVolunteerList(paging);
 		model.addAttribute("volunteerList", volunteerList);
 		
 		return "volunteer/volunteerList.admin";
 	}
 	
+	/**
+	******************************************
+	* @MethodName    : volunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 봉사 목록 조회
+	* @return
+	*******************************************
+	*/
 	@RequestMapping(value = "/volunteerList.do")
 	public String volunteerList( Model model
 								  , @RequestParam(defaultValue = "0") int curPage 
 								  , @ModelAttribute SearchDTO searchDTO) {
 		logger.info("=== 봉사목록 화면 컨트롤러 진입 ===");  
-		System.out.println("searchDTO===" + searchDTO);
-		Paging paging = volunteerService.getPaging(curPage, searchDTO);
+		
+		// 페이징 처리
+		Paging paging = volunteerService.getSearchPaging(curPage, searchDTO);
 		paging.setUri("/service/volunteerList.do");
 		model.addAttribute("paging", paging);
 		
+		// 목록 조회
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("paging", paging);
 		paramMap.put("searchDTO", searchDTO);
 		
-		List<VolunteerDTO> volunteerList = volunteerService.getVolunteerListNew(paramMap);
+		List<VolunteerDTO> volunteerList = volunteerService.volunteerList(paramMap);
 		model.addAttribute("volunteerList", volunteerList);
 		model.addAttribute("searchDTO", searchDTO);
 		model.addAttribute("param", searchDTO.getParam());
 		model.addAttribute("param1", searchDTO.getParam1());
 		
 		
-		/*
-		 * String test1 = "test1"; String test2 = "test2";
-		 */
-		
-		/*
-		 * if ( !param.isEmpty() ) { System.out.println("진입?");
-		 * model.addAttribute("param", param); }
-		 */
-		
 		return "volunteer/volunteerList.admin";
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : getVolunteerPlaceList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.12
+	* @Comment : 봉사 장소 화면 조회
+	* @return
+	*******************************************
+	*/
+	@RequestMapping(value="/getVolunteerPlaceList.do")
+	public String getVolunteerPlaceList( Model model, @RequestParam(defaultValue = "0") int curPage ) {
+		logger.info("=== 봉사장소 화면 컨트롤러 진입 ==="); 
+		
+		// 페이징 처리
+		String tbNm = "TB_PLACE_INFO";
+		Paging paging = commService.getPaging(curPage, tbNm);
+		paging.setUri("/service/getVolunteerPlaceList.do");
+		model.addAttribute("paging", paging);
+		
+		// 목록 조회
+		List<VolunteerDTO> volunteerPlaceList = volunteerService.getVolunteerPlaceList(paging);
+		model.addAttribute("volunteerPlaceList", volunteerPlaceList);
+		
+		return "volunteer/volunteerPlaceList.admin";
 	}
 
 }

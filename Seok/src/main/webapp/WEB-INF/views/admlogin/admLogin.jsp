@@ -16,7 +16,7 @@ $(document).ready(function(){
 		var dataType = 'json'
 	 	ajaxStart(url, params, dataType, function(data) {
 	        if (data.resultCd === 'Y' ) {
-	        	goToUri('/admin.do');
+	        	goToUri('/admMain.do');
 	        } else {
 				alert('아이디/비밀번호를 다시 확인해주세요.');
 				return;

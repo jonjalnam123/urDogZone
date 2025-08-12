@@ -8,12 +8,24 @@ import org.springframework.stereotype.Service;
 import web.comm.dao.face.CommDao;
 import web.comm.dto.CommDTO;
 import web.comm.service.face.CommService;
+import web.util.Paging;
+import web.volunteer.dto.SearchDTO;
 
 @Service
 public class CommServiceImpl implements CommService{
 	
 	@Autowired CommDao commDao;
 	
+	/**
+	******************************************
+	* @MethodName    : getEmailCd
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 이메일 코드 조회
+	* @Param : code
+	* @return
+	*******************************************
+	*/
 	@Override
 	public List<CommDTO> getEmailCd(String code) {
 		
@@ -24,6 +36,28 @@ public class CommServiceImpl implements CommService{
 		}
 		
 		return commEmailList;
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : getPaging
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 전체 목록 페이징 처리
+	* @Param : curPage, tbNm
+	* @return
+	*******************************************
+	*/
+	@Override
+	public Paging getPaging(int curPage, String tbNm) {
+		
+		//총 게시글 수 조회
+		int totalCount = commDao.selectCntall(tbNm);
+		
+		//페이징계산
+		Paging paging = new Paging(totalCount, curPage);
+		
+		return paging;
 	}
 
 }

@@ -5,9 +5,6 @@
 $(document).ready(function(){
 	
 	$('#searchBtn').on('click', function() {
-/* 		var param = $('#keyword').val()
-		var param1 = $('#locateSel').val()
-		window.location.href='/service/volunteerList.do?param=' + param + '&param1=' + param1; */
 		var form = $('#seacrhForm');
   		form.submit();
 	})
@@ -22,9 +19,9 @@ $(document).ready(function(){
   <form action="/service/volunteerList.do" method="get" id="seacrhForm" >
 	  <select id="param" name="param">
 		  <option value="" ${empty searchDTO.param ? 'selected' : ''}>지역선택</option>
-		  <option value="1" ${searchDTO.param == '1' ? 'selected' : ''}>김포</option>
+		  <option value="1" ${searchDTO.param == '1' ? 'selected' : ''}>서울</option>
 		  <option value="2" ${searchDTO.param == '2' ? 'selected' : ''}>파주</option>
-		  <option value="3" ${searchDTO.param == '3' ? 'selected' : ''}>서울</option>
+		  <option value="3" ${searchDTO.param == '3' ? 'selected' : ''}>김포</option>
 	  </select>
 	  <input type="text" id="param1" name="param1" placeholder="제목" value="${searchDTO.param1}">
 	  <button type="button" id="searchBtn">검색</button>
@@ -34,7 +31,6 @@ $(document).ready(function(){
     <table class="volunteer-table w-full">
       <thead>
         <tr>
-          <th>봉사 코드</th>
           <th>장소명</th>
           <th>제목</th>
           <th>설명</th>
@@ -49,7 +45,6 @@ $(document).ready(function(){
       <tbody>
         <c:forEach var="vol" items="${volunteerList}">
           <tr>
-            <td>${vol.volunteerCd}</td>
             <td>${vol.placeNm}</td>
             <td>${vol.volunteerTitle}</td>
             <td>${vol.volunteerNote}</td>

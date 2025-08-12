@@ -21,5 +21,10 @@
 		 WHERE COMM_DEL_YN = 'N'
 		    AND COMM_UPPER_CD = #{code}
 	</select>
+	
+    <select id ="selectCntall" parameterType="String" resultType="int">
+    	/* CommDao.selectCntall */
+    	SELECT COUNT(*) FROM ${tbNm}
+    </select>
 
 </mapper>

@@ -74,5 +74,22 @@ public class AdmLoginController {
 		
 		return result;
 	}
+	
+	/**
+	******************************************
+	* @MethodName    : admLogout
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.12
+	* @Comment : 로그아웃
+	* @param session
+	* @return
+	*******************************************
+	*/
+	@RequestMapping(value="/admLogout.do")
+	public String logout(HttpSession session) {
+		logger.info("=== 관리자 로그아웃 컨트롤러 진입 === ");
+	    session.invalidate();
+	    return "redirect:/admLogin/getAdminLogin.do";
+	}
 
 }

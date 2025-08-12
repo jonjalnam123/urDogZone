@@ -16,7 +16,7 @@ public class MainController {
 		return "main/main.page";
 	}
 	
-	@RequestMapping(value="/admin.do")
+	@RequestMapping(value="/admMain.do")
 	public String adminMain() {
 		logger.info("===[adminMain] 진입===");
 		return "admmain/admMain.admin";

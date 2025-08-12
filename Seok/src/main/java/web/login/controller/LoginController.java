@@ -225,7 +225,7 @@ public class LoginController {
 	* @return
 	*******************************************
 	*/
-	@RequestMapping(value="mailCheck.do")
+	@RequestMapping(value="/mailCheck.do")
 	@ResponseBody
 	public Map<String, Object> mailCheck(@RequestParam("email") String email) {
 		Map<String, Object> result = new HashMap<String,Object>();

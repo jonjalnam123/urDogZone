@@ -88,7 +88,8 @@ public class Paging {
 		//------------------------------------
 		
 		//화면에 보이는 게시글의 시작 번호, 끝 번호 계산
-		startNo = ( curPage-1 ) * listCount + 1;
+		//startNo = ( curPage-1 ) * listCount + 1;
+		startNo = (curPage - 1) * listCount;
 		endNo = curPage * listCount;
 		
 	}

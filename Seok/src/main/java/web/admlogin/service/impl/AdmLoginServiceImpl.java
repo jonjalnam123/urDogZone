@@ -1,5 +1,6 @@
 package web.admlogin.service.impl;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -17,6 +18,7 @@ public class AdmLoginServiceImpl implements AdmLoginService{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired AdmLoginDao admLoginDao;
+	@Autowired private HttpServletRequest request;
 	
 	/**
 	******************************************
@@ -29,26 +31,26 @@ public class AdmLoginServiceImpl implements AdmLoginService{
 	* @return
 	*******************************************
 	*/
-	@Override
-	public int adminLogin(AdminDTO adminDTO, HttpSession session) {
-		int result = 0;
-		AdminDTO adminDto = admLoginDao.adminLogin(adminDTO); 
-		if ( adminDto != null ) {
-			String adminId = adminDto.getAdminId();
-			String adminNm = adminDto.getAdminNm();
-			String adminType = adminDto.getAdminType();
-			Object userId = session.getAttribute("userId");
-			if ( userId != null ) {
-				session.invalidate();
-			}
-			session.setAttribute("adminId", adminId);
-			session.setAttribute("adminNm", adminNm);
-			session.setAttribute("adminType", adminType);
-			result = 1;
-		} else {
-			result = 0;
-		}
-		return result;
-	}
+    @Override
+    public int adminLogin(AdminDTO adminDTO, HttpSession session) {
+        // 로그인 시도
+        AdminDTO adminInfo = admLoginDao.adminLogin(adminDTO);
+
+        if (adminInfo != null) {
+            // 사용자 세션이 있으면 세션 초기화
+            if (session.getAttribute("userId") != null) {
+                session.invalidate();
+                session = request.getSession(true); // 새 세션 생성
+            }
+
+            // 관리자 정보 저장
+            session.setAttribute("adminId", adminInfo.getAdminId());
+            session.setAttribute("adminNm", adminInfo.getAdminNm());
+            session.setAttribute("adminType", adminInfo.getAdminType());
+
+            return 1;
+        }
+        return 0;
+    }
 
 }

@@ -9,12 +9,49 @@ import web.volunteer.dto.VolunteerDTO;
 
 public interface VolunteerService {
 	
-	public Paging getPaging(int curPage);
-
+	/**
+	******************************************
+	* @MethodName    : getVolunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 봉사 목록 화면 조회
+	* @return
+	*******************************************
+	*/
 	List<VolunteerDTO> getVolunteerList(Paging paging);
 
-	public Paging getPaging(int curPage, SearchDTO searchDTO);
+	/**
+	******************************************
+	* @MethodName    : getSearchPaging
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 검색 조건 페이징 처리
+	* @Param : curPage, searchDTO
+	* @return
+	*******************************************
+	*/
+	public Paging getSearchPaging(int curPage, SearchDTO searchDTO);
 
-	public List<VolunteerDTO> getVolunteerListNew(Map<String, Object> paramMap);
+	/**
+	******************************************
+	* @MethodName    : volunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 봉사 목록 조회
+	* @return
+	*******************************************
+	*/
+	public List<VolunteerDTO> volunteerList(Map<String, Object> paramMap);
+
+	/**
+	******************************************
+	* @MethodName    : getVolunteerPlaceList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.12
+	* @Comment : 봉사 장소 화면 조회
+	* @return
+	*******************************************
+	*/
+	public List<VolunteerDTO> getVolunteerPlaceList(Paging paging);
 
 }

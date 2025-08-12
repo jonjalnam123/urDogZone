@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ public class LoginServiceImpl implements LoginService{
 	
 	@Autowired LoginDao loginDao;
 	@Autowired JavaMailSenderImpl mailSender;
-	private int authNumber; 
+    @Autowired private HttpServletRequest request;
 	
 	/**
 	******************************************
@@ -59,6 +60,8 @@ public class LoginServiceImpl implements LoginService{
 	* @return
 	*******************************************
 	*/
+	
+	private int authNumber; // 메일 인증번호
 	
 	//랜덤번호 추출 메소드
 	public void makeRandomNumber() {
@@ -151,34 +154,29 @@ public class LoginServiceImpl implements LoginService{
 	* @return
 	*******************************************
 	*/
-	@Override
-	public String userLogin(UserDTO userDTO, HttpSession session) {
-		String result = "";
-		String userPwOrg = userDTO.getUserPw();
-		
-		// 비밀번호 암호화
-		String encryPassword = Sha256.encrypt(userPwOrg);
-		userDTO.setUserPw(encryPassword); 
-				
-		UserDTO userDto = loginDao.userLogin(userDTO);
-		
-		if ( userDto != null ) {
-			String userId = userDto.getUserId();
-			String userNm = userDto.getUserNm();
-			String userType = userDto.getUserType();
-			Object adminId = session.getAttribute("adminId");
-			if ( adminId != null ) {
-				session.invalidate();
-			}
-			session.setAttribute("userId", userId);
-			session.setAttribute("userNm", userNm);
-			session.setAttribute("userType", userType);
-			result = "Y";
-		} else {
-			result = "N";
-		}
-		
-		return result;
-	}
+    @Override
+    public String userLogin(UserDTO userDTO, HttpSession session) {
+        // 비밀번호 암호화
+        userDTO.setUserPw(Sha256.encrypt(userDTO.getUserPw()));
+
+        // 로그인 시도
+        UserDTO userInfo = loginDao.userLogin(userDTO);
+
+        if (userInfo != null) {
+            // 관리자 세션이 있으면 세션 초기화
+            if (session.getAttribute("adminId") != null) {
+                session.invalidate();
+                session = request.getSession(true); // 새 세션 생성
+            }
+
+            // 사용자 정보 저장
+            session.setAttribute("userId", userInfo.getUserId());
+            session.setAttribute("userNm", userInfo.getUserNm());
+            session.setAttribute("userType", userInfo.getUserType());
+
+            return "Y";
+        }
+        return "N";
+    }
 	
 }

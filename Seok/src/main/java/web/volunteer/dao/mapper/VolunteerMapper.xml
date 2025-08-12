@@ -7,10 +7,6 @@
 
 <mapper namespace="web.volunteer.dao.face.VolunteerDao">
 
-    <select id ="selectCntall" resultType="int">
-    	SELECT COUNT(*) FROM TB_VOLUNTEER_INFO
-    </select>
-
 	<select id="getVolunteerList" parameterType="Paging" resultType="VolunteerDTO">
 		/* VolunteerDao.getVolunteerList */
 		SELECT A.VOLUNTEER_CD
@@ -31,15 +27,16 @@
 		  LIMIT #{startNo}, #{endNo}
 	</select>
 	
-    <select id ="selectCntallNew" resultType="int" parameterType="SearchDTO">
+    <select id ="selectCntSearchAll" resultType="int" parameterType="SearchDTO">
+		/* VolunteerDao.selectCntSearchAll */
 		SELECT COUNT(*) 
 		  FROM TB_VOLUNTEER_INFO
 		 WHERE VOLUNTEER_LOCATE_CITY_CD LIKE CONCAT('%', #{param}, '%') 
 		 	AND VOLUNTEER_TITLE LIKE CONCAT('%', #{param1}, '%')
     </select>
     
-   	<select id="getVolunteerListNew" parameterType="map" resultType="VolunteerDTO">
-		/* VolunteerDao.getVolunteerListNew */
+   	<select id="volunteerList" parameterType="map" resultType="VolunteerDTO">
+		/* VolunteerDao.volunteerList */
 		SELECT A.VOLUNTEER_CD
 				, A.PLACE_CD
 		        , B.PLACE_NM
@@ -58,6 +55,21 @@
 	       AND A.VOLUNTEER_TITLE LIKE CONCAT('%', #{searchDTO.param1}, '%')
 		ORDER BY A.VOLUNTEER_DT DESC
 		 LIMIT #{paging.startNo}, #{paging.endNo}
+	</select>
+	
+	<select id="getVolunteerPlaceList" parameterType="Paging" resultType="VolunteerPlaceDTO">
+		/* VolunteerDao.getVolunteerPlaceList */
+		SELECT PLACE_CD
+				, PLACE_NM
+				, PLACE_AD
+				, PLACE_NOTE
+				, FILE_NO
+				, REG_ID
+				, REG_DT
+				, UPD_ID
+				, UPD_DT
+		  FROM TB_PLACE_INFO
+		  LIMIT #{startNo}, #{endNo}
 	</select>
 
 

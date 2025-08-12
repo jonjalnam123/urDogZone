@@ -21,29 +21,36 @@ public class VolunteerServiceImpl implements VolunteerService{
 	
 	@Autowired VolunteerDao volunteerDao;
 	
-	@Override
-	public Paging getPaging(int curPage) {
-		
-		//총 게시글 수 조회
-		int totalCount = volunteerDao.selectCntall();
-		
-		//페이징계산
-		Paging paging = new Paging(totalCount, curPage);
-		
-		return paging;
-	}
-	
+	/**
+	******************************************
+	* @MethodName    : getVolunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 봉사 목록 화면 조회
+	* @return
+	*******************************************
+	*/
 	@Override
 	public List<VolunteerDTO> getVolunteerList(Paging paging) {
-		logger.info("=== 봉사목록 화면 임플 진입 ===");  
+		logger.info("=== 봉사목록 화면 조회 임플 진입 ===");  
 		return volunteerDao.getVolunteerList(paging);
 	}
 	
+	/**
+	******************************************
+	* @MethodName    : getSearchPaging
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 검색 조건 페이징 처리
+	* @Param : curPage, searchDTO
+	* @return
+	*******************************************
+	*/
 	@Override
-	public Paging getPaging(int curPage, SearchDTO searchDTO) {	
+	public Paging getSearchPaging(int curPage, SearchDTO searchDTO) {	
 		
 		//총 게시글 수 조회
-		int totalCount = volunteerDao.selectCntallNew(searchDTO);
+		int totalCount = volunteerDao.selectCntSearchAll(searchDTO);
 		
 		//페이징계산
 		Paging paging = new Paging(totalCount, curPage);
@@ -51,9 +58,33 @@ public class VolunteerServiceImpl implements VolunteerService{
 		return paging;
 	}
 	
+	/**
+	******************************************
+	* @MethodName    : volunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 봉사 목록 조회
+	* @return
+	*******************************************
+	*/
 	@Override
-	public List<VolunteerDTO> getVolunteerListNew(Map<String, Object> paramMap) {
-		return volunteerDao.getVolunteerListNew(paramMap);
+	public List<VolunteerDTO> volunteerList(Map<String, Object> paramMap) {
+		return volunteerDao.volunteerList(paramMap);
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : getVolunteerPlaceList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.12
+	* @Comment : 봉사 장소 화면 조회
+	* @return
+	*******************************************
+	*/
+	@Override
+	public List<VolunteerDTO> getVolunteerPlaceList(Paging paging) {
+		logger.info("=== 봉사장소 화면 조회 임플 진입 ===");  
+		return volunteerDao.getVolunteerPlaceList(paging);
 	}
 
 }

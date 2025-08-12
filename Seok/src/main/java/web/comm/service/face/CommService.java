@@ -3,9 +3,33 @@ package web.comm.service.face;
 import java.util.List;
 
 import web.comm.dto.CommDTO;
+import web.util.Paging;
+import web.volunteer.dto.SearchDTO;
 
 public interface CommService {
 
+	/**
+	******************************************
+	* @MethodName    : getEmailCd
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 이메일 코드 조회
+	* @Param : code
+	* @return
+	*******************************************
+	*/
 	List<CommDTO> getEmailCd(String code);
+	
+	/**
+	******************************************
+	* @MethodName    : getPaging
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 전체 목록 페이징 처리
+	* @Param : curPage, tbNm
+	* @return
+	*******************************************
+	*/
+	public Paging getPaging(int curPage, String tbNm);
 
 }

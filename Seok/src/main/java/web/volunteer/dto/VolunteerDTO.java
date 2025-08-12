@@ -6,10 +6,10 @@ import lombok.Data;
 public class VolunteerDTO {
 	
 	//봉사 코드
-	private String volunteerCd;
+	private int volunteerCd;
 	
 	//봉사 장소 코드
-	private String placeCd;
+	private int placeCd;
 	
 	//봉사 장소 이름
 	private String placeNm;
@@ -24,7 +24,7 @@ public class VolunteerDTO {
 	private String volunteerNote;
 	
 	//봉사 신청 최대 인원
-	private String volunteerMaxCnt;
+	private int volunteerMaxCnt;
 	
 	//봉사 날짜
 	private String volunteerDt;
