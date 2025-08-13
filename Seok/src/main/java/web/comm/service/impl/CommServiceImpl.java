@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import web.comm.dao.face.CommDao;
+import web.comm.dto.CommCityDTO;
 import web.comm.dto.CommDTO;
 import web.comm.service.face.CommService;
 import web.util.Paging;
@@ -40,6 +41,26 @@ public class CommServiceImpl implements CommService{
 	
 	/**
 	******************************************
+	* @MethodName    : getMainCity
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 메인 도시 조회
+	* @return
+	*******************************************
+	*/
+	@Override
+	public List<CommCityDTO> getMainCity() {
+		List<CommCityDTO> mainCityList = commDao.getMainCity();
+		
+		if( mainCityList.isEmpty() || mainCityList.size() < 0 || mainCityList == null ) {
+			mainCityList = null;
+		}
+		
+		return mainCityList;
+	}
+	
+	/**
+	******************************************
 	* @MethodName    : getPaging
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.27
@@ -53,6 +74,29 @@ public class CommServiceImpl implements CommService{
 		
 		//총 게시글 수 조회
 		int totalCount = commDao.selectCntall(tbNm);
+		
+		//페이징계산
+		Paging paging = new Paging(totalCount, curPage);
+		
+		return paging;
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : getSearchPaging
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 검색 조건 페이징 처리
+	* @Param : curPage, searchDTO
+	* @return
+	*******************************************
+	*/
+	@Override
+	public Paging getSearchPaging(int curPage, SearchDTO searchDTO) {	
+		
+		//총 게시글 수 조회
+		int totalCount = commDao.selectCntSearchAll(searchDTO); 
+		System.out.println("searchDTO====" + searchDTO);
 		
 		//페이징계산
 		Paging paging = new Paging(totalCount, curPage);

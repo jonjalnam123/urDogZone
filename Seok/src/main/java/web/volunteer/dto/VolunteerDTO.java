@@ -29,6 +29,9 @@ public class VolunteerDTO {
 	//봉사 날짜
 	private String volunteerDt;
 	
+	//봉사 삭제 유무
+	private String volunteerDelYn;
+	
 	//등록자 아이디
 	private String regId;
 	

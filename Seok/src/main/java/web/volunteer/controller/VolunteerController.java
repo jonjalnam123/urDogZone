@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import web.comm.dto.CommCityDTO;
 import web.comm.service.face.CommService;
 import web.util.Paging;
 import web.volunteer.dto.SearchDTO;
 import web.volunteer.dto.VolunteerDTO;
+import web.volunteer.dto.VolunteerPlaceDTO;
 import web.volunteer.service.face.VolunteerService;
 
 @Controller
@@ -67,10 +69,13 @@ public class VolunteerController {
 	public String volunteerList( Model model
 								  , @RequestParam(defaultValue = "0") int curPage 
 								  , @ModelAttribute SearchDTO searchDTO) {
-		logger.info("=== 봉사목록 화면 컨트롤러 진입 ===");  
+		logger.info("=== 봉사 목록 컨트롤러 진입 ===");  
 		
 		// 페이징 처리
-		Paging paging = volunteerService.getSearchPaging(curPage, searchDTO);
+		searchDTO.setTbNm("TB_VOLUNTEER_INFO");
+		searchDTO.setCol("VOLUNTEER_LOCATE_CITY_CD");
+		searchDTO.setCol1("VOLUNTEER_TITLE");
+		Paging paging = commService.getSearchPaging(curPage, searchDTO);
 		paging.setUri("/service/volunteerList.do");
 		model.addAttribute("paging", paging);
 		
@@ -108,9 +113,53 @@ public class VolunteerController {
 		paging.setUri("/service/getVolunteerPlaceList.do");
 		model.addAttribute("paging", paging);
 		
+		// 메인 도시 조회
+		List<CommCityDTO> mainCityList = commService.getMainCity();
+		model.addAttribute("mainCityList", mainCityList);
+		
 		// 목록 조회
-		List<VolunteerDTO> volunteerPlaceList = volunteerService.getVolunteerPlaceList(paging);
+		List<VolunteerPlaceDTO> volunteerPlaceList = volunteerService.getVolunteerPlaceList(paging);
 		model.addAttribute("volunteerPlaceList", volunteerPlaceList);
+		
+		return "volunteer/volunteerPlaceList.admin";
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : volunteerPlaceList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 봉사 장소 목록 조회
+	* @return
+	*******************************************
+	*/
+	@RequestMapping(value = "/volunteerPlaceList.do")
+	public String volunteerPlaceList( Model model
+								  , @RequestParam(defaultValue = "0") int curPage 
+								  , @ModelAttribute SearchDTO searchDTO) {
+		logger.info("=== 봉사 장소 목록 컨트롤러 진입 ===");  
+		
+		// 페이징 처리
+		searchDTO.setTbNm("TB_PLACE_INFO");
+		searchDTO.setCol("CITY_CODE");
+		searchDTO.setCol1("PLACE_NM");
+		Paging paging = commService.getSearchPaging(curPage, searchDTO);
+		paging.setUri("/service/volunteerPlaceList.do");
+		model.addAttribute("paging", paging);
+		
+		// 메인 도시 조회
+		List<CommCityDTO> mainCityList = commService.getMainCity();
+		model.addAttribute("mainCityList", mainCityList);
+		
+		// 목록 조회
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("paging", paging);
+		paramMap.put("searchDTO", searchDTO);
+		
+		List<VolunteerPlaceDTO> volunteerPlaceList = volunteerService.volunteerPlaceList(paramMap);
+		model.addAttribute("volunteerPlaceList", volunteerPlaceList);
+		model.addAttribute("searchDTO", searchDTO);
+		model.addAttribute("param1", searchDTO.getParam1());
 		
 		return "volunteer/volunteerPlaceList.admin";
 	}

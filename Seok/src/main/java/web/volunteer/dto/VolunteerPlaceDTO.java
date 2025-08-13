@@ -8,6 +8,7 @@ public class VolunteerPlaceDTO {
 	private int placeCd;
 	private String placeNm;
 	private String placeAd;
+	private String cityName;
 	private String placeNote;
 	private String fileNo;
 	private String regId;

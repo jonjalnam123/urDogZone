@@ -16,8 +16,16 @@ $(document).ready(function(){
 <div class="card">
   <h2 class="text-center mb-2">봉사활동 정보</h2>
   
-  <form action="/service/volunteerList.do" method="get" id="seacrhForm" >
-	  <input type="text" id="param1" name="param1" placeholder="제목" value="${searchDTO.param1}">
+  <form action="/service/volunteerPlaceList.do" method="get" id="seacrhForm" >
+
+  	  <select id="param" name="param" class="combo-scroll">  
+		  <option value="" ${empty searchDTO.param ? 'selected' : ''}>지역선택</option>
+	      <c:forEach var="mainCity" items="${mainCityList}">
+			  <option value="${mainCity.cityCode}" ${searchDTO.param eq mainCity.cityCode ? 'selected' : ''}>${mainCity.cityName}</option>
+		  </c:forEach>
+	  </select>
+	  
+	  <input type="text" id="param1" name="param1" placeholder="이름" value="${searchDTO.param1}">
 	  <button type="button" id="searchBtn">검색</button>
   </form>
   
@@ -25,9 +33,9 @@ $(document).ready(function(){
     <table class="volunteer-table w-full">
       <thead>
         <tr>
-          <th>이름</th>
-          <th>주소</th>
-          <th>특징</th>
+          <th>봉사장 이름</th>
+          <th>봉사장 주소</th>
+          <th>봉사장 특징</th>
           <th>등록일</th>
           <th>등록자</th>
         </tr>
@@ -36,7 +44,7 @@ $(document).ready(function(){
         <c:forEach var="volPlace" items="${volunteerPlaceList}">
           <tr>
             <td>${volPlace.placeNm}</td>
-            <td>${volPlace.placeAd}</td>
+            <td>${volPlace.cityName}</td>
             <td>${volPlace.placeNote}</td>
             <td>${volPlace.regId}</td>
             <td>${volPlace.regDt}</td>

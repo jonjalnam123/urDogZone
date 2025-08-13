@@ -51,25 +51,60 @@
 		  FROM TB_VOLUNTEER_INFO A
 		  INNER JOIN TB_PLACE_INFO B
 		     ON A.PLACE_CD = B.PLACE_CD
-	    WHERE A.VOLUNTEER_LOCATE_CITY_CD LIKE CONCAT('%', #{searchDTO.param}, '%') 
-	       AND A.VOLUNTEER_TITLE LIKE CONCAT('%', #{searchDTO.param1}, '%')
+	    WHERE VOLUNTEER_DEL_YN = 'N'
+	        <if test="searchDTO.param != null and searchDTO.param != ''">
+	             AND A.VOLUNTEER_LOCATE_CITY_CD LIKE CONCAT('%', #{searchDTO.param}, '%') 
+	        </if>
+	        <if test="searchDTO.param1 != null and searchDTO.param1 != ''">
+	            AND A.VOLUNTEER_TITLE LIKE CONCAT('%', #{searchDTO.param1}, '%')
+	        </if>
 		ORDER BY A.VOLUNTEER_DT DESC
 		 LIMIT #{paging.startNo}, #{paging.endNo}
 	</select>
 	
 	<select id="getVolunteerPlaceList" parameterType="Paging" resultType="VolunteerPlaceDTO">
 		/* VolunteerDao.getVolunteerPlaceList */
-		SELECT PLACE_CD
-				, PLACE_NM
-				, PLACE_AD
-				, PLACE_NOTE
-				, FILE_NO
-				, REG_ID
-				, REG_DT
-				, UPD_ID
-				, UPD_DT
-		  FROM TB_PLACE_INFO
+		SELECT A.PLACE_CD
+				, A.PLACE_NM
+				, B.CITY_NAME
+				, A.PLACE_AD
+				, A.PLACE_NOTE
+				, A.FILE_NO
+				, A.REG_ID
+				, A.REG_DT
+				, A.UPD_ID
+				, A.UPD_DT
+		  FROM TB_PLACE_INFO A
+		  INNER JOIN TB_KOREA_CITY_INFO B
+		     ON  A.CITY_CODE = B.CITY_CODE
+		 WHERE A.PLACE_DEL_YN = 'N'
 		  LIMIT #{startNo}, #{endNo}
+	</select>
+	
+   	<select id="volunteerPlaceList" parameterType="map" resultType="VolunteerPlaceDTO">
+		/* VolunteerDao.volunteerPlaceList */
+		SELECT A.PLACE_CD
+				, A.PLACE_NM
+				, B.CITY_NAME
+				, A.PLACE_AD
+				, A.PLACE_NOTE
+				, A.FILE_NO
+				, A.REG_ID
+				, A.REG_DT
+				, A.UPD_ID
+				, A.UPD_DT
+		  FROM TB_PLACE_INFO A
+		  INNER JOIN TB_KOREA_CITY_INFO B
+		     ON A.CITY_CODE = B.CITY_CODE
+	    WHERE A.PLACE_DEL_YN = 'N'
+        <if test="searchDTO.param != null and searchDTO.param != ''">
+            AND A.CITY_CODE LIKE CONCAT('%', #{searchDTO.param}, '%')
+        </if>
+        <if test="searchDTO.param1 != null and searchDTO.param1 != ''">
+            AND A.PLACE_NM LIKE CONCAT('%', #{searchDTO.param1}, '%')
+        </if>
+		ORDER BY A.PLACE_CD DESC
+		 LIMIT #{paging.startNo}, #{paging.endNo}
 	</select>
 
 

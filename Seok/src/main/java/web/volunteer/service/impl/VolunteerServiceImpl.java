@@ -12,6 +12,7 @@ import web.util.Paging;
 import web.volunteer.dao.face.VolunteerDao;
 import web.volunteer.dto.SearchDTO;
 import web.volunteer.dto.VolunteerDTO;
+import web.volunteer.dto.VolunteerPlaceDTO;
 import web.volunteer.service.face.VolunteerService;
 
 @Service
@@ -82,9 +83,23 @@ public class VolunteerServiceImpl implements VolunteerService{
 	*******************************************
 	*/
 	@Override
-	public List<VolunteerDTO> getVolunteerPlaceList(Paging paging) {
+	public List<VolunteerPlaceDTO> getVolunteerPlaceList(Paging paging) {
 		logger.info("=== 봉사장소 화면 조회 임플 진입 ===");  
 		return volunteerDao.getVolunteerPlaceList(paging);
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : volunteerPlaceList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 봉사 장소 목록 조회
+	* @return
+	*******************************************
+	*/
+	@Override
+	public List<VolunteerPlaceDTO> volunteerPlaceList(Map<String, Object> paramMap) {
+		return volunteerDao.volunteerPlaceList(paramMap);
 	}
 
 }

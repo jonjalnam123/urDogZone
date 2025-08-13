@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import web.util.Paging;
 import web.volunteer.dto.SearchDTO;
 import web.volunteer.dto.VolunteerDTO;
+import web.volunteer.dto.VolunteerPlaceDTO;
 
 @Mapper
 public interface VolunteerDao {
@@ -55,6 +56,18 @@ public interface VolunteerDao {
 	* @return
 	*******************************************
 	*/
-	public List<VolunteerDTO> getVolunteerPlaceList(Paging paging);
+	public List<VolunteerPlaceDTO> getVolunteerPlaceList(Paging paging);
+
+	
+	/**
+	******************************************
+	* @MethodName    : volunteerPlaceList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.07.27
+	* @Comment : 봉사 장소 목록 조회
+	* @return
+	*******************************************
+	*/
+	public List<VolunteerPlaceDTO> volunteerPlaceList(Map<String, Object> paramMap);
 	
 }

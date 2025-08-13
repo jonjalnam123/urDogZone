@@ -22,9 +22,30 @@
 		    AND COMM_UPPER_CD = #{code}
 	</select>
 	
+	<select id="getMainCity" resultType="CommCityDTO">
+		/* CommDao.getMainCity */
+		SELECT CITY_CODE
+				, CITY_NAME
+		  FROM TB_KOREA_CITY_INFO
+		 WHERE CITY_DEL_YN = 'N'
+		    AND CITY_PARENT_CODE IS NULL  
+	</select>
+	
     <select id ="selectCntall" parameterType="String" resultType="int">
     	/* CommDao.selectCntall */
     	SELECT COUNT(*) FROM ${tbNm}
     </select>
+    
+	<select id ="selectCntSearchAll" resultType="int" parameterType="SearchDTO">
+		/* VolunteerDao.selectCntSearchAll */
+		SELECT COUNT(*) 
+	  	  FROM ${tbNm}
+		<if test="col != null and col != ''">
+			WHERE ${col} LIKE CONCAT('%', #{param}, '%')
+		</if>
+	  	 <if test="col1 != null and col1 != ''">
+	  	 	AND ${col1} LIKE CONCAT('%', #{param1}, '%')
+	  	 </if> 
+	</select>
 
 </mapper>
