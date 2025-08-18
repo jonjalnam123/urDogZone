@@ -3,6 +3,8 @@ package web.volunteer.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ public class VolunteerServiceImpl implements VolunteerService{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired VolunteerDao volunteerDao;
+	@Autowired private HttpSession session;
 	
 	/**
 	******************************************
@@ -100,6 +103,24 @@ public class VolunteerServiceImpl implements VolunteerService{
 	@Override
 	public List<VolunteerPlaceDTO> volunteerPlaceList(Map<String, Object> paramMap) {
 		return volunteerDao.volunteerPlaceList(paramMap);
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : regVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 장소 등록
+	* @return
+	*******************************************
+	*/
+	@Override
+	public int regVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO) {
+		String admId = (String) session.getAttribute("adminId");
+		volunteerPlaceDTO.setRegId(admId);
+		volunteerPlaceDTO.setUpdId(admId);
+		int result = volunteerDao.regVolunteerPlace(volunteerPlaceDTO);
+		return result;
 	}
 
 }

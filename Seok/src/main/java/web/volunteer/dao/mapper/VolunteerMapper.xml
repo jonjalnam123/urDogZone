@@ -17,9 +17,9 @@
 				, A.VOLUNTEER_MAX_CNT
 				, A.VOLUNTEER_DT
 				, A.REG_ID
-				, A.REG_DT
+				, DATE_FORMAT(A.REG_DT, '%Y-%m-%d') AS REG_DT
 				, A.UPD_ID
-				, A.UPD_DT
+				, DATE_FORMAT(A.UPD_DT, '%Y-%m-%d') AS UPD_DT
 		  FROM TB_VOLUNTEER_INFO A
 		  INNER JOIN TB_PLACE_INFO B
 		     ON A.PLACE_CD = B.PLACE_CD
@@ -45,9 +45,9 @@
 				, A.VOLUNTEER_MAX_CNT
 				, A.VOLUNTEER_DT
 				, A.REG_ID
-				, A.REG_DT
+				, DATE_FORMAT(A.REG_DT, '%Y-%m-%d') AS REG_DT
 				, A.UPD_ID
-				, A.UPD_DT
+				, DATE_FORMAT(A.UPD_DT, '%Y-%m-%d') AS UPD_DT
 		  FROM TB_VOLUNTEER_INFO A
 		  INNER JOIN TB_PLACE_INFO B
 		     ON A.PLACE_CD = B.PLACE_CD
@@ -71,9 +71,9 @@
 				, A.PLACE_NOTE
 				, A.FILE_NO
 				, A.REG_ID
-				, A.REG_DT
+				, DATE_FORMAT(A.REG_DT, '%Y-%m-%d') AS REG_DT
 				, A.UPD_ID
-				, A.UPD_DT
+				, DATE_FORMAT(A.UPD_DT, '%Y-%m-%d') AS UPD_DT
 		  FROM TB_PLACE_INFO A
 		  INNER JOIN TB_KOREA_CITY_INFO B
 		     ON  A.CITY_CODE = B.CITY_CODE
@@ -90,9 +90,9 @@
 				, A.PLACE_NOTE
 				, A.FILE_NO
 				, A.REG_ID
-				, A.REG_DT
+				, DATE_FORMAT(A.REG_DT, '%Y-%m-%d') AS REG_DT
 				, A.UPD_ID
-				, A.UPD_DT
+				, DATE_FORMAT(A.UPD_DT, '%Y-%m-%d') AS UPD_DT
 		  FROM TB_PLACE_INFO A
 		  INNER JOIN TB_KOREA_CITY_INFO B
 		     ON A.CITY_CODE = B.CITY_CODE
@@ -106,6 +106,38 @@
 		ORDER BY A.PLACE_CD DESC
 		 LIMIT #{paging.startNo}, #{paging.endNo}
 	</select>
+	
+	<insert id="regVolunteerPlace" parameterType="VolunteerPlaceDTO">
+		/* LoginDao.regVolunteerPlace */
+		INSERT INTO TB_PLACE_INFO (
+		   PLACE_NM
+		 , PLACE_POSTCODE
+		 , PLACE_AD
+		 , PLACE_ADD
+		 , CITY_CODE
+		 , PLACE_NOTE
+		 , PLACE_DEL_YN
+		 , FILE_NO
+		 , REG_ID
+		 , REG_DT
+		 , UPD_ID
+		 , UPD_DT
+		) 
+		VALUES (
+		   #{placeNm}
+		 , #{placePostCode}
+		 , #{placeAd}
+		 , #{placeAdd}
+		 , #{cityCode}
+		 , #{placeNote}
+		 , 'N'
+		 , #{fileNo}
+		 , #{regId}
+		 , SYSDATE()
+		 , #{updId}
+		 , SYSDATE()
+		)
+	</insert>
 
 
 </mapper>

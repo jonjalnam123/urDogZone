@@ -171,5 +171,54 @@ public class VolunteerController {
 		
 		return "volunteer/volunteerPlaceList.admin";
 	}
+	
+	/**
+	******************************************
+	* @MethodName    : getRegVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 장소 등록 화면 조회
+	* @return
+	*******************************************
+	*/
+	@RequestMapping(value = "/getRegVolunteerPlace.do")
+	public String getRegVolunteerPlace( Model model ) {
+		logger.info("=== 봉사 장소 등록 화면 조회 컨트롤러 진입 ===");  
+
+		// 메인 도시 조회
+		List<CommCityDTO> mainCityList = commService.getMainCity();
+		model.addAttribute("mainCityList", mainCityList);
+		
+		return "volunteer/volunteerPlaceReg.admin";
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : regVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 장소 등록
+	* @return
+	*******************************************
+	*/
+	@RequestMapping(value = "/regVolunteerPlace.do")
+	public String regVolunteerPlace( Model model, @ModelAttribute VolunteerPlaceDTO volunteerPlaceDTO) {
+		
+		String uri = "";
+		try {
+			logger.info("=== 봉사 장소 등록 컨트롤러 진입 ===");
+			int result = volunteerService.regVolunteerPlace(volunteerPlaceDTO);
+			if ( result == 1 ) {
+				uri = "redirect:/service/getVolunteerPlaceList.do";
+			} else {
+				uri = "redirect:/login/getJoinFailPage.do";
+			}
+		} catch (Exception e) {
+			logger.info("=== 봉사 장소 등록 컨트롤러 실패===");  
+		}
+		
+		return uri;
+	}
+	
 
 }

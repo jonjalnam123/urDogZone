@@ -1,17 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script type="text/javascript">
-
-$(document).ready(function(){
-	
-	$('#searchBtn').on('click', function() {
-		var form = $('#seacrhForm');
-  		form.submit();
-	})
-	
-})
-
-</script>
+<script src="${pageContext.request.contextPath}/resources/static/js/volunteer/volunteerList.js"></script>
 
 <div class="card">
   <h2 class="text-center mb-2">봉사활동 정보</h2>

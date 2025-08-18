@@ -78,7 +78,7 @@
       <label for="userPostcode">우편번호</label>
       <div style="display: flex; gap: 10px; flex-wrap: wrap;">
         <input type="text" id="userPostcode" name="userPostcode" placeholder="우편번호" readonly>
-        <input type="button" class="btn" onclick="execDaumPostcode()" value="우편번호 찾기">
+        <input type="button" class="btn" id="getPostCode" value="우편번호 찾기">
       </div>
       <input type="text" id="userAd" name="userAd" placeholder="도로명주소" class="mt-2" readonly>
       <input type="text" id="userAdd" name="userAdd" placeholder="상세주소" class="mt-2">

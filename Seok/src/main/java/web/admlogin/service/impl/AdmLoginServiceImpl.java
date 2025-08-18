@@ -42,7 +42,6 @@ public class AdmLoginServiceImpl implements AdmLoginService{
                 session.invalidate();
                 session = request.getSession(true); // 새 세션 생성
             }
-
             // 관리자 정보 저장
             session.setAttribute("adminId", adminInfo.getAdminId());
             session.setAttribute("adminNm", adminInfo.getAdminNm());

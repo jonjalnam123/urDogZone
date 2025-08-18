@@ -96,7 +96,6 @@ public class CommServiceImpl implements CommService{
 		
 		//총 게시글 수 조회
 		int totalCount = commDao.selectCntSearchAll(searchDTO); 
-		System.out.println("searchDTO====" + searchDTO);
 		
 		//페이징계산
 		Paging paging = new Paging(totalCount, curPage);

@@ -22,7 +22,7 @@ public interface VolunteerDao {
 	* @return
 	*******************************************
 	*/
-	List<VolunteerDTO> getVolunteerList(Paging paging);
+	public List<VolunteerDTO> getVolunteerList(Paging paging);
 
 	/**
 	******************************************
@@ -69,5 +69,16 @@ public interface VolunteerDao {
 	*******************************************
 	*/
 	public List<VolunteerPlaceDTO> volunteerPlaceList(Map<String, Object> paramMap);
+
+	/**
+	******************************************
+	* @MethodName    : regVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 장소 등록
+	* @return
+	*******************************************
+	*/
+	public int regVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO);
 	
 }

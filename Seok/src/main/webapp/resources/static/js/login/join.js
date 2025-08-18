@@ -101,6 +101,13 @@ $(document).ready(function(){
 		}
 	});
 	
+	// 우편번호 찾기 이벤트
+	$('#getPostCode').on('click', function(){
+		var postId =  $('#userPostcode').attr('id');
+		var adId = $('#userAd').attr('id');
+		execDaumPostcode( postId, adId )
+	})
+	
 	// 등록버튼 이벤트
 	$('#regBtn').on('click', function () {
 		var poh1 = $('#userPhone1').val()
