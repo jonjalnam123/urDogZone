@@ -49,6 +49,10 @@ public class VolunteerController {
 		paging.setUri("/service/getVolunteerList.do");
 		model.addAttribute("paging", paging);
 		
+		// 메인 도시 조회
+		List<CommCityDTO> mainCityList = commService.getMainCity();
+		model.addAttribute("mainCityList", mainCityList);
+		
 		// 목록 조회
 		List<VolunteerDTO> volunteerList = volunteerService.getVolunteerList(paging);
 		model.addAttribute("volunteerList", volunteerList);
@@ -78,6 +82,10 @@ public class VolunteerController {
 		Paging paging = commService.getSearchPaging(curPage, searchDTO);
 		paging.setUri("/service/volunteerList.do");
 		model.addAttribute("paging", paging);
+		
+		// 메인 도시 조회
+		List<CommCityDTO> mainCityList = commService.getMainCity();
+		model.addAttribute("mainCityList", mainCityList);
 		
 		// 목록 조회
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -140,11 +148,11 @@ public class VolunteerController {
 		logger.info("=== 봉사 장소 목록 컨트롤러 진입 ===");  
 		
 		// 페이징 처리
-		searchDTO.setTbNm("TB_PLACE_INFO");
-		searchDTO.setCol("CITY_CODE");
-		searchDTO.setCol1("PLACE_NM");
+		searchDTO.setTbNm("TB_PLACE_INFO"); // 테이블명
+		searchDTO.setCol("CITY_CODE"); // 조회 컬럼
+		searchDTO.setCol1("PLACE_NM"); // 조회 컬럼 1
 		Paging paging = commService.getSearchPaging(curPage, searchDTO);
-		paging.setUri("/service/volunteerPlaceList.do");
+		paging.setUri("/service/volunteerPlaceList.do"); //페이징URI
 		model.addAttribute("paging", paging);
 		
 		// 메인 도시 조회

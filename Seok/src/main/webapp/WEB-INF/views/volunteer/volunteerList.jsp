@@ -17,11 +17,11 @@ $(document).ready(function(){
   <h2 class="text-center mb-2">봉사활동 정보</h2>
   
   <form action="/service/volunteerList.do" method="get" id="seacrhForm" >
-	  <select id="param" name="param">
+  	  <select id="param" name="param" class="combo-scroll">  
 		  <option value="" ${empty searchDTO.param ? 'selected' : ''}>지역선택</option>
-		  <option value="1" ${searchDTO.param == '1' ? 'selected' : ''}>서울</option>
-		  <option value="2" ${searchDTO.param == '2' ? 'selected' : ''}>파주</option>
-		  <option value="3" ${searchDTO.param == '3' ? 'selected' : ''}>김포</option>
+	      <c:forEach var="mainCity" items="${mainCityList}">
+			  <option value="${mainCity.cityCode}" ${searchDTO.param eq mainCity.cityCode ? 'selected' : ''}>${mainCity.cityName}</option>
+		  </c:forEach>
 	  </select>
 	  <input type="text" id="param1" name="param1" placeholder="제목" value="${searchDTO.param1}">
 	  <button type="button" id="searchBtn">검색</button>
