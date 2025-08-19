@@ -23,18 +23,6 @@ public interface VolunteerService {
 
 	/**
 	******************************************
-	* @MethodName    : getSearchPaging
-	* @Author        : Jung Seok Choi
-	* @Date        : 2025.07.27
-	* @Comment : 검색 조건 페이징 처리
-	* @Param : curPage, searchDTO
-	* @return
-	*******************************************
-	*/
-	public Paging getSearchPaging(int curPage, SearchDTO searchDTO);
-
-	/**
-	******************************************
 	* @MethodName    : volunteerList
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.27
@@ -76,5 +64,28 @@ public interface VolunteerService {
 	*******************************************
 	*/
 	public int regVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO);
+
+	
+	/**
+	******************************************
+	* @MethodName    : getVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 장소 상세 조회
+	* @return
+	*******************************************
+	*/
+	public VolunteerPlaceDTO getVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO);
+
+	/**
+	******************************************
+	* @MethodName    : updVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 장소 수정
+	* @return
+	*******************************************
+	*/
+	public int updVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO);
 
 }

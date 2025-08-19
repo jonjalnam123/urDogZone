@@ -42,28 +42,6 @@ public class VolunteerServiceImpl implements VolunteerService{
 	
 	/**
 	******************************************
-	* @MethodName    : getSearchPaging
-	* @Author        : Jung Seok Choi
-	* @Date        : 2025.07.27
-	* @Comment : 검색 조건 페이징 처리
-	* @Param : curPage, searchDTO
-	* @return
-	*******************************************
-	*/
-	@Override
-	public Paging getSearchPaging(int curPage, SearchDTO searchDTO) {	
-		
-		//총 게시글 수 조회
-		int totalCount = volunteerDao.selectCntSearchAll(searchDTO);
-		
-		//페이징계산
-		Paging paging = new Paging(totalCount, curPage);
-		
-		return paging;
-	}
-	
-	/**
-	******************************************
 	* @MethodName    : volunteerList
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.27
@@ -120,6 +98,42 @@ public class VolunteerServiceImpl implements VolunteerService{
 		volunteerPlaceDTO.setRegId(admId);
 		volunteerPlaceDTO.setUpdId(admId);
 		int result = volunteerDao.regVolunteerPlace(volunteerPlaceDTO);
+		return result;
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : getVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 장소 상세 조회
+	* @return
+	*******************************************
+	*/
+	@Override
+	public VolunteerPlaceDTO getVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO) {
+		int placeCd = volunteerPlaceDTO.getPlaceCd();
+		VolunteerPlaceDTO volunteerPlace = volunteerDao.getVolunteerPlace(placeCd);
+		if ( volunteerPlace == null ) {
+			volunteerPlace = null;
+		}
+		return volunteerPlace;
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : updVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 장소 수정
+	* @return
+	*******************************************
+	*/
+	@Override
+	public int updVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO) {
+		String admId = (String) session.getAttribute("adminId");
+		volunteerPlaceDTO.setUpdId(admId);
+		int result = volunteerDao.updVolunteerPlace(volunteerPlaceDTO);
 		return result;
 	}
 

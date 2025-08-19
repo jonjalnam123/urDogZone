@@ -14,11 +14,11 @@ $(document).ready(function(){
 	})
 	
 	// 등록 버튼 이벤트
-	$('#regBtn').on('click', function() {
-		var conMsg = "봉사장소를 등록 하시겠습니까?"
+	$('#updBtn').on('click', function() {
+		var conMsg = "봉사장소를 수정 하시겠습니까?"
 		var conResult = callConfirm(conMsg);
 		if ( conResult === 'Y') { 
-			var form = $('#regVolunteerForm');
+			var form = $('#updVolunteerForm');
 	  		form.submit();
 		} 
 	});

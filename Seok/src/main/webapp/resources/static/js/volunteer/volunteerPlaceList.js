@@ -15,4 +15,11 @@ $(document).ready(function(){
 		goToUri('/service/getRegVolunteerPlace.do');
 	})
 	
+	// 이름 클릭 시 상세페이지 이동
+  	$(".volunteer-table").on("click", ".placeNm", function(){
+	    var placeCd = $(this).closest("tr").data("placecd");
+		var uri = "/service/updVolunteerPlace.do?placeCd=" + placeCd;
+		goToUri(uri);
+    });
+	
 });

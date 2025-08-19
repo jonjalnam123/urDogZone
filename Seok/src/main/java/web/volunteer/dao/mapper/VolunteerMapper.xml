@@ -67,6 +67,7 @@
 		SELECT A.PLACE_CD
 				, A.PLACE_NM
 				, B.CITY_NAME
+				, B.CITY_CODE
 				, A.PLACE_AD
 				, A.PLACE_NOTE
 				, A.FILE_NO
@@ -78,6 +79,7 @@
 		  INNER JOIN TB_KOREA_CITY_INFO B
 		     ON  A.CITY_CODE = B.CITY_CODE
 		 WHERE A.PLACE_DEL_YN = 'N'
+	  ORDER BY B.CITY_CODE ASC 
 		  LIMIT #{startNo}, #{endNo}
 	</select>
 	
@@ -86,6 +88,7 @@
 		SELECT A.PLACE_CD
 				, A.PLACE_NM
 				, B.CITY_NAME
+				, B.CITY_CODE
 				, A.PLACE_AD
 				, A.PLACE_NOTE
 				, A.FILE_NO
@@ -103,12 +106,12 @@
         <if test="searchDTO.param1 != null and searchDTO.param1 != ''">
             AND A.PLACE_NM LIKE CONCAT('%', #{searchDTO.param1}, '%')
         </if>
-		ORDER BY A.PLACE_CD DESC
+		ORDER BY B.CITY_CODE ASC
 		 LIMIT #{paging.startNo}, #{paging.endNo}
 	</select>
 	
 	<insert id="regVolunteerPlace" parameterType="VolunteerPlaceDTO">
-		/* LoginDao.regVolunteerPlace */
+		/* VolunteerDao.regVolunteerPlace */
 		INSERT INTO TB_PLACE_INFO (
 		   PLACE_NM
 		 , PLACE_POSTCODE
@@ -138,6 +141,40 @@
 		 , SYSDATE()
 		)
 	</insert>
+	
+   	<select id="getVolunteerPlace" parameterType="int" resultType="VolunteerPlaceDTO">
+		/* VolunteerDao.getVolunteerPlace */
+		SELECT PLACE_CD
+				, CITY_CODE
+				, PLACE_NM
+				, PLACE_POSTCODE
+				, PLACE_AD
+				, PLACE_ADD
+				, PLACE_NOTE
+				, FILE_NO
+				, REG_ID
+				, DATE_FORMAT(REG_DT, '%Y-%m-%d') AS REG_DT
+				, UPD_ID
+				, DATE_FORMAT(UPD_DT, '%Y-%m-%d') AS UPD_DT
+		  FROM TB_PLACE_INFO
+	    WHERE PLACE_CD = #{placeCd}
+	       AND PLACE_DEL_YN = 'N'
+	</select>
+	
+	<update id="updVolunteerPlace" parameterType="VolunteerPlaceDTO">
+		/* VolunteerDao.updVolunteerPlace */
+        UPDATE TB_PLACE_INFO 
+			 SET PLACE_NM = #{placeNm}
+			     , CITY_CODE = #{cityCode}
+				 , PLACE_POSTCODE = #{placePostCode}
+			     , PLACE_AD = #{placeAd}
+			     , PLACE_ADD = #{placeAdd}
+			     , PLACE_NOTE = #{placeNote}
+			     , PLACE_DEL_YN = 'N'
+			     , UPD_ID = #{updId}
+			     , UPD_DT = SYSDATE()
+		  WHERE PLACE_CD = #{placeCd}
+	</update>
 
 
 </mapper>

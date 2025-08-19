@@ -3,7 +3,7 @@
 <script src="${pageContext.request.contextPath}/resources/static/js/volunteer/volunteerPlaceList.js"></script>
 
 <div class="card">
-  <h2 class="text-center mb-2">봉사활동 정보</h2>
+  <h2 class="text-center mb-2">봉사장소</h2>
   
   <form action="/service/volunteerPlaceList.do" method="get" id="seacrhForm" >
   	  <select id="param" name="param" class="combo-scroll">  
@@ -23,22 +23,22 @@
     <table class="volunteer-table w-full">
       <thead>
         <tr>
-          <th>봉사장명</th>
-          <th>봉사장 주소</th>
-          <th>봉사장 특징</th>
+          <th>이름</th>
+          <th>지역</th>
+          <th>특징</th>
           <th>등록자</th>
           <th>등록일</th>
         </tr>
       </thead>
       <tbody>
         <c:forEach var="volPlace" items="${volunteerPlaceList}">
-          <tr>
-            <td>${volPlace.placeNm}</td>
-            <td>${volPlace.cityName}</td>
-            <td>${volPlace.placeNote}</td>
-            <td>${volPlace.regId}</td>
-            <td>${volPlace.regDt}</td>
-          </tr>
+       		<tr data-placecd="${volPlace.placeCd}">
+	            <td class="placeNm clickable">${volPlace.placeNm}</td>
+	            <td>${volPlace.cityName}</td>
+	            <td>${volPlace.placeNote}</td>
+	            <td>${volPlace.regId}</td>
+	            <td>${volPlace.regDt}</td>
+       		</tr>
         </c:forEach>
       </tbody>
     </table>

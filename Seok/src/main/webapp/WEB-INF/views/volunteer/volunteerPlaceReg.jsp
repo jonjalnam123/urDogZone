@@ -40,7 +40,7 @@
 
     <div class="btn-group">
       <button type="button" class="btn" id="regBtn">등록</button>
-      <button type="button" class="btn" id="delBtn">취소</button>
+      <button type="button" class="btn" id="cancelBtn">취소</button>
     </div>
 
   </form>

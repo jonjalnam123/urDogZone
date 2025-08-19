@@ -26,18 +26,6 @@ public interface VolunteerDao {
 
 	/**
 	******************************************
-	* @MethodName    : selectCntSearchAll
-	* @Author        : Jung Seok Choi
-	* @Date        : 2025.07.27
-	* @Comment : 검색 조건 페이징 처리
-	* @Param : searchDTO
-	* @return
-	*******************************************
-	*/
-	public int selectCntSearchAll(SearchDTO searchDTO);
-
-	/**
-	******************************************
 	* @MethodName    : volunteerList
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.27
@@ -80,5 +68,27 @@ public interface VolunteerDao {
 	*******************************************
 	*/
 	public int regVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO);
+
+	/**
+	******************************************
+	* @MethodName    : getVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 장소 상세 조회
+	* @return
+	*******************************************
+	*/
+	public VolunteerPlaceDTO getVolunteerPlace(int placeCd);
+
+	/**
+	******************************************
+	* @MethodName    : updVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 장소 수정
+	* @return
+	*******************************************
+	*/
+	public int updVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO);
 	
 }

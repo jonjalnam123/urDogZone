@@ -211,10 +211,54 @@ public class VolunteerController {
 			if ( result == 1 ) {
 				uri = "redirect:/service/getVolunteerPlaceList.do";
 			} else {
-				uri = "redirect:/login/getJoinFailPage.do";
+				uri = "redirect:/comm/getFailPage.do";
 			}
 		} catch (Exception e) {
 			logger.info("=== 봉사 장소 등록 컨트롤러 실패===");  
+		}
+		
+		return uri;
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : updVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 장소 수정
+	* @return
+	*******************************************
+	*/
+	@RequestMapping(value = "/updVolunteerPlace.do")
+	public String updVolunteerPlace( Model model
+										 , @ModelAttribute VolunteerPlaceDTO volunteerPlaceDTO) {
+		
+		String uri = "";
+		String flag = volunteerPlaceDTO.getFlag();
+		
+		if ( flag == null || flag.isBlank() || flag.isEmpty() ) {
+			
+			// 메인 도시 조회
+			List<CommCityDTO> mainCityList = commService.getMainCity();
+			model.addAttribute("mainCityList", mainCityList);
+			
+			// 봉사 장소 상세 조회
+			VolunteerPlaceDTO volunteerPlace = volunteerService.getVolunteerPlace(volunteerPlaceDTO);
+			model.addAttribute("volunteerPlace", volunteerPlace);
+			
+			uri = "volunteer/volunteerPlaceUpd.admin";
+
+		} else {
+			
+			if ( flag.equals("U") ) {
+				int result = volunteerService.updVolunteerPlace(volunteerPlaceDTO);
+				if ( result == 1 ) {
+					uri = "redirect:/service/getVolunteerPlaceList.do";
+				} else {
+					uri = "redirect:/comm/getFailPage.do";
+				}
+			}
+			
 		}
 		
 		return uri;

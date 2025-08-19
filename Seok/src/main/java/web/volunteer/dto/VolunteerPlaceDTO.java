@@ -46,5 +46,8 @@ public class VolunteerPlaceDTO {
 	
 	// 수정 날짜
 	private String updDt;
+	
+	// 분기 처리
+	private String flag;
 
 }
