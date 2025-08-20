@@ -1,10 +1,15 @@
 /**
  * 작성자 : 최정석
- * 작성날짜 : 2025.08.18
- * 내용 : 봉사 장소 등록 스크립트
+ * 작성날짜 : 2025.08.20
+ * 내용 : 봉사 목록 등록 스크립트
  */
 
 $(document).ready(function(){
+	
+	// 봉사 모집인원 입력 이벤트
+	$('#volunteerMaxCnt').on('change', function() {
+		checkNum('volunteerMaxCnt');
+	})
 	
 	// 우편 번호 찾기 이벤트
 	$('#getPostCode').on('click', function() {
@@ -14,11 +19,11 @@ $(document).ready(function(){
 	})
 	
 	// 등록 버튼 이벤트
-	$('#regBtn').on('click', function() {
-		var conMsg = "봉사장소를 등록 하시겠습니까?"
+	$('#updBtn').on('click', function() {
+		var conMsg = "봉사장소를 수정 하시겠습니까?"
 		var conResult = callConfirm(conMsg);
 		if ( conResult === 'Y') { 
-			var form = $('#regVolunteerPlaceForm');
+			var form = $('#updVolunteerPlaceForm');
 	  		form.submit();
 		} 
 	});

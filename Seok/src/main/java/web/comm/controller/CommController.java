@@ -46,5 +46,19 @@ public class CommController {
 		}
 		return result;
 	}
-
+	
+	/**
+	******************************************
+	* @MethodName    : getFailPage
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.20
+	* @Comment : 공통 실패 화면 조회
+	* @return
+	*******************************************
+	*/
+	@RequestMapping(value="/getFailPage.do")
+	public String getFailPage() {
+		logger.info("=== 공통 실패 화면 조회 컨트롤러 진입 ===");  
+		return "comm/failPage.admin";
+	}
 }

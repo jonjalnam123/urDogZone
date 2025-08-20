@@ -27,14 +27,6 @@
 		  LIMIT #{startNo}, #{endNo}
 	</select>
 	
-    <select id ="selectCntSearchAll" resultType="int" parameterType="SearchDTO">
-		/* VolunteerDao.selectCntSearchAll */
-		SELECT COUNT(*) 
-		  FROM TB_VOLUNTEER_INFO
-		 WHERE VOLUNTEER_LOCATE_CITY_CD LIKE CONCAT('%', #{param}, '%') 
-		 	AND VOLUNTEER_TITLE LIKE CONCAT('%', #{param1}, '%')
-    </select>
-    
    	<select id="volunteerList" parameterType="map" resultType="VolunteerDTO">
 		/* VolunteerDao.volunteerList */
 		SELECT A.VOLUNTEER_CD
@@ -68,7 +60,9 @@
 				, A.PLACE_NM
 				, B.CITY_NAME
 				, B.CITY_CODE
+				, A.PLACE_POSTCODE
 				, A.PLACE_AD
+				, A.PLACE_ADD
 				, A.PLACE_NOTE
 				, A.FILE_NO
 				, A.REG_ID
@@ -89,7 +83,9 @@
 				, A.PLACE_NM
 				, B.CITY_NAME
 				, B.CITY_CODE
+				, A.PLACE_POSTCODE
 				, A.PLACE_AD
+				, A.PLACE_ADD
 				, A.PLACE_NOTE
 				, A.FILE_NO
 				, A.REG_ID
@@ -142,8 +138,8 @@
 		)
 	</insert>
 	
-   	<select id="getVolunteerPlace" parameterType="int" resultType="VolunteerPlaceDTO">
-		/* VolunteerDao.getVolunteerPlace */
+   	<select id="getVolunteerPlaceDetail" parameterType="int" resultType="VolunteerPlaceDTO">
+		/* VolunteerDao.getVolunteerPlaceDetail */
 		SELECT PLACE_CD
 				, CITY_CODE
 				, PLACE_NM
@@ -176,5 +172,13 @@
 		  WHERE PLACE_CD = #{placeCd}
 	</update>
 
+	<update id="delVolunteerPlace" parameterType="VolunteerPlaceDTO">
+	    UPDATE TB_PLACE_INFO
+	         SET PLACE_DEL_YN = 'Y'
+	     WHERE PLACE_CD IN
+	    <foreach item="placeCd" collection="checkPlaceCdList" open="(" separator="," close=")">
+	        #{placeCd}
+	    </foreach>
+	</update>
 
 </mapper>

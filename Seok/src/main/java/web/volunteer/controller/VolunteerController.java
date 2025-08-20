@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import web.comm.dto.CommCityDTO;
 import web.comm.service.face.CommService;
@@ -230,39 +231,69 @@ public class VolunteerController {
 	*******************************************
 	*/
 	@RequestMapping(value = "/updVolunteerPlace.do")
-	public String updVolunteerPlace( Model model
-										 , @ModelAttribute VolunteerPlaceDTO volunteerPlaceDTO) {
+	public String updVolunteerPlace( Model model, @ModelAttribute VolunteerPlaceDTO volunteerPlaceDTO) {
 		
 		String uri = "";
 		String flag = volunteerPlaceDTO.getFlag();
 		
-		if ( flag == null || flag.isBlank() || flag.isEmpty() ) {
-			
-			// 메인 도시 조회
-			List<CommCityDTO> mainCityList = commService.getMainCity();
-			model.addAttribute("mainCityList", mainCityList);
-			
-			// 봉사 장소 상세 조회
-			VolunteerPlaceDTO volunteerPlace = volunteerService.getVolunteerPlace(volunteerPlaceDTO);
-			model.addAttribute("volunteerPlace", volunteerPlace);
-			
-			uri = "volunteer/volunteerPlaceUpd.admin";
-
-		} else {
-			
-			if ( flag.equals("U") ) {
-				int result = volunteerService.updVolunteerPlace(volunteerPlaceDTO);
-				if ( result == 1 ) {
-					uri = "redirect:/service/getVolunteerPlaceList.do";
-				} else {
-					uri = "redirect:/comm/getFailPage.do";
+		try {
+			if ( flag == null || flag.isBlank() || flag.isEmpty() ) {
+				logger.info("=== 봉사 장소 상세 조회 컨트롤러 진입 ===");
+				
+				// 메인 도시 조회
+				List<CommCityDTO> mainCityList = commService.getMainCity();
+				model.addAttribute("mainCityList", mainCityList);
+				
+				// 봉사 장소 상세 조회
+				VolunteerPlaceDTO volunteerPlace = volunteerService.getVolunteerPlaceDetail(volunteerPlaceDTO);
+				model.addAttribute("volunteerPlace", volunteerPlace);
+				
+				uri = "volunteer/volunteerPlaceUpd.admin";
+			} else {
+				if ( flag.equals("U") ) {
+					logger.info("=== 봉사 장소 수정 컨트롤러 진입 ===");
+					int result = volunteerService.updVolunteerPlace(volunteerPlaceDTO);
+					if ( result == 1 ) {
+						uri = "redirect:/service/getVolunteerPlaceList.do";
+					} else {
+						uri = "redirect:/comm/getFailPage.do";
+					}
 				}
 			}
-			
+		} catch (Exception e) {
+			logger.info("=== 봉사 장소 상세, 수정 컨트롤러 실패  ===");
 		}
-		
+
 		return uri;
 	}
 	
-
+	/**
+	******************************************
+	* @MethodName    : delVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.20
+	* @Comment : 봉사 장소 삭제
+	* @return
+	*******************************************
+	*/
+	@RequestMapping(value = "/delVolunteerPlace.do")
+	@ResponseBody
+	public Map<String, Object> delVolunteerPlace( Model model , @ModelAttribute VolunteerPlaceDTO volunteerPlaceDTO) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			logger.info("=== 봉사 장소 삭제 컨트롤러 진입 ===");
+			int resultCnt = volunteerService.delVolunteerPlace(volunteerPlaceDTO);
+			if(resultCnt == 1 ) {
+				result.put("result", "SUCCESS");
+				result.put("resultCd", "Y");
+			} else {
+				result.put("resultCd", "N");
+			}
+		} catch (Exception e) {
+			logger.info("=== 봉사 장소 삭제 컨트롤러 실패 ===");
+			result.put("result", "FAIL");
+		}
+		return result;
+	}
+	
 }

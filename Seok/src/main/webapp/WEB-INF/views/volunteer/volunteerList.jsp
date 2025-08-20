@@ -14,6 +14,8 @@
 	  </select>
 	  <input type="text" id="param1" name="param1" placeholder="제목" value="${searchDTO.param1}">
 	  <button type="button" id="searchBtn">검색</button>
+	  <button type="button" id="regBtn">등록</button>
+	  <button type="button" id="delBtn">삭제</button>
   </form>
   
   <div class="table-responsive">
@@ -32,22 +34,21 @@
         </tr>
       </thead>
       <tbody>
-        <c:forEach var="vol" items="${volunteerList}">
-          <tr>
-            <td>${vol.placeNm}</td>
-            <td>${vol.volunteerTitle}</td>
-            <td>${vol.volunteerNote}</td>
-            <td>${vol.volunteerMaxCnt}</td>
-            <td>${vol.volunteerDt}</td>
-            <td>${vol.regId}</td>
-            <td>${vol.regDt}</td>
-            <td>${vol.updId}</td>
-            <td>${vol.updDt}</td>
-          </tr>
+      	<c:forEach var="vol" items="${volunteerList}">
+			<tr data-volcd="${vol.volunteerCd}">
+				<td>${vol.placeNm}</td>
+	            <td>${vol.volunteerTitle}</td>
+	            <td>${vol.volunteerNote}</td>
+	            <td>${vol.volunteerMaxCnt}</td>
+	            <td>${vol.volunteerDt}</td>
+	            <td>${vol.regId}</td>
+	            <td>${vol.regDt}</td>
+	            <td>${vol.updId}</td>
+	            <td>${vol.updDt}</td>
+          	</tr>
         </c:forEach>
       </tbody>
     </table>
   </div>
+  <c:import url="/WEB-INF/views/layout/paging.jsp" />
 </div>
-
-<c:import url="/WEB-INF/views/layout/paging.jsp" />

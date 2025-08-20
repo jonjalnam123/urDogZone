@@ -75,7 +75,7 @@ public interface VolunteerService {
 	* @return
 	*******************************************
 	*/
-	public VolunteerPlaceDTO getVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO);
+	public VolunteerPlaceDTO getVolunteerPlaceDetail(VolunteerPlaceDTO volunteerPlaceDTO);
 
 	/**
 	******************************************
@@ -87,5 +87,17 @@ public interface VolunteerService {
 	*******************************************
 	*/
 	public int updVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO);
+
+	
+	/**
+	******************************************
+	* @MethodName    : delVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.20
+	* @Comment : 봉사 장소 삭제
+	* @return
+	*******************************************
+	*/
+	public int delVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO);
 
 }

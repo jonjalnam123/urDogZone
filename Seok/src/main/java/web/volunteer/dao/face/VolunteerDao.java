@@ -78,7 +78,7 @@ public interface VolunteerDao {
 	* @return
 	*******************************************
 	*/
-	public VolunteerPlaceDTO getVolunteerPlace(int placeCd);
+	public VolunteerPlaceDTO getVolunteerPlaceDetail(int placeCd);
 
 	/**
 	******************************************
@@ -90,5 +90,16 @@ public interface VolunteerDao {
 	*******************************************
 	*/
 	public int updVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO);
+
+	/**
+	******************************************
+	* @MethodName    : delVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.20
+	* @Comment : 봉사 장소 삭제
+	* @return
+	*******************************************
+	*/
+	public int delVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO);
 	
 }

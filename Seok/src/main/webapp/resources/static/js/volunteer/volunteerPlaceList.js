@@ -16,10 +16,45 @@ $(document).ready(function(){
 	})
 	
 	// 이름 클릭 시 상세페이지 이동
-  	$(".volunteer-table").on("click", ".placeNm", function(){
+  	$("#volPlaceTb").on("click", ".placeNm", function(){
 	    var placeCd = $(this).closest("tr").data("placecd");
 		var uri = "/service/updVolunteerPlace.do?placeCd=" + placeCd;
 		goToUri(uri);
     });
+
+	// 전체 선택 / 해제
+	$("#checkAll").on("click", function () {
+	  $(".rowCheck").prop("checked", this.checked );
+	});
+	
+	// 전체 선택 / 해제
+	$("#delBtn").on("click", function () {
+		
+	    var checkPlaceCdList = [];
+	    $(".rowCheck:checked").each(function () {
+	        var placeCd = $(this).closest("tr").data("placecd");
+	        checkPlaceCdList.push(placeCd);
+	    });
+	
+	    if (checkPlaceCdList.length === 0) {
+	        alert("선택된 봉사 장소가 없습니다.");
+	        return;
+	    }
+
+		var url = '/service/delVolunteerPlace.do';
+		var params = {
+				checkPlaceCdList : checkPlaceCdList
+		}
+		var dataType = 'json'
+		
+	 	ajaxStart(url, params, dataType, function(data) {
+			if ( data.resultCd === 'Y' ) {
+				goToUri('/service/getVolunteerPlaceList.do')
+			} else {
+				alert("삭제할 봉사 장소가 없습니다.");
+			}
+		});
+
+	});
 	
 });

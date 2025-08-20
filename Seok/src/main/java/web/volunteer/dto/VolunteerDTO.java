@@ -43,4 +43,5 @@ public class VolunteerDTO {
 	
 	//수정 날짜
 	private String updDt;
+		
 }

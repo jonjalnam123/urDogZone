@@ -6,7 +6,7 @@
 <div class="card">
   <h2 class="text-center mb-2">봉사장소 등록</h2>
 
-  <form action="/service/regVolunteerPlace.do" method="post" id="regVolunteerForm">
+  <form action="/service/regVolunteerPlace.do" method="post" id="regVolunteerPlaceForm">
 
     <div class="form-group">
       <label for="placeNm">봉사장명</label>

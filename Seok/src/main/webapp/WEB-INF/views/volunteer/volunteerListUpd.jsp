@@ -6,9 +6,7 @@
 <div class="card">
   <h2 class="text-center mb-2">봉사장소 수정</h2>
 
-  <form action="/service/updVolunteerPlace.do" method="post" id="updVolunteerPlaceForm">
-  	<input type="hidden" id="flag" name="flag" value="U">
-	<input type="hidden" id="placeCd" name="placeCd" value="${volunteerPlace.placeCd}">
+  <form action="/service/updVolunteerPlace.do" method="post" id="updVolunteerListForm">
     <div class="form-group">
       <label for="placeNm">봉사장명</label>
       <input type="text" id="placeNm" name="placeNm" value="${volunteerPlace.placeNm}">

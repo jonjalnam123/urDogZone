@@ -1,7 +1,7 @@
 /**
  * 작성자 : 최정석
  * 작성날짜 : 2025.08.18
- * 내용 : 봉사 장소 등록 스크립트
+ * 내용 : 봉사 장소 수정 스크립트
  */
 
 $(document).ready(function(){
@@ -18,7 +18,7 @@ $(document).ready(function(){
 		var conMsg = "봉사장소를 수정 하시겠습니까?"
 		var conResult = callConfirm(conMsg);
 		if ( conResult === 'Y') { 
-			var form = $('#updVolunteerForm');
+			var form = $('#updVolunteerPlaceForm');
 	  		form.submit();
 		} 
 	});
