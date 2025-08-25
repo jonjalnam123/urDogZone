@@ -6,6 +6,7 @@ import web.comm.dto.CommCityDTO;
 import web.comm.dto.CommDTO;
 import web.util.Paging;
 import web.volunteer.dto.SearchDTO;
+import web.volunteer.dto.VolunteerDTO;
 
 public interface CommService {
 
@@ -31,6 +32,17 @@ public interface CommService {
 	*******************************************
 	*/
 	List<CommCityDTO> getMainCity();
+	
+	/**
+	******************************************
+	* @MethodName    : getVolPlaceList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.26
+	* @Comment : 봉사 장소 조회
+	* @return
+	*******************************************
+	*/
+	public List<VolunteerDTO> getVolPlaceList();
 	
 	/**
 	******************************************

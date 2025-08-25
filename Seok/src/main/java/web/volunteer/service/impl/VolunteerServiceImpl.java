@@ -29,13 +29,13 @@ public class VolunteerServiceImpl implements VolunteerService{
 	* @MethodName    : getVolunteerList
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.27
-	* @Comment : 봉사 목록 화면 조회
+	* @Comment : 봉사 일정 화면 조회
 	* @return
 	*******************************************
 	*/
 	@Override
 	public List<VolunteerDTO> getVolunteerList(Paging paging) {
-		logger.info("=== 봉사목록 화면 조회 임플 진입 ===");  
+		logger.info("=== 봉사 일정 화면 조회 임플 진입 ===");  
 		return volunteerDao.getVolunteerList(paging);
 	}
 	
@@ -44,14 +44,50 @@ public class VolunteerServiceImpl implements VolunteerService{
 	* @MethodName    : volunteerList
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.27
-	* @Comment : 봉사 목록 조회
+	* @Comment : 봉사 일정 조회
 	* @return
 	*******************************************
 	*/
 	@Override
 	public List<VolunteerDTO> volunteerList(Map<String, Object> paramMap) {
-		logger.info("=== 봉사 목록 조회 임플 진입 ===");  
+		logger.info("=== 봉사 일정 조회 임플 진입 ===");  
 		return volunteerDao.volunteerList(paramMap);
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : regVolunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 일정 등록
+	* @return
+	*******************************************
+	*/
+	@Override
+	public int regVolunteerList(VolunteerDTO volunteerDTO) {
+		logger.info("=== 봉사 일정 등록 임플 진입 ===");  
+		String admId = (String) session.getAttribute("adminId");
+		volunteerDTO.setRegId(admId);
+		volunteerDTO.setUpdId(admId);
+		int result = volunteerDao.regVolunteerList(volunteerDTO);
+		return result;
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : delVolunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.20
+	* @Comment : 봉사 일정 삭제
+	* @return
+	*******************************************
+	*/
+	@Override
+	public int delVolunteerList(VolunteerDTO volunteerDTO) {
+		System.out.println("volunteerDTO==" + volunteerDTO);
+		logger.info("=== 봉사 일정 삭제 임플 진입 ===");  
+		int result = volunteerDao.delVolunteerList(volunteerDTO);
+		return result;
 	}
 	
 	/**

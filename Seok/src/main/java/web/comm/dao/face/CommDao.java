@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import web.comm.dto.CommCityDTO;
 import web.comm.dto.CommDTO;
 import web.volunteer.dto.SearchDTO;
+import web.volunteer.dto.VolunteerDTO;
 
 @Mapper
 public interface CommDao {
@@ -33,6 +34,17 @@ public interface CommDao {
 	*******************************************
 	*/
 	List<CommCityDTO> getMainCity();
+	
+	/**
+	******************************************
+	* @MethodName    : getVolPlaceList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.26
+	* @Comment : 봉사 장소 조회
+	* @return
+	*******************************************
+	*/
+	List<VolunteerDTO> getVolPlaceList();
 	
 	/**
 	******************************************

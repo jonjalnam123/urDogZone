@@ -11,6 +11,7 @@ import web.comm.dto.CommDTO;
 import web.comm.service.face.CommService;
 import web.util.Paging;
 import web.volunteer.dto.SearchDTO;
+import web.volunteer.dto.VolunteerDTO;
 
 @Service
 public class CommServiceImpl implements CommService{
@@ -57,6 +58,26 @@ public class CommServiceImpl implements CommService{
 		}
 		
 		return mainCityList;
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : getVolPlaceList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.26
+	* @Comment : 봉사 장소 조회
+	* @return
+	*******************************************
+	*/
+	@Override
+	public List<VolunteerDTO> getVolPlaceList() {
+		List<VolunteerDTO> volPlaceList = commDao.getVolPlaceList();
+		
+		if( volPlaceList.isEmpty() || volPlaceList.size() < 0 || volPlaceList == null ) {
+			volPlaceList = null;
+		}
+		
+		return volPlaceList;
 	}
 	
 	/**

@@ -6,11 +6,13 @@
 
 $(document).ready(function(){
 	
+	// 검색 버튼 이벤트
 	$('#searchBtn').on('click', function() {
 		var form = $('#seacrhForm');
   		form.submit();
 	})
 	
+	// 등록 버튼 이벤트
 	$('#regBtn').on('click', function() {
 		goToUri('/service/getRegVolunteerPlace.do');
 	})
@@ -27,34 +29,37 @@ $(document).ready(function(){
 	  $(".rowCheck").prop("checked", this.checked );
 	});
 	
-	// 전체 선택 / 해제
+	// 삭제 버튼 이벤트
 	$("#delBtn").on("click", function () {
+
+		var conMsg = "봉사 장소를 삭제 하시겠습니까?"
+		var conResult = callConfirm(conMsg);
+		if ( conResult === 'Y') { 	
+		    var checkPlaceCdList = [];
+		    $(".rowCheck:checked").each(function () {
+		        var placeCd = $(this).closest("tr").data("placecd");
+		        checkPlaceCdList.push(placeCd);
+		    });
 		
-	    var checkPlaceCdList = [];
-	    $(".rowCheck:checked").each(function () {
-	        var placeCd = $(this).closest("tr").data("placecd");
-	        checkPlaceCdList.push(placeCd);
-	    });
+		    if (checkPlaceCdList.length === 0) {
+		        alert("선택된 봉사 장소가 없습니다.");
+		        return;
+		    }
 	
-	    if (checkPlaceCdList.length === 0) {
-	        alert("선택된 봉사 장소가 없습니다.");
-	        return;
-	    }
-
-		var url = '/service/delVolunteerPlace.do';
-		var params = {
-				checkPlaceCdList : checkPlaceCdList
-		}
-		var dataType = 'json'
-		
-	 	ajaxStart(url, params, dataType, function(data) {
-			if ( data.resultCd === 'Y' ) {
-				goToUri('/service/getVolunteerPlaceList.do')
-			} else {
-				alert("삭제할 봉사 장소가 없습니다.");
+			var url = '/service/delVolunteerPlace.do';
+			var params = {
+					checkPlaceCdList : checkPlaceCdList
 			}
-		});
-
+			var dataType = 'json'
+			
+		 	ajaxStart(url, params, dataType, function(data) {
+				if ( data.resultCd === 'Y' ) {
+					goToUri('/service/getVolunteerPlaceList.do')
+				} else {
+					alert("삭제할 봉사 장소가 없습니다.");
+				}
+			});
+		} 
 	});
 	
 });

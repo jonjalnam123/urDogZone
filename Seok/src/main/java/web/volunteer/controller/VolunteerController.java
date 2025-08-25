@@ -36,7 +36,7 @@ public class VolunteerController {
 	* @MethodName    : getVolunteerList
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.27
-	* @Comment : 봉사 목록 화면 조회
+	* @Comment : 봉사 일정 화면 조회
 	* @return
 	*******************************************
 	*/
@@ -66,7 +66,7 @@ public class VolunteerController {
 	* @MethodName    : volunteerList
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.27
-	* @Comment : 봉사 목록 조회
+	* @Comment : 봉사 일정 조회
 	* @return
 	*******************************************
 	*/
@@ -74,7 +74,7 @@ public class VolunteerController {
 	public String volunteerList( Model model
 								  , @RequestParam(defaultValue = "0") int curPage 
 								  , @ModelAttribute SearchDTO searchDTO) {
-		logger.info("=== 봉사 목록 컨트롤러 진입 ===");  
+		logger.info("=== 봉사 일정 컨트롤러 진입 ===");  
 		
 		// 페이징 처리
 		searchDTO.setTbNm("TB_VOLUNTEER_INFO");
@@ -101,6 +101,83 @@ public class VolunteerController {
 		
 		
 		return "volunteer/volunteerList.admin";
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : getRegVolunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 일정 등록 화면 조회
+	* @return
+	*******************************************
+	*/
+	@RequestMapping(value = "/getRegVolunteerList.do")
+	public String getRegVolunteerList( Model model ) {
+		logger.info("=== 봉사 일정 등록 화면 조회 컨트롤러 진입 ===");  
+
+		// 메인 도시 조회
+		List<VolunteerDTO> volPlaceList = commService.getVolPlaceList();
+		model.addAttribute("volPlaceList", volPlaceList);
+		
+		return "volunteer/volunteerListReg.admin";
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : regVolunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 일정 등록
+	* @return
+	*******************************************
+	*/
+	@RequestMapping(value = "/regVolunteerList.do")
+	public String regVolunteerList( Model model, @ModelAttribute VolunteerDTO volunteerDTO) {
+		
+		String uri = "";
+		try {
+			logger.info("=== 봉사 일정 등록 컨트롤러 진입 ===");
+			int result = volunteerService.regVolunteerList(volunteerDTO);
+			if ( result == 1 ) {
+				uri = "redirect:/service/getVolunteerList.do";
+			} else {
+				uri = "redirect:/comm/getFailPage.do";
+			}
+		} catch (Exception e) {
+			logger.info("=== 봉사 일정 등록 컨트롤러 실패===");  
+		}
+		
+		return uri;
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : delVolunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.20
+	* @Comment : 봉사 일정 삭제
+	* @return
+	*******************************************
+	*/
+	@RequestMapping(value = "/delVolunteerList.do")
+	@ResponseBody
+	public Map<String, Object> delVolunteerList( Model model , @ModelAttribute VolunteerDTO volunteerDTO) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			logger.info("=== 봉사 일정 삭제 컨트롤러 진입 ===");
+			int resultCnt = volunteerService.delVolunteerList(volunteerDTO);
+			if(resultCnt == 1 ) {
+				result.put("result", "SUCCESS");
+				result.put("resultCd", "Y");
+			} else {
+				result.put("resultCd", "N");
+			}
+		} catch (Exception e) {
+			logger.info("=== 봉사 일정 삭제 컨트롤러 실패 ===");
+			result.put("result", "FAIL");
+		}
+		return result;
 	}
 	
 	/**

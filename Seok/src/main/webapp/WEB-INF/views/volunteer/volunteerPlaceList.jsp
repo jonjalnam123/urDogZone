@@ -7,6 +7,19 @@
   
   <c:choose>
   	<c:when test="${empty volunteerPlaceList || volunteerPlaceList eq null || volunteerPlaceList eq ''}">
+  		<form action="/service/volunteerPlaceList.do" method="get" id="seacrhForm" >
+  	  		<select id="param" name="param" class="combo-scroll">  
+		  		<option value="" ${empty searchDTO.param ? 'selected' : ''}>지역선택</option>
+		      	<c:forEach var="mainCity" items="${mainCityList}">
+			  		<option value="${mainCity.cityCode}" ${searchDTO.param eq mainCity.cityCode ? 'selected' : ''}>${mainCity.cityName}</option>
+			  	</c:forEach>
+		  	</select>
+		  
+		  	<input type="text" id="param1" name="param1" placeholder="이름" value="${searchDTO.param1}">
+		  	<button type="button" id="searchBtn">검색</button>
+	   	  	<button type="button" id="regBtn">등록</button>
+	  	  	<button type="button" id="delBtn">삭제</button>
+	  	</form>
   		<h2>봉사장소 데이터가 없습니다.</h2>
   	</c:when>
   	<c:otherwise>

@@ -18,7 +18,7 @@ public interface VolunteerDao {
 	* @MethodName    : getVolunteerList
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.27
-	* @Comment : 봉사 목록 화면 조회
+	* @Comment : 봉사 일정 화면 조회
 	* @return
 	*******************************************
 	*/
@@ -29,11 +29,34 @@ public interface VolunteerDao {
 	* @MethodName    : volunteerList
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.07.27
-	* @Comment : 봉사 목록 조회
+	* @Comment : 봉사 일정 조회
 	* @return
 	*******************************************
 	*/
 	public List<VolunteerDTO> volunteerList(Map<String, Object> paramMap);
+	
+
+	/**
+	******************************************
+	* @MethodName    : regVolunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 일정 등록
+	* @return
+	*******************************************
+	*/
+	public int regVolunteerList(VolunteerDTO volunteerDTO);
+	
+	/**
+	******************************************
+	* @MethodName    : delVolunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.20
+	* @Comment : 봉사 일정 삭제
+	* @return
+	*******************************************
+	*/
+	public int delVolunteerList(VolunteerDTO volunteerDTO);
 
 	/**
 	******************************************
@@ -101,5 +124,5 @@ public interface VolunteerDao {
 	*******************************************
 	*/
 	public int delVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO);
-	
+
 }

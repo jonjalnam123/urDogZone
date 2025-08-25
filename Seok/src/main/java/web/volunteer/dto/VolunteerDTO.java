@@ -1,5 +1,7 @@
 package web.volunteer.dto;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -43,5 +45,8 @@ public class VolunteerDTO {
 	
 	//수정 날짜
 	private String updDt;
+	
+	// 체크 박스 리스트
+	private List<Integer> checkVolCdList;
 		
 }

@@ -23,6 +23,7 @@
 		  FROM TB_VOLUNTEER_INFO A
 		  INNER JOIN TB_PLACE_INFO B
 		     ON A.PLACE_CD = B.PLACE_CD
+	     WHERE A.VOLUNTEER_DEL_YN = 'N'
 		 ORDER BY A.VOLUNTEER_DT DESC
 		  LIMIT #{startNo}, #{endNo}
 	</select>
@@ -43,7 +44,7 @@
 		  FROM TB_VOLUNTEER_INFO A
 		  INNER JOIN TB_PLACE_INFO B
 		     ON A.PLACE_CD = B.PLACE_CD
-	    WHERE VOLUNTEER_DEL_YN = 'N'
+	    WHERE A.VOLUNTEER_DEL_YN = 'N'
 	        <if test="searchDTO.param != null and searchDTO.param != ''">
 	             AND A.VOLUNTEER_LOCATE_CITY_CD LIKE CONCAT('%', #{searchDTO.param}, '%') 
 	        </if>
@@ -53,6 +54,44 @@
 		ORDER BY A.VOLUNTEER_DT DESC
 		 LIMIT #{paging.startNo}, #{paging.endNo}
 	</select>
+	
+	<insert id="regVolunteerList" parameterType="VolunteerDTO">
+		/* VolunteerDao.regVolunteerList */
+		INSERT INTO TB_VOLUNTEER_INFO (
+		   PLACE_CD
+		 , VOLUNTEER_TITLE
+		 , VOLUNTEER_NOTE
+		 , VOLUNTEER_MAX_CNT
+		 , VOLUNTEER_DT
+		 , VOLUNTEER_DEL_YN
+		 , REG_ID
+		 , REG_DT
+		 , UPD_ID
+		 , UPD_DT
+		) 
+		VALUES (
+		   #{placeCd}
+		 , #{volunteerTitle}
+		 , #{volunteerNote}
+		 , #{volunteerMaxCnt}
+		 , #{volunteerDt}
+		 , 'N'
+		 , #{regId}
+		 , SYSDATE()
+		 , #{updId}
+		 , SYSDATE()
+		)
+	</insert>
+	
+	<update id="delVolunteerList" parameterType="VolunteerDTO">
+		/* VolunteerDao.delVolunteerList */
+	    UPDATE TB_VOLUNTEER_INFO
+	         SET VOLUNTEER_DEL_YN = 'Y'
+	     WHERE VOLUNTEER_CD IN 
+	    <foreach item="volunteerCd" collection="checkVolCdList" open="(" separator="," close=")">
+	        #{volunteerCd}
+	    </foreach>
+	</update>
 	
 	<select id="getVolunteerPlaceList" parameterType="Paging" resultType="VolunteerPlaceDTO">
 		/* VolunteerDao.getVolunteerPlaceList */
@@ -173,6 +212,7 @@
 	</update>
 
 	<update id="delVolunteerPlace" parameterType="VolunteerPlaceDTO">
+		/* VolunteerDao.delVolunteerPlace */
 	    UPDATE TB_PLACE_INFO
 	         SET PLACE_DEL_YN = 'Y'
 	     WHERE PLACE_CD IN

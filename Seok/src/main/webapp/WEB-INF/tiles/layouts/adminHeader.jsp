@@ -23,7 +23,7 @@
 			      <li>
 			        <a href="/admLogin/getAdminLogin.do">봉사활동</a>
 			        <ul class="submenu">
-			          <li><a href="/admLogin/getAdminLogin.do">봉사 목록</a></li>
+			          <li><a href="/admLogin/getAdminLogin.do">봉사 일정</a></li>
 			          <li><a href="/admLogin/getAdminLogin.do">봉사 장소</a></li>
 			        </ul>
 			      </li>
@@ -55,7 +55,7 @@
 			      <li>
 			        <a href="#">봉사활동</a>
 			        <ul class="submenu">
-			          <li><a href="/service/getVolunteerList.do">봉사 목록</a></li>
+			          <li><a href="/service/getVolunteerList.do">봉사 일정</a></li>
 			          <li><a href="/service/getVolunteerPlaceList.do">봉사 장소</a></li>
 			        </ul>
 			      </li>

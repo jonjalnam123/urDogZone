@@ -31,13 +31,21 @@
 		    AND CITY_PARENT_CODE IS NULL  
 	</select>
 	
+   	<select id="getVolPlaceList" resultType="VolunteerDTO">
+		/* CommDao.getVolPlaceList */
+		SELECT PLACE_CD
+				, PLACE_NM
+		  FROM TB_PLACE_INFO
+	    WHERE PLACE_DEL_YN = 'N'
+	</select>
+	
     <select id ="selectCntall" parameterType="String" resultType="int">
     	/* CommDao.selectCntall */
     	SELECT COUNT(*) FROM ${tbNm}
     </select>
     
 	<select id ="selectCntSearchAll" resultType="int" parameterType="SearchDTO">
-		/* VolunteerDao.selectCntSearchAll */
+		/* CommDao.selectCntSearchAll */
 		SELECT COUNT(*) 
 	  	  FROM ${tbNm}
 		<if test="col != null and col != ''">
