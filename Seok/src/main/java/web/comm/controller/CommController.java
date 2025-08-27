@@ -59,6 +59,6 @@ public class CommController {
 	@RequestMapping(value="/getFailPage.do")
 	public String getFailPage() {
 		logger.info("=== 공통 실패 화면 조회 컨트롤러 진입 ===");  
-		return "comm/failPage.admin";
+		return "comm/failPage.none";
 	}
 }

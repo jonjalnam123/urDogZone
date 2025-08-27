@@ -41,4 +41,21 @@
         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
     </definition>        
     
+    <!-- 빈 페이지 표시 -->
+    <definition name="baseNone" template="/WEB-INF/tiles/templateNone.jsp">
+
+    </definition>
+    
+    <definition name="*.none" extends="baseNone">
+        <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+    </definition>
+ 
+     <definition name="*/*.none" extends="baseNone">
+         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+     </definition>
+    
+    <definition name="*/*/*.none" extends="baseNone">
+        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+    </definition>        
+    
 </tiles-definitions>

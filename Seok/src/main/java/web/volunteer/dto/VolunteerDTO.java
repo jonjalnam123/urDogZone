@@ -48,5 +48,8 @@ public class VolunteerDTO {
 	
 	// 체크 박스 리스트
 	private List<Integer> checkVolCdList;
+	
+	// 분기 처리
+	private String flag;
 		
 }

@@ -43,7 +43,39 @@ public interface VolunteerService {
 	*******************************************
 	*/
 	public int regVolunteerList(VolunteerDTO volunteerDTO);
-
+	
+	/**
+	******************************************
+	* @MethodName    : getVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 일정 상세 조회
+	* @return
+	*******************************************
+	*/
+	public VolunteerDTO getVolunteerListDetail(VolunteerDTO volunteerDTO);
+	
+	/**
+	******************************************
+	* @MethodName    : updVolunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 일정 수정
+	* @return
+	*******************************************
+	*/
+	public int updVolunteerList(VolunteerDTO volunteerDTO);
+	
+	/**
+	******************************************
+	* @MethodName    : delVolunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.20
+	* @Comment : 봉사 일정 삭제
+	* @return
+	*******************************************
+	*/
+	public int delVolunteerList(VolunteerDTO volunteerDTO);
 
 	/**
 	******************************************
@@ -77,18 +109,6 @@ public interface VolunteerService {
 	*******************************************
 	*/
 	public int regVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO);
-	
-	/**
-	******************************************
-	* @MethodName    : delVolunteerList
-	* @Author        : Jung Seok Choi
-	* @Date        : 2025.08.20
-	* @Comment : 봉사 일정 삭제
-	* @return
-	*******************************************
-	*/
-	public int delVolunteerList(VolunteerDTO volunteerDTO);
-
 	
 	/**
 	******************************************

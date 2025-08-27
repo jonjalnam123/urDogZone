@@ -1,7 +1,7 @@
 /**
  * 작성자 : 최정석
  * 작성날짜 : 2025.08.18
- * 내용 : 봉사 목록 스크립트
+ * 내용 : 봉사 일정 스크립트
  */
 
 $(document).ready(function(){
@@ -25,7 +25,7 @@ $(document).ready(function(){
 	// 봉사명 클릭 시 상세페이지 이동
   	$("#volListTb").on("click", ".volunteerTitle", function(){
 	    var volCd = $(this).closest("tr").data("volcd");
-		var uri = "/service/updVolunteerList.do?volCd=" + volCd;
+		var uri = "/service/updVolunteerList.do?volunteerCd=" + volCd;
 		goToUri(uri);
     });
 	

@@ -83,6 +83,36 @@
 		)
 	</insert>
 	
+   	<select id="getVolunteerListDetail" parameterType="int" resultType="VolunteerDTO">
+		/* VolunteerDao.getVolunteerListDetail */
+		SELECT VOLUNTEER_CD
+				, PLACE_CD
+				, VOLUNTEER_TITLE
+				, VOLUNTEER_NOTE
+				, VOLUNTEER_MAX_CNT
+				, VOLUNTEER_DT
+				, VOLUNTEER_DEL_YN
+				, REG_ID
+				, DATE_FORMAT(REG_DT, '%Y-%m-%d') AS REG_DT
+				, UPD_ID
+				, DATE_FORMAT(UPD_DT, '%Y-%m-%d') AS UPD_DT
+		  FROM TB_VOLUNTEER_INFO
+	    WHERE VOLUNTEER_CD = #{volunteerCd}
+	       AND VOLUNTEER_DEL_YN = 'N'
+	</select>
+	
+	<update id="updVolunteerList" parameterType="VolunteerDTO">
+		/* VolunteerDao.updVolunteerList */
+        UPDATE TB_VOLUNTEER_INFO 
+			 SET VOLUNTEER_TITLE = #{volunteerTitle}
+			     , VOLUNTEER_NOTE = #{volunteerNote}
+				 , VOLUNTEER_MAX_CNT = #{volunteerMaxCnt}
+			     , VOLUNTEER_DT = #{volunteerDt}
+			     , UPD_ID = #{updId}
+			     , UPD_DT = SYSDATE()
+		  WHERE VOLUNTEER_CD = #{volunteerCd}
+	</update>
+	
 	<update id="delVolunteerList" parameterType="VolunteerDTO">
 		/* VolunteerDao.delVolunteerList */
 	    UPDATE TB_VOLUNTEER_INFO
@@ -205,7 +235,6 @@
 			     , PLACE_AD = #{placeAd}
 			     , PLACE_ADD = #{placeAdd}
 			     , PLACE_NOTE = #{placeNote}
-			     , PLACE_DEL_YN = 'N'
 			     , UPD_ID = #{updId}
 			     , UPD_DT = SYSDATE()
 		  WHERE PLACE_CD = #{placeCd}

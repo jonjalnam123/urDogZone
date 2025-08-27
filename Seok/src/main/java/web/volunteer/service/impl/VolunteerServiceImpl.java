@@ -75,6 +75,44 @@ public class VolunteerServiceImpl implements VolunteerService{
 	
 	/**
 	******************************************
+	* @MethodName    : getVolunteerPlace
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 일정 상세 조회
+	* @return
+	*******************************************
+	*/
+	@Override
+	public VolunteerDTO getVolunteerListDetail(VolunteerDTO volunteerDTO) {
+		logger.info("=== 봉사 일정 상세 조회 임플 진입 ===");  
+		int volunteerCd = volunteerDTO.getVolunteerCd();
+		VolunteerDTO volunteerList = volunteerDao.getVolunteerListDetail(volunteerCd);
+		if ( volunteerList == null ) {
+			volunteerList = null;
+		}
+		return volunteerList;
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : updVolunteerList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.08.18
+	* @Comment : 봉사 일정 수정
+	* @return
+	*******************************************
+	*/
+	@Override
+	public int updVolunteerList(VolunteerDTO volunteerDTO) {
+		logger.info("=== 봉사 일정 수정 임플 진입 ===");  
+		String admId = (String) session.getAttribute("adminId");
+		volunteerDTO.setUpdId(admId);
+		int result = volunteerDao.updVolunteerList(volunteerDTO);
+		return result;
+	}
+	
+	/**
+	******************************************
 	* @MethodName    : delVolunteerList
 	* @Author        : Jung Seok Choi
 	* @Date        : 2025.08.20

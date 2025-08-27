@@ -43,7 +43,6 @@
 						<th>봉사장명</th>
 						<th>모집인원</th>
 						<th>봉사일자</th>
-						<th>등록일</th>
 		        	</tr>
 	      		</thead>
 		      	<tbody>
@@ -54,7 +53,6 @@
 						<td>${vol.placeNm}</td>
 			            <td>${vol.volunteerMaxCnt}</td>
 			            <td>${vol.volunteerDt}</td>
-			            <td>${vol.regDt}</td>
 		          	</tr>
 	       		</c:forEach>
 	   	 		</tbody>
