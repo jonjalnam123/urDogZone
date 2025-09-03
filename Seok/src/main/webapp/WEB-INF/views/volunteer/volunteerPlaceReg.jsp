@@ -6,7 +6,7 @@
 <div class="card">
   <h2 class="text-center mb-2">봉사장소 등록</h2>
 
-  <form action="/service/regVolunteerPlace.do" method="post" id="regVolunteerPlaceForm">
+  <form action="/service/regVolunteerPlace.do" method="post" id="regVolunteerPlaceForm" enctype="multipart/form-data">
 
     <div class="form-group">
       <label for="placeNm">봉사장명</label>
@@ -37,6 +37,19 @@
       <label for="placeNote">봉사장 특징</label>
       <textarea id="placeNote" name="placeNote" maxlength="333"></textarea>
     </div>
+    
+    <!-- 파일 업로드 -->
+	<div class="form-group">
+	  <label>첨부파일</label>
+	  <div id="fileInputs">
+	    <div class="file-row">
+	      <input type="file" name="files" class="file-input"/>
+	      <button type="button" class="removeFileBtn">삭제</button>
+	    </div>
+	  </div>
+	  <button type="button" id="addFileBtn">+ 파일 추가</button>
+	  <input type="hidden" name="refType" value="volPlace"/>
+	</div>
 
     <div class="btn-group">
       <button type="button" class="btn" id="regBtn">등록</button>

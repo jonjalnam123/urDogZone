@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import web.comm.dto.CommCityDTO;
 import web.comm.dto.CommDTO;
+import web.comm.dto.FileDTO;
 import web.volunteer.dto.SearchDTO;
 import web.volunteer.dto.VolunteerDTO;
 
@@ -69,5 +70,19 @@ public interface CommDao {
 	*******************************************
 	*/
 	public int selectCntSearchAll(SearchDTO searchDTO);
+
+	/**
+	******************************************
+	* @MethodName    : saveFiles
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.09.03
+	* @Comment : 파일 업로드
+	* @Param : files ( 파일 리스트 )
+	* @Param : refNo ( 참조 번호 )
+	* @Param : refType ( 참조 타입 )
+	* @return
+	*******************************************
+	*/
+	public int saveFiles(FileDTO fileDTO);
 
 }

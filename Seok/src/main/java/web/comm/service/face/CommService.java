@@ -1,6 +1,9 @@
 package web.comm.service.face;
 
+import java.io.IOException;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import web.comm.dto.CommCityDTO;
 import web.comm.dto.CommDTO;
@@ -67,5 +70,20 @@ public interface CommService {
 	*******************************************
 	*/
 	public Paging getSearchPaging(int curPage, SearchDTO searchDTO);
+	
+	/**
+	******************************************
+	* @MethodName    : saveFiles
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.09.03
+	* @Comment : 파일 업로드
+	* @Param : files ( 파일 리스트 )
+	* @Param : refNo ( 참조 번호 )
+	* @Param : refType ( 참조 타입 )
+	* @return
+	 * @throws IOException 
+	*******************************************
+	*/
+    public int saveFiles(List<MultipartFile> files, int refNo, String refType) throws IOException;
 
 }

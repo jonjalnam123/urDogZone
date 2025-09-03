@@ -34,8 +34,8 @@ public class VolunteerPlaceDTO {
 	// 봉사장 삭제 유무
 	private String placeDelYn;
 	
-	// 첨부파일 번호
-	private String fileNo;
+	// 봉사장 파일 유무
+	private String placeFileYn;
 	
 	// 등록자 아이디
 	private String regId;

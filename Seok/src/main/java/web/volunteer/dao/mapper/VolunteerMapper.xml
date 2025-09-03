@@ -133,7 +133,6 @@
 				, A.PLACE_AD
 				, A.PLACE_ADD
 				, A.PLACE_NOTE
-				, A.FILE_NO
 				, A.REG_ID
 				, DATE_FORMAT(A.REG_DT, '%Y-%m-%d') AS REG_DT
 				, A.UPD_ID
@@ -156,7 +155,6 @@
 				, A.PLACE_AD
 				, A.PLACE_ADD
 				, A.PLACE_NOTE
-				, A.FILE_NO
 				, A.REG_ID
 				, DATE_FORMAT(A.REG_DT, '%Y-%m-%d') AS REG_DT
 				, A.UPD_ID
@@ -175,7 +173,7 @@
 		 LIMIT #{paging.startNo}, #{paging.endNo}
 	</select>
 	
-	<insert id="regVolunteerPlace" parameterType="VolunteerPlaceDTO">
+	<insert id="regVolunteerPlace" parameterType="VolunteerPlaceDTO" useGeneratedKeys="true" keyProperty="placeCd">
 		/* VolunteerDao.regVolunteerPlace */
 		INSERT INTO TB_PLACE_INFO (
 		   PLACE_NM
@@ -185,7 +183,7 @@
 		 , CITY_CODE
 		 , PLACE_NOTE
 		 , PLACE_DEL_YN
-		 , FILE_NO
+		 , PLACE_FILE_YN
 		 , REG_ID
 		 , REG_DT
 		 , UPD_ID
@@ -199,13 +197,20 @@
 		 , #{cityCode}
 		 , #{placeNote}
 		 , 'N'
-		 , #{fileNo}
+		 , 'N'
 		 , #{regId}
 		 , SYSDATE()
 		 , #{updId}
 		 , SYSDATE()
 		)
 	</insert>
+	
+	<update id="updFileYn" parameterType="VolunteerPlaceDTO">
+		/* VolunteerDao.updFileYn */
+        UPDATE TB_PLACE_INFO 
+			 SET PLACE_FILE_YN = 'Y'
+		  WHERE PLACE_CD = #{placeCd}
+	</update>
 	
    	<select id="getVolunteerPlaceDetail" parameterType="int" resultType="VolunteerPlaceDTO">
 		/* VolunteerDao.getVolunteerPlaceDetail */
@@ -216,7 +221,6 @@
 				, PLACE_AD
 				, PLACE_ADD
 				, PLACE_NOTE
-				, FILE_NO
 				, REG_ID
 				, DATE_FORMAT(REG_DT, '%Y-%m-%d') AS REG_DT
 				, UPD_ID
@@ -234,7 +238,7 @@
 				 , PLACE_POSTCODE = #{placePostCode}
 			     , PLACE_AD = #{placeAd}
 			     , PLACE_ADD = #{placeAdd}
-			     , PLACE_NOTE = #{placeNote}
+			     , PLACE_NOTE = #{placeNote}  
 			     , UPD_ID = #{updId}
 			     , UPD_DT = SYSDATE()
 		  WHERE PLACE_CD = #{placeCd}

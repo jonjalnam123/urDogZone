@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import web.comm.dto.CommCityDTO;
 import web.comm.service.face.CommService;
@@ -326,22 +327,38 @@ public class VolunteerController {
 	*******************************************
 	*/
 	@RequestMapping(value = "/regVolunteerPlace.do")
-	public String regVolunteerPlace( Model model, @ModelAttribute VolunteerPlaceDTO volunteerPlaceDTO) {
-		
-		String uri = "";
-		try {
-			logger.info("=== 봉사 장소 등록 컨트롤러 진입 ===");
-			int result = volunteerService.regVolunteerPlace(volunteerPlaceDTO);
-			if ( result == 1 ) {
-				uri = "redirect:/service/getVolunteerPlaceList.do";
-			} else {
-				uri = "redirect:/comm/getFailPage.do";
-			}
-		} catch (Exception e) {
-			logger.info("=== 봉사 장소 등록 컨트롤러 실패===");  
-		}
-		
-		return uri;
+	public String regVolunteerPlace(Model model,
+	                                @ModelAttribute VolunteerPlaceDTO volunteerPlaceDTO,
+	                                @RequestParam(value = "files") List<MultipartFile> files) {
+	    String uri = "";
+	    try {
+	        logger.info("=== 봉사 장소 등록 컨트롤러 진입 ===");
+
+	        // 봉사장소 등록 → placeCd 세팅됨 (MyBatis useGeneratedKeys 필요)
+	        int result = volunteerService.regVolunteerPlace(volunteerPlaceDTO);
+	        int placeCd = volunteerPlaceDTO.getPlaceCd();  // PK 값 확보
+
+	        if (result == 1) {
+	            // 파일 업로드 처리
+	            if (files != null && !files.isEmpty()) {
+	            	int fileResult = commService.saveFiles(files, placeCd, "volPlace");
+	            	if ( fileResult == 1 ) {
+	            		volunteerPlaceDTO.setPlaceFileYn("Y");
+	            		volunteerService.updFileYn(volunteerPlaceDTO);
+	            	} else {
+	            		uri = "redirect:/comm/getFailFilePage.do";
+	            	}
+	            }
+	            uri = "redirect:/service/getVolunteerPlaceList.do";
+	        } else {
+	            uri = "redirect:/comm/getFailPage.do";
+	        }
+	    } catch (Exception e) {
+	        logger.error("=== 봉사 장소 등록 컨트롤러 실패 ===", e);
+	        uri = "redirect:/comm/getFailPage.do";
+	    }
+
+	    return uri;
 	}
 	
 	/**

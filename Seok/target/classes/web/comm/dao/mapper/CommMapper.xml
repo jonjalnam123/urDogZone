@@ -55,5 +55,35 @@
 	  	 	AND ${col1} LIKE CONCAT('%', #{param1}, '%')
 	  	 </if> 
 	</select>
+	
+	<insert id="saveFiles" parameterType="FileDTO">
+	  /* CommDao.saveFile */
+	  INSERT INTO TB_FILE_INFO ( 
+	      FILE_REF_NO
+	    , FILE_REF_TYPE
+	    , FILE_ORG_NM
+	    , FILE_SAVE_NM
+	    , FILE_PATH
+	    , FILE_SIZE
+	    , FILE_CONTENT_TYPE
+		, REG_ID
+		, REG_DT  
+		, UPD_ID
+		, UPD_DT
+	    )
+	  VALUES (
+	     #{fileRefNo}
+	   , #{fileRefType}
+	   , #{fileOrgNm}
+	   , #{fileSaveNm}
+	   , #{filePath}
+	   , #{fileSize}
+	   , #{fileContentType}
+	   , #{regId}
+	   , SYSDATE()
+	   , #{updId}
+	   , SYSDATE()
+	     )
+	</insert>
 
 </mapper>
