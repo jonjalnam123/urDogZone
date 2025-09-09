@@ -110,7 +110,7 @@ public class LoginController {
 			logger.info("=== 아이디 중복검사 컨트롤러 실패 === ");
 			result.put("result", "FAIL");
 		}
-		
+		 
 		return result;
 	}
 	
