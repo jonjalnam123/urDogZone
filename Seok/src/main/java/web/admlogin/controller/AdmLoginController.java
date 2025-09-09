@@ -33,16 +33,11 @@ public class AdmLoginController {
 	* @Comment : 관리자 로그인 화면 조회
 	* @return
 	*******************************************
+	*/
 	@RequestMapping(value="/getAdminLogin.do")
 	public String getAdminLogin() {
 		logger.info("=== 관리자 로그인 화면 컨트롤러 진입 === ");
-	    return "admlogin/admLogin.admin";
-	}*/
-	
-	@RequestMapping(value="/getAdminLogin.do")
-	public String getAdminLogin() {
-		logger.info("=== 관리자 로그인 화면 컨트롤러 진입 === ");
-	    return "admlogin/admLogin2.none";
+	    return "admlogin/admLogin.none";
 	}
 	
 	/**

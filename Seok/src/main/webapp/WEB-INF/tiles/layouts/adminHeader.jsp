@@ -1,68 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:choose>
-	<c:when test="${empty adminId || adminId eq '' || adminId eq null}">
-		<header>
-	  		<h1>🐶 유아독존 - 유기견 보호 플랫폼</h1>
-  			<nav>
-			    <ul class="menu">
-			      <li><a href="/admLogin/getAdminLogin.do">홈</a></li>
-			      <li>
-			        <a href="/admLogin/getAdminLogin.do">보호소</a>
-			        <ul class="submenu">
-			          <li><a href="/admLogin/getAdminLogin.do">보호소 등록</a></li>
-			        </ul>
-			      </li>
-			      <li>
-			        <a href="/admLogin/getAdminLogin.do">팀원관리</a>
-			        <ul class="submenu">
-			          <li><a href="/admLogin/getAdminLogin.do">팀원 리스트</a></li>
-			          <li><a href="/admLogin/getAdminLogin.do">팀원 지도</a></li>
-			        </ul>
-			      </li>
-			      <li>
-			        <a href="/admLogin/getAdminLogin.do">봉사활동</a>
-			        <ul class="submenu">
-			          <li><a href="/admLogin/getAdminLogin.do">봉사 일정</a></li>
-			          <li><a href="/admLogin/getAdminLogin.do">봉사 장소</a></li>
-			        </ul>
-			      </li>
-			      <li><a href="/admLogin/getAdminLogin.do">문의하기</a></li>
-			      <li class="admin-login"><a href="/">사용자 홈</a></li>
-			    </ul>
-	  		</nav>
-		</header>
-	</c:when>
-	<c:otherwise>
-		<header>
-	  		<h1>🐶 유아독존 - 유기견 보호 플랫폼</h1>
-  			<nav>
-			    <ul class="menu">
-			      <li><a href="/admMain.do">홈</a></li>
-			      <li>
-			        <a href="#">보호소</a>
-			        <ul class="submenu">
-			          <li><a href="#">보호소 등록</a></li>
-			        </ul>
-			      </li>
-			      <li>
-			        <a href="#">팀원관리</a>
-			        <ul class="submenu">
-			          <li><a href="#">팀원 리스트</a></li>
-			          <li><a href="#">팀원 지도</a></li>
-			        </ul>
-			      </li>
-			      <li>
-			        <a href="#">봉사활동</a>
-			        <ul class="submenu">
-			          <li><a href="/service/getVolunteerList.do">봉사 일정</a></li>
-			          <li><a href="/service/getVolunteerPlaceList.do">봉사 장소</a></li>
-			        </ul>
-			      </li>
-			      <li><a href="#">문의하기</a></li>
-			      <li class="admin-login"><a href="/">사용자 홈</a></li>
-			    </ul>
-	  		</nav>
-		</header>
-	</c:otherwise>
-</c:choose>
+
+<!-- Script Part -->
+<script src="${pageContext.request.contextPath}/resources/static/js/header/adminHeader.js"></script>
+
+<!-- Draw view [S] -->
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand ps-3" href="/admMain.do">🐶 유아독존</a>
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+<!--     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </form> -->
+    <div>
+		<input id="adminId" type="text" value="${adminId}님 안녕하세요."><br>
+		<button type="button" id="logoutBtn">로그아웃</button>
+	</div>
+    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#!">Settings</a></li>
+                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#!">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<!-- Draw view [E] -->

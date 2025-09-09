@@ -2,7 +2,53 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="${pageContext.request.contextPath}/resources/static/js/volunteer/volunteerList.js"></script>
 
-<div class="card">
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Tables</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item active">Tables</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-body">
+            DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
+            <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
+            .
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            DataTable Example
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                    	<th><input type="checkbox" id="checkAll"></th>
+						<th>봉사명</th>
+						<th>봉사장명</th>
+						<th>모집인원</th>
+						<th>봉사일자</th>
+                    </tr>
+                </thead>
+                <tbody>
+			      	<c:forEach var="vol" items="${volunteerList}">
+						<tr data-volcd="${vol.volunteerCd}">
+							<td><input type="checkbox" class="rowCheck"></td>
+							<td class="volunteerTitle">${vol.volunteerTitle}</td>
+							<td>${vol.placeNm}</td>
+				            <td>${vol.volunteerMaxCnt}</td>
+				            <td>${vol.volunteerDt}</td>
+			          	</tr>
+		       		</c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<%-- <div class="card">
   <h2 class="text-center mb-2">봉사 일정</h2>
     <c:choose>
   	<c:when test="${empty volunteerList || volunteerList eq null || volunteerList eq ''}">
@@ -61,4 +107,4 @@
 	  <c:import url="/WEB-INF/views/layout/paging.jsp" />
   	</c:otherwise>
   </c:choose>
-</div>
+</div> --%>

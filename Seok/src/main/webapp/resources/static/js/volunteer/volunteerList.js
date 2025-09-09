@@ -3,8 +3,9 @@
  * 작성날짜 : 2025.08.18
  * 내용 : 봉사 일정 스크립트
  */
-
 $(document).ready(function(){
+	
+	$('#datatablesSimple').DataTable();
 	
 	// 검색 버튼 이벤트
 	$('#searchBtn').on('click', function() {
