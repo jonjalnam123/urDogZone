@@ -2,7 +2,6 @@
 * 공통 JS
 */
 
-
 /*************************************************************
 * 작성자 : 최정석
 * 작성날짜 : 2025.07.22
@@ -15,6 +14,9 @@ function ajaxStart(url, params, dataType, callback) {
 	    method: 'post',
 	    data : params,
 	    dataType : dataType,
+	  	beforeSend: function() {
+	    	$('#loadingSpinner').show();
+	 	},
 	    success: function (data, status, xhr) {
 	        if (typeof callback === 'function' && callback !== null ) {
 				console.log('data>>>>', data);
@@ -22,6 +24,9 @@ function ajaxStart(url, params, dataType, callback) {
 	        } else {
 	            console.warn("callback이 function이 아닙니다:", callback);
 	        }
+	    },
+	    complete: function() {
+	    	$('#loadingSpinner').hide();
 	    },
 	    error: function (data, status, err) {
 			console.error("AJAX 에러", err);
@@ -46,7 +51,7 @@ function getNowUri() {
 * 내용 : kakao 주소 찾기 함수
 * 파라미터 : 
 **************************************************************/
-function execDaumPostcode() {
+function execDaumPostcode(postId, adId) {
     new daum.Postcode({
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -71,8 +76,8 @@ function execDaumPostcode() {
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById('userPostcode').value = data.zonecode;
-            document.getElementById("userAd").value = roadAddr;
+            document.getElementById(postId).value = data.zonecode;
+            document.getElementById(adId).value = roadAddr;
         }
     }).open();
 }
@@ -119,14 +124,23 @@ function goToUri(uri) {
 * 파라미터 : conMsg
 **************************************************************/
 function callConfirm(conMsg) {
-	
 	var result = '';
-	
 	if(confirm(conMsg)){
-		result = 'Y'
+		result = 'Y';
 	}else{
-		result = 'N'
+		result = 'N';
 	}
+	return result;
+};
 
-	return result
+/*************************************************************
+* 작성자 : 최정석
+* 작성날짜 : 2025.08.08
+* 내용 : 숫자만 입력 정규식
+* 파라미터 : id
+**************************************************************/	
+function checkNum(id){
+	var idVal = '#' + id;
+	var result = $(idVal).val().replace(/[^0-9]/g,"");
+	return result;
 };

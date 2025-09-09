@@ -60,13 +60,16 @@
 		<!-- 업로드된 파일 하나 당 최대 사이즈 : 5MB -->
 		<beans:property name="maxUploadSizePerFile" value="5242880" />
 		
+	    <beans:property name="defaultEncoding" value="utf-8"/>
+		
 	</beans:bean>
 	
 	<context:component-scan base-package="web.sample.controller, web.sample.service
 														, web.main.controller, web.main.service
 														, web.login.controller, web.login.service
 														, web.volunteer.controller, web.volunteer.service
-														, web.admlogin.controller, web.admlogin.service" />
+														, web.admlogin.controller, web.admlogin.service
+														, web.comm.controller, web.comm.service" />
 	
 	<!-- Tiles 뷰 리졸버 -->
 	<beans:bean id="tielsViewResolver"
@@ -84,7 +87,5 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
-	
-   <context:property-placeholder location="classpath:/db-config/email.properties" />
-	
+		
 </beans:beans>
