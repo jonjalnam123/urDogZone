@@ -19,10 +19,12 @@
 
 <!-- JS 추가  -->
 <script src="${pageContext.request.contextPath}/resources/static/js/comm/common.js"></script>
+<script src="${pageContext.request.contextPath}/resources/static/js/demo/*.js"></script>
 
 <!-- CSS 추가 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/adminCommon.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 </head>
