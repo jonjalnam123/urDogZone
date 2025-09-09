@@ -18,7 +18,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <!-- JS 추가  -->
-<script src="${pageContext.request.contextPath}/resources/static/js/common.js"></script>
+<script src="${pageContext.request.contextPath}/resources/static/js/comm/common.js"></script>
 
 <!-- CSS 추가 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">

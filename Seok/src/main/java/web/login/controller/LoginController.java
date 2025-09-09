@@ -110,7 +110,7 @@ public class LoginController {
 			logger.info("=== 아이디 중복검사 컨트롤러 실패 === ");
 			result.put("result", "FAIL");
 		}
-		
+		 
 		return result;
 	}
 	
@@ -236,7 +236,7 @@ public class LoginController {
 			result.put("emailCode", emailCode);
 		} catch (Exception e) {
 			logger.info("=== 이메일 인증 컨트롤러 실패 === ");
-			result.put("result", "FAIL");
+			result.put("result", "FAIL"); 
 		}
 		return result;
 	}
