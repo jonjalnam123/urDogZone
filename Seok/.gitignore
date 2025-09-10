@@ -1,0 +1,5 @@
+# ignore properties file
+pom.properties
+
+# ignore mf file
+MANIFEST.MF
