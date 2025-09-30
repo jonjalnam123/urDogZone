@@ -5,29 +5,14 @@
 <script src="${pageContext.request.contextPath}/resources/static/js/header/adminHeader.js"></script>
 
 <!-- Draw view [S] -->
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand ps-3" href="/admMain.do">🐶 유아독존</a>
-    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle"><i class="fas fa-bars"></i></button>
-<!--     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-        <div class="input-group">
-            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-        </div>
-    </form> -->
-    <div>
-		<input id="adminId" type="text" value="${adminId}님 안녕하세요."><br>
-		<button type="button" id="logoutBtn">로그아웃</button>
-	</div>
-    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">Settings</a></li>
-                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#!">Logout</a></li>
-            </ul>
-        </li>
-    </ul>
-</nav>
+<header>
+  <div class="header-left">
+    <span class="logo">URDOGZONE</span>
+  </div>
+  <div class="header-right">
+    <span class="user-info">안녕하세요, <strong>${adminId}</strong>님</span>
+    <button class="btn header-btn" onclick="location.href='/mypage'">마이페이지</button>
+    <button class="btn header-btn logout" onclick="location.href='/logout'">로그아웃</button>
+  </div>
+</header>
 <!-- Draw view [E] -->

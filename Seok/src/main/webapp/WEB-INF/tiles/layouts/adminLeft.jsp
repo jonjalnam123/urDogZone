@@ -1,71 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!-- Draw view [S] -->
-<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-    <div class="sb-sidenav-menu">
-        <div class="nav">
-            <div class="sb-sidenav-menu-heading">Home</div>
-            <a class="nav-link" href="index.html">
-                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                홈으로
-            </a>
-            <div class="sb-sidenav-menu-heading">Volunteer</div>
-            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                봉사 활동
-                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-            </a>
-            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="/service/getVolunteerList.do">봉사 일정</a>
-                    <a class="nav-link" href="/service/getVolunteerPlaceList.do">봉사 장소</a>
-                </nav>
-            </div>
-            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                Pages
-                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-            </a>
-            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                        Authentication
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="login.html">Login</a>
-                            <a class="nav-link" href="register.html">Register</a>
-                            <a class="nav-link" href="password.html">Forgot Password</a>
-                        </nav>
-                    </div>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                        Error
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="401.html">401 Page</a>
-                            <a class="nav-link" href="404.html">404 Page</a>
-                            <a class="nav-link" href="500.html">500 Page</a>
-                        </nav>
-                    </div>
-                </nav>
-            </div>
-            <div class="sb-sidenav-menu-heading">Addons</div>
-            <a class="nav-link" href="charts.html">
-                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                Charts
-            </a>
-            <a class="nav-link" href="tables.html">
-                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                Tables
-            </a>
+<nav id="sidenavAccordion">
+  <div class="sb-sidenav-menu">
+    <ul>
+      <!-- Home -->
+      <li>
+        <a class="nav-link" href="/index.do">
+          <i class="fas fa-home"></i> 홈
+        </a>
+      </li>
+
+      <!-- Volunteer -->
+      <li>
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseVolunteer" aria-expanded="false" aria-controls="collapseVolunteer">
+          <i class="fas fa-hands-helping"></i> 봉사 활동
+          <span class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></span>
+        </a>
+        <div class="collapse" id="collapseVolunteer" data-bs-parent="#sidenavAccordion">
+          <ul>
+            <li><a class="nav-link" href="/service/getVolunteerList.do">봉사 일정</a></li>
+            <li><a class="nav-link" href="/service/getVolunteerPlaceList.do">봉사 장소</a></li>
+          </ul>
         </div>
-    </div>
-    <div class="sb-sidenav-footer">
-        <div class="small">Logged in as:</div>
-        Start Bootstrap
-    </div>
+      </li>
+
+      <!-- Pages -->
+      <li>
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+          <i class="fas fa-book-open"></i> 자료실
+          <span class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></span>
+        </a>
+        <div class="collapse" id="collapsePages" data-bs-parent="#sidenavAccordion">
+          <ul>
+            <li><a class="nav-link" href="/pages/login.do">Login</a></li>
+            <li><a class="nav-link" href="/pages/register.do">Register</a></li>
+            <li><a class="nav-link" href="/pages/password.do">Forgot Password</a></li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- Addons -->
+      <li>
+        <a class="nav-link" href="/charts.do"><i class="fas fa-chart-area"></i> 통계</a>
+      </li>
+      <li>
+        <a class="nav-link" href="/tables.do"><i class="fas fa-table"></i> 테이블</a>
+      </li>
+    </ul>
+  </div>
 </nav>
 <!-- Draw view [E] -->

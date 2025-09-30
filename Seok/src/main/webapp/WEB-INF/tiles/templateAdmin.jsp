@@ -9,7 +9,7 @@
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-<!-- 부트스트랩 3 -->
+<!-- Bootstrap 5 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 <!-- kakao 주소 API -->
@@ -17,31 +17,30 @@
 
 <!-- JS 추가  -->
 <script src="${pageContext.request.contextPath}/resources/static/js/comm/common.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
 
 <!-- CSS 추가 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/styles.css">
-<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/adminCommon.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!--  폰트 추가 -->
+<!--  폰트 및 이미지 추가 -->
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+
 
 </head>
 <body class="sb-nav-fixed">
 	<tiles:insertAttribute name="header"/>
 	<div id="layoutSidenav">
-		<div id="layoutSidenav_nav">
-			<tiles:insertAttribute name="left"/>
-		</div>
-		<div id="layoutSidenav_content">
-			<main>
-			    <tiles:insertAttribute name="body"/>
-			</main>
-			<tiles:insertAttribute name="footer"/>
-		</div>
+	  <div id="layoutSidenav_nav">
+	    <tiles:insertAttribute name="left"/>
+	  </div>
+	  <div id="layoutSidenav_content">
+	    <main>
+	      <tiles:insertAttribute name="body"/>
+	    </main>
+	    <tiles:insertAttribute name="footer"/>
+	  </div>
 	</div>
 </body>
 </html>

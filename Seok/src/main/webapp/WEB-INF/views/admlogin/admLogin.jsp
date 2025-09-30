@@ -5,36 +5,40 @@
 <script src="${pageContext.request.contextPath}/resources/static/js/login/admLogin.js"></script>
 
 <!-- Draw view [S] -->
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-5">
-            <div class="card shadow-lg border-0 rounded-lg mt-5">
-                <div class="card-header"><h3 class="text-center font-weight-light my-4">URDOGZONE ADMIN</h3></div>
-                <div class="card-body">
-                    <form>
-                        <div class="form-floating mb-3">
-                            <input class="form-control" type="text" name="adminId" id="adminId" />
-                            <label for="inputEmail">아이디</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input class="form-control" type="password" name="adminPw" id="adminPw" />
-                            <label for="inputPassword">비밀번호</label>
-                        </div>
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
-                            <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                            <a class="small" href="#">Forgot Password?</a>
-                            <a class="btn btn-primary" id="adLoginBtn">Login</a>
-                        </div>
-                    </form>
-                </div>
-               <div class="card-footer text-center py-3">
-                    <div class="small"><a href="#">Need an account? Sign up!</a></div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="login-container">
+  <div class="login-box">
+    <h2 class="login-title">UMS</h2>
+
+    <form action="/loginProc.do" method="post">
+      <div class="form-group">
+        <input type="text" id="userId" name="userId" class="login-input" placeholder="아이디" required>
+      </div>
+      <div class="form-group">
+        <input type="password" id="userPw" name="userPw" class="login-input" placeholder="비밀번호" required>
+      </div>
+
+      <!-- 로그인 / 회원가입 / 비밀번호 찾기 버튼 묶음 -->
+      <div class="login-actions">
+        <button type="submit" class="action-btn">로그인</button>
+      </div>
+    </form>
+
+<!--     <div class="divider">또는</div>
+
+    카카오 로그인
+    <a href="/oauth2/authorization/kakao" class="kakao-btn">
+      <i class="fa-solid fa-comment"></i> 카카오 계정으로 로그인
+    </a>
+
+    네이버 로그인
+    <a href="/oauth2/authorization/naver" class="naver-btn">
+      <i class="fa-solid fa-n"></i> 네이버 계정으로 로그인
+    </a>
+
+    구글 로그인
+    <a href="/oauth2/authorization/google" class="google-btn">
+      <i class="fa-brands fa-google"></i> 구글 계정으로 로그인
+    </a> -->
+  </div>
 </div>
 <!-- Draw view [E] -->
