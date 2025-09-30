@@ -6,7 +6,7 @@
 $(document).ready(function(){
 	
 	// 관리자 로그인 버튼 이벤트
-	$('#adLoginBtn').on('click', function() {
+	$('#admLoginBtn').on('click', function() {
 		var adminId = $("#adminId").val();
 		var adminPw = $("#adminPw").val();
 		
@@ -17,8 +17,8 @@ $(document).ready(function(){
 		}
 		var dataType = 'json'
 	 	ajaxStart(url, params, dataType, function(data) {
-	 	goToUri('/admMain.do');
-	       /* if (data.resultCd === 'Y' ) {
+	 		goToUri('/admMain.do');
+	       /** if (data.resultCd === 'Y' ) {
 	        	goToUri('/admMain.do');
 	        } else {
 				alert('아이디/비밀번호를 다시 확인해주세요.');

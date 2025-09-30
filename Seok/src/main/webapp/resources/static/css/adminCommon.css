@@ -3,14 +3,16 @@
 /* ==============================
    공통 레이아웃
 ============================== */
-body {
+html, body {
+  height: 100%;
   margin: 0;
+  overflow: hidden;   /* ★ 전체 스크롤 완전 차단 */
   font-family: 'Noto Sans KR', sans-serif;
   background-color: #f8fdf8;
   color: #333;
-  overflow: hidden; /* 로그인 화면 스크롤 제거 */
 }
 
+/* 헤더 */
 header {
   background-color: #a8e6cf;
   color: #fff;
@@ -18,15 +20,17 @@ header {
   font-size: 1.3rem;
   font-weight: bold;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-shrink: 0;
 }
 
+/* 레이아웃 구조 */
 #layoutSidenav {
   display: flex;
-  min-height: 100vh;
+  height: calc(100% - 60px); /* header 높이 제외 (대략 60px) */
+  min-width: 0;
 }
 
 #layoutSidenav_nav {
@@ -35,17 +39,12 @@ header {
   padding: 20px 10px;
   box-shadow: inset -1px 0 3px rgba(0,0,0,0.05);
 }
-
 #layoutSidenav_nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
-#layoutSidenav_nav li {
-  margin: 10px 0;
-}
-
+#layoutSidenav_nav li { margin: 10px 0; }
 #layoutSidenav_nav a {
   display: block;
   padding: 10px;
@@ -54,7 +53,6 @@ header {
   color: #333;
   transition: 0.2s;
 }
-
 #layoutSidenav_nav a:hover {
   background-color: #a8e6cf;
   color: #fff;
@@ -64,18 +62,27 @@ header {
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
+/* 메인 */
 main {
   flex: 1;
   padding: 20px;
   background-color: #fff;
+  overflow: hidden;   /* ★ 메인 스크롤 제거 */
+}
+main .content-wrapper {
+  max-width: 1100px;   /* 최대 가로 폭 제한 */
+  margin: 0 auto;      /* 가운데 정렬 */
+  padding: 0 15px;     /* 좌우 여백 */
 }
 
 /* ==============================
-   푸터
+   푸터 (항상 하단 고정)
 ============================== */
 footer {
+  flex-shrink: 0;
   background-color: #fff;
   border-top: 1px solid #ddd;
   text-align: center;
@@ -83,39 +90,23 @@ footer {
   font-size: 0.9rem;
   color: #000;
 }
-
 footer a {
   color: #000 !important;
   text-decoration: none !important;
 }
-
 footer a:hover {
   color: #000 !important;
   text-decoration: underline;
 }
-
-footer .footer-links {
-  margin-top: 5px;
-}
-
-footer .footer-links a {
-  margin: 0 8px;
-  font-size: 0.85rem;
-}
-
-footer .social-icons {
-  margin-top: 8px;
-}
-
+footer .footer-links { margin-top: 5px; }
+footer .footer-links a { margin: 0 8px; font-size: 0.85rem; }
+footer .social-icons { margin-top: 8px; }
 footer .social-icons a {
   margin: 0 6px;
   font-size: 1.2rem;
   color: #000 !important;
 }
-
-footer .social-icons a:hover {
-  color: #000 !important;
-}
+footer .social-icons a:hover { color: #000 !important; }
 
 /* ==============================
    헤더 사용자 메뉴
@@ -125,18 +116,12 @@ header .logo {
   font-weight: bold;
   color: #fff;
 }
-
 header .header-right {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
-header .user-info {
-  font-size: 0.95rem;
-  margin-right: 10px;
-}
-
+header .user-info { font-size: 0.95rem; margin-right: 10px; }
 header .header-btn {
   background-color: #81c784;
   border: none;
@@ -147,18 +132,9 @@ header .header-btn {
   transition: 0.2s;
   color: #fff;
 }
-
-header .header-btn:hover {
-  background-color: #66bb6a;
-}
-
-header .header-btn.logout {
-  background-color: #ef5350;
-}
-
-header .header-btn.logout:hover {
-  background-color: #e53935;
-}
+header .header-btn:hover { background-color: #66bb6a; }
+header .header-btn.logout { background-color: #ef5350; }
+header .header-btn.logout:hover { background-color: #e53935; }
 
 /* ==============================
    버튼 스타일
@@ -174,12 +150,10 @@ button, .btn {
   transition: 0.2s;
   text-decoration: none !important;
 }
-
 button:hover, .btn:hover {
   background-color: #66bb6a;
   color: #fff !important;
 }
-
 button:disabled, .btn:disabled {
   background-color: #c8e6c9;
   cursor: not-allowed;
@@ -195,7 +169,6 @@ button:disabled, .btn:disabled {
   font-size: 0.9rem;
   transition: 0.2s;
 }
-
 .search-input:focus {
   outline: none;
   border-color: #66bb6a;
@@ -209,10 +182,11 @@ button:disabled, .btn:disabled {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: calc(100vh - 100px); /* header+footer 높이 제외 (예: 100px) */
   background-color: #f8fdf8;
+  box-sizing: border-box;
+  padding: 20px;
 }
-
 .login-box {
   background: #fff;
   border: 1px solid #ddd;
@@ -222,25 +196,18 @@ button:disabled, .btn:disabled {
   text-align: center;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
-
 .login-title {
   margin-bottom: 20px;
   font-size: 1.4rem;
   color: #333;
 }
-
-.form-group {
-  margin-bottom: 15px;
-  text-align: left;
-}
-
+.form-group { margin-bottom: 15px; text-align: left; }
 .form-group label {
   font-size: 0.9rem;
   color: #555;
   display: block;
   margin-bottom: 5px;
 }
-
 .login-input {
   width: 100%;
   padding: 10px;
@@ -249,20 +216,16 @@ button:disabled, .btn:disabled {
   font-size: 0.9rem;
   box-sizing: border-box;
 }
-
 .login-input:focus {
   border-color: #66bb6a;
   outline: none;
   box-shadow: 0 0 4px #a5d6a7;
 }
-
-/* === 로그인 버튼 묶음 === */
 .login-actions {
   display: flex;
   gap: 8px;
   margin-top: 15px;
 }
-
 .login-actions .action-btn {
   flex: 1;
   text-align: center;
@@ -274,118 +237,164 @@ button:disabled, .btn:disabled {
   text-decoration: none !important;
   transition: 0.2s;
 }
+.login-actions .action-btn:hover { background-color: #66bb6a; }
 
-.login-actions .action-btn:hover {
-  background-color: #66bb6a;
+/* ==============================
+   페이지 타이틀 & 브레드크럼
+============================== */
+.page-header {
+  margin-bottom: 20px;
 }
-
-/* 구분선 */
-.divider {
-  margin: 20px 0;
-  font-size: 0.85rem;
-  color: #aaa;
-  position: relative;
-}
-.divider::before, .divider::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 40%;
-  height: 1px;
-  background: #ddd;
-}
-.divider::before { left: 0; }
-.divider::after { right: 0; }
-
-/* 카카오 로그인 버튼 */
-.kakao-btn {
-  display: block;
-  background-color: #fee500;
-  color: #000 !important;
+.page-header h2 {
+  margin: 0;
+  font-size: 1.6rem;
   font-weight: bold;
+  color: #333;
+}
+.breadcrumb {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #666;
+}
+.breadcrumb span {
+  color: #333;
+  font-weight: 500;
+}
+.breadcrumb a {
+  color: #666;
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+/* ==============================
+   그리드 디자인
+============================== */
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.search-form input,
+.search-form select {
+  padding: 6px 10px;
+  border: 2px solid #a5d6a7;
   border-radius: 6px;
-  padding: 10px;
-  margin-top: 10px;
-  text-decoration: none !important;
-  font-size: 0.95rem;
-  transition: opacity 0.2s;
+  font-size: 0.9rem;
+  transition: 0.2s;
 }
-.kakao-btn:hover { opacity: 0.85; }
-
-/* 네이버 로그인 버튼 */
-.naver-btn {
-  display: block;
-  background-color: #03c75a;
-  color: #fff !important;
-  font-weight: bold;
+.search-form input:focus,
+.search-form select:focus {
+  outline: none;
+  border-color: #66bb6a;
+  box-shadow: 0 0 4px #a5d6a7;
+}
+.search-form button {
+  background-color: #81c784;
+  border: none;
   border-radius: 6px;
-  padding: 10px;
-  margin-top: 10px;
-  text-decoration: none !important;
-  font-size: 0.95rem;
-  transition: background-color 0.2s;
+  padding: 8px 15px;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.2s;
 }
-.naver-btn:hover { background-color: #029e48; }
+.search-form button:hover { background-color: #66bb6a; }
 
-/* 구글 로그인 버튼 */
-.google-btn {
-  display: block;
-  background-color: #fff;
-  color: #000 !important;
-  font-weight: bold;
+/* 테이블 */
+.table-grid {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.table-grid th,
+.table-grid td {
   border: 1px solid #ddd;
-  border-radius: 6px;
   padding: 10px;
-  margin-top: 10px;
-  text-decoration: none !important;
-  font-size: 0.95rem;
-  transition: background-color 0.2s;
+  text-align: center;
+  font-size: 0.9rem;
 }
-.google-btn:hover { background-color: #f5f5f5; }
+.table-grid th {
+  background-color: #a8e6cf;
+  color: #333;
+  font-weight: bold;
+}
+.table-grid tr:nth-child(even) { background-color: #f9f9f9; }
+.table-grid tr:hover { background-color: #e8f5e9; }
+
+/* 페이징 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 15px;
+}
+.pagination button {
+  border: 1px solid #81c784;
+  background: #fff;
+  color: #333;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  min-width: 36px;
+}
+.pagination button:hover {
+  background: #c8e6c9;
+  color: #000;
+}
+.pagination button.active {
+  background: #81c784;
+  color: #fff;
+  font-weight: bold;
+  border-color: #66bb6a;
+}
 
 /* ==============================
    반응형 (모바일 대응)
 ============================== */
 @media (max-width: 768px) {
-  .login-actions {
-    flex-direction: column;
-  }
-
+  .login-actions { flex-direction: column; }
   #layoutSidenav { flex-direction: column; }
-
   #layoutSidenav_nav {
     width: 100%;
     display: flex;
     overflow-x: auto;
     padding: 10px;
   }
-
   #layoutSidenav_nav ul {
     display: flex;
     flex-direction: row;
     width: 100%;
   }
-
-  #layoutSidenav_nav li {
-    margin: 0 5px;
-    flex: 1;
-  }
-
+  #layoutSidenav_nav li { margin: 0 5px; flex: 1; }
   #layoutSidenav_nav a {
     text-align: center;
     padding: 8px;
     font-size: 0.9rem;
   }
-
   main { padding: 10px; }
-
   .table-grid {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
   }
+  .search-form { flex-direction: column; gap: 6px; }
+  .search-form input,
+  .search-form select,
+  .search-form button { width: 100%; }
+  .pagination {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .pagination button {
+    flex: 1 1 auto;
+    min-width: 40px;
+  }
 }
-
 @media (max-width: 480px) {
   header {
     flex-direction: column;
@@ -393,24 +402,26 @@ button:disabled, .btn:disabled {
     font-size: 1rem;
     padding: 10px;
   }
-
-  header .header-right {
-    flex-wrap: wrap;
-    gap: 5px;
-  }
-
+  header .header-right { flex-wrap: wrap; gap: 5px; }
   button, .btn {
     width: 100%;
     margin-bottom: 5px;
   }
-
-  .search-input {
-    width: 100%;
-    margin-bottom: 5px;
-  }
-
-  footer {
-    font-size: 0.8rem;
+  .search-input { width: 100%; margin-bottom: 5px; }
+  footer { font-size: 0.8rem; padding: 8px; }
+  .search-form input,
+  .search-form select,
+  .search-form button {
+    font-size: 0.85rem;
     padding: 8px;
+  }
+  .table-grid th,
+  .table-grid td {
+    padding: 6px;
+    font-size: 0.8rem;
+  }
+  .pagination button {
+    font-size: 0.8rem;
+    padding: 4px 8px;
   }
 }

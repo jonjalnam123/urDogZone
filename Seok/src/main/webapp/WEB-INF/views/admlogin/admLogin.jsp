@@ -8,21 +8,18 @@
 <div class="login-container">
   <div class="login-box">
     <h2 class="login-title">UMS</h2>
-
-    <form action="/loginProc.do" method="post">
+    
       <div class="form-group">
-        <input type="text" id="userId" name="userId" class="login-input" placeholder="아이디" required>
+        <input type="text" id="userId" name="userId" class="login-input" placeholder="아이디">
       </div>
       <div class="form-group">
-        <input type="password" id="userPw" name="userPw" class="login-input" placeholder="비밀번호" required>
+        <input type="password" id="userPw" name="userPw" class="login-input" placeholder="비밀번호">
       </div>
 
       <!-- 로그인 / 회원가입 / 비밀번호 찾기 버튼 묶음 -->
       <div class="login-actions">
-        <button type="submit" class="action-btn">로그인</button>
+        <button type="button" id="admLoginBtn" class="action-btn">로그인</button>
       </div>
-    </form>
-
 <!--     <div class="divider">또는</div>
 
     카카오 로그인
