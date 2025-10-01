@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script>
+	$(document).ready(function() {
+	  $('#categorySelect').select2({
+	    allowClear: true,
+	    width: 'resolve',  // 부모 요소 너비 따라감 (검색 인풋과 동일 폭)
+	    minimumResultsForSearch: Infinity   // 🔥 검색창 숨기기
+	  });
+	});
+</script>
+
 <!-- Draw view [S] -->
 <div class="content-wrapper">
 
@@ -12,16 +22,23 @@
     </div>
   </div>
 
-  <!-- 검색 조건 -->
+<!-- 검색 조건 + 등록/삭제 버튼 -->
+<div class="search-bar">
+  <!-- 검색폼 -->
   <form class="search-form">
-    <input type="text" placeholder="제목 검색">
-    <select>
+    <select id="categorySelect">
       <option value="">전체</option>
       <option value="공지">공지</option>
       <option value="이벤트">이벤트</option>
+      <option value="안내">안내</option>
+      <option value="점검">점검</option>
+      <option value="업데이트">업데이트</option>
     </select>
-    <button type="submit">검색</button>
+    <input type="text" class="search-input" placeholder="제목 검색">
+    <button type="submit" class="search-btn">검색</button>
   </form>
+  
+</div>
 
   <!-- 테이블 -->
   <div class="table-wrapper">

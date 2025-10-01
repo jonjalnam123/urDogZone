@@ -3,7 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="text-center">
+<%-- <div class="text-center">
 	<ul class="pagination pagination-sm">
 	
 	<c:set var="searchQuery"
@@ -32,4 +32,34 @@
 	</c:if>
 	
 	</ul>
+</div> --%>
+
+
+<div class="pagination">
+    
+    <c:set var="searchQuery"
+       value="&param=${searchDTO.param}&param1=${searchDTO.param1}" />
+       
+    <!-- 이전 페이지 -->
+    <c:if test="${paging.curPage > 1 }">
+        <button onclick="location.href='${paging.uri}?curPage=${paging.curPage - 1}${searchQuery}'">&laquo;</button>
+    </c:if>
+    
+    <!-- 페이지 번호 -->
+    <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i">
+        <c:choose>
+            <c:when test="${paging.curPage eq i}">
+                <button class="active">${i}</button>
+            </c:when>
+            <c:otherwise>
+                <button onclick="location.href='${paging.uri}?curPage=${i}${searchQuery}'">${i}</button>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+    
+    <!-- 다음 페이지 -->
+    <c:if test="${paging.curPage < paging.totalPage }">
+        <button onclick="location.href='${paging.uri}?curPage=${paging.curPage + 1}${searchQuery}'">&raquo;</button>
+    </c:if>
+    
 </div>

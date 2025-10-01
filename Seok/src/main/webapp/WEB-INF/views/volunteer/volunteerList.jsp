@@ -2,109 +2,53 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="${pageContext.request.contextPath}/resources/static/js/volunteer/volunteerList.js"></script>
 
-<div class="container-fluid px-4">
-    <h1 class="mt-4">Tables</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-        <li class="breadcrumb-item active">Tables</li>
-    </ol>
-    <div class="card mb-4">
-        <div class="card-body">
-            DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
-            <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-            .
-        </div>
+<div class="content-wrapper">
+  <!-- 페이지 타이틀 + 브레드크럼 -->
+  <div class="page-header">
+    <h2>공지사항 목록</h2>
+    <div class="breadcrumb">
+      <a href="#">공지사항</a> &gt; <span>공지사항 목록</span>
     </div>
-    <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            DataTable Example
-        </div>
-        <div class="card-body">
-            <table id="datatablesSimple">
-                <thead>
-                    <tr>
-                    	<th><input type="checkbox" id="checkAll"></th>
-						<th>봉사명</th>
-						<th>봉사장명</th>
-						<th>모집인원</th>
-						<th>봉사일자</th>
-                    </tr>
-                </thead>
-                <tbody>
-			      	<c:forEach var="vol" items="${volunteerList}">
-						<tr data-volcd="${vol.volunteerCd}">
-							<td><input type="checkbox" class="rowCheck"></td>
-							<td class="volunteerTitle">${vol.volunteerTitle}</td>
-							<td>${vol.placeNm}</td>
-				            <td>${vol.volunteerMaxCnt}</td>
-				            <td>${vol.volunteerDt}</td>
-			          	</tr>
-		       		</c:forEach>
-                </tbody>
-            </table>
-        </div>
-    </div>
+  </div>
+
+  <!-- 검색 조건 -->
+  <form action="/service/volunteerList.do" method="get" id="seacrhForm">
+    <input type="text" placeholder="제목 검색">
+  		<select id="param" name="param" class="combo-scroll">  
+	  		<option value="" ${empty searchDTO.param ? 'selected' : ''}>지역선택</option>
+	      	<c:forEach var="mainCity" items="${mainCityList}">
+		  		<option value="${mainCity.cityCode}" ${searchDTO.param eq mainCity.cityCode ? 'selected' : ''}>${mainCity.cityName}</option>
+		  	</c:forEach>
+	  	</select>
+    <button type="submit">검색</button>
+  </form>
+
+  <!-- 테이블 -->
+  <div class="table-wrapper">
+    <table class="table-grid">
+    	<thead>
+              <tr>
+              	<th><input type="checkbox" id="checkAll"></th>
+				<th>봉사명</th>
+				<th>봉사장명</th>
+				<th>모집인원</th>
+				<th>봉사일자</th>
+              </tr>
+          </thead>
+          <tbody>
+		   	<c:forEach var="vol" items="${volunteerList}">
+				<tr data-volcd="${vol.volunteerCd}">
+				<td><input type="checkbox" class="rowCheck"></td>
+				<td class="volunteerTitle">${vol.volunteerTitle}</td>
+				<td>${vol.placeNm}</td>
+		        <td>${vol.volunteerMaxCnt}</td>
+		        <td>${vol.volunteerDt}</td>
+		     	</tr>
+ 			</c:forEach>
+        </tbody>
+    </table>
+  </div>
+
+  <!-- 페이징 -->
+  <c:import url="/WEB-INF/views/layout/paging.jsp" />
 </div>
-
-
-<%-- <div class="card">
-  <h2 class="text-center mb-2">봉사 일정</h2>
-    <c:choose>
-  	<c:when test="${empty volunteerList || volunteerList eq null || volunteerList eq ''}">
-  		<form action="/service/volunteerList.do" method="get" id="seacrhForm" >
-  	  		<select id="param" name="param" class="combo-scroll">  
-			  <option value="" ${empty searchDTO.param ? 'selected' : ''}>지역선택</option>
-		      <c:forEach var="mainCity" items="${mainCityList}">
-				  <option value="${mainCity.cityCode}" ${searchDTO.param eq mainCity.cityCode ? 'selected' : ''}>${mainCity.cityName}</option>
-			  </c:forEach>
-		  	</select>
-		  	<input type="text" id="param1" name="param1" placeholder="제목" value="${searchDTO.param1}">
-		  	<button type="button" id="searchBtn">검색</button>
-		  	<button type="button" id="regBtn">등록</button>
-		  	<button type="button" id="delBtn">삭제</button>
-	  	</form>
-  		<h2>봉사목록 데이터가 없습니다.</h2>
-  	</c:when>
-  	<c:otherwise>
-  		<form action="/service/volunteerList.do" method="get" id="seacrhForm" >
-  	  		<select id="param" name="param" class="combo-scroll">  
-			  <option value="" ${empty searchDTO.param ? 'selected' : ''}>지역선택</option>
-		      <c:forEach var="mainCity" items="${mainCityList}">
-				  <option value="${mainCity.cityCode}" ${searchDTO.param eq mainCity.cityCode ? 'selected' : ''}>${mainCity.cityName}</option>
-			  </c:forEach>
-		  	</select>
-		  	<input type="text" id="param1" name="param1" placeholder="제목" value="${searchDTO.param1}">
-		  	<button type="button" id="searchBtn">검색</button>
-		  	<button type="button" id="regBtn">등록</button>
-		  	<button type="button" id="delBtn">삭제</button>
-	  	</form>
-	  
-	  	<div class="table-responsive">
-	    	<table id="volListTb" class="volunteer-table w-full">
-	      		<thead>
-			        <tr>
-			        	<th><input type="checkbox" id="checkAll"></th>
-						<th>봉사명</th>
-						<th>봉사장명</th>
-						<th>모집인원</th>
-						<th>봉사일자</th>
-		        	</tr>
-	      		</thead>
-		      	<tbody>
-		      	<c:forEach var="vol" items="${volunteerList}">
-					<tr data-volcd="${vol.volunteerCd}">
-						<td><input type="checkbox" class="rowCheck"></td>
-						<td class="volunteerTitle">${vol.volunteerTitle}</td>
-						<td>${vol.placeNm}</td>
-			            <td>${vol.volunteerMaxCnt}</td>
-			            <td>${vol.volunteerDt}</td>
-		          	</tr>
-	       		</c:forEach>
-	   	 		</tbody>
-	    	</table>
-	  	</div>
-	  <c:import url="/WEB-INF/views/layout/paging.jsp" />
-  	</c:otherwise>
-  </c:choose>
-</div> --%>
