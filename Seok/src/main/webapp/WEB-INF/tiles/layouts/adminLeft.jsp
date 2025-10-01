@@ -6,7 +6,7 @@
     <ul>
       <!-- Home -->
       <li>
-        <a class="nav-link" href="/index.do">
+        <a class="nav-link" href="/admMain.do">
           <i class="fas fa-home"></i> 홈
         </a>
       </li>
@@ -14,13 +14,13 @@
       <!-- Volunteer -->
       <li>
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseVolunteer" aria-expanded="false" aria-controls="collapseVolunteer">
-          <i class="fas fa-hands-helping"></i> 봉사 활동
+          <i class="fas fa-hands-helping"></i> 봉사활동
           <span class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></span>
         </a>
         <div class="collapse" id="collapseVolunteer" data-bs-parent="#sidenavAccordion">
           <ul>
-            <li><a class="nav-link" href="/service/getVolunteerList.do">봉사 일정</a></li>
-            <li><a class="nav-link" href="/service/getVolunteerPlaceList.do">봉사 장소</a></li>
+            <li><a class="nav-link" href="/service/getVolunteerList.do">봉사일정</a></li>
+            <li><a class="nav-link" href="/service/getVolunteerPlaceList.do">봉사장소</a></li>
           </ul>
         </div>
       </li>

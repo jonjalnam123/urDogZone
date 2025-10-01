@@ -5,50 +5,61 @@
 <div class="content-wrapper">
   <!-- 페이지 타이틀 + 브레드크럼 -->
   <div class="page-header">
-    <h2>공지사항 목록</h2>
+    <h2>봉사일정 목록</h2>
     <div class="breadcrumb">
-      <a href="#">공지사항</a> &gt; <span>공지사항 목록</span>
+      <a href="#">봉사활동</a> &gt; <span>봉사일정 목록</span>
     </div>
   </div>
-
+  
   <!-- 검색 조건 -->
-  <form action="/service/volunteerList.do" method="get" id="seacrhForm">
-    <input type="text" placeholder="제목 검색">
+  <div class="search-bar">
+    <form class="search-form" action="/service/volunteerList.do" method="get" id="seacrhForm">
   		<select id="param" name="param" class="combo-scroll">  
 	  		<option value="" ${empty searchDTO.param ? 'selected' : ''}>지역선택</option>
 	      	<c:forEach var="mainCity" items="${mainCityList}">
 		  		<option value="${mainCity.cityCode}" ${searchDTO.param eq mainCity.cityCode ? 'selected' : ''}>${mainCity.cityName}</option>
 		  	</c:forEach>
 	  	</select>
-    <button type="submit">검색</button>
-  </form>
-
-  <!-- 테이블 -->
-  <div class="table-wrapper">
-    <table class="table-grid">
-    	<thead>
-              <tr>
-              	<th><input type="checkbox" id="checkAll"></th>
-				<th>봉사명</th>
-				<th>봉사장명</th>
-				<th>모집인원</th>
-				<th>봉사일자</th>
-              </tr>
-          </thead>
-          <tbody>
-		   	<c:forEach var="vol" items="${volunteerList}">
-				<tr data-volcd="${vol.volunteerCd}">
-				<td><input type="checkbox" class="rowCheck"></td>
-				<td class="volunteerTitle">${vol.volunteerTitle}</td>
-				<td>${vol.placeNm}</td>
-		        <td>${vol.volunteerMaxCnt}</td>
-		        <td>${vol.volunteerDt}</td>
-		     	</tr>
- 			</c:forEach>
-        </tbody>
-    </table>
+      <input type="text" class="search-input" id="param1" name="param1" placeholder="제목 검색" value="${searchDTO.param1}">
+      <button type="button" id="searchBtn" class="search-btn">검색</button>
+      <button type="button" id="regBtn" class="btn-insert">등록</button>
+  	  <button type="button" id="delBtn" class="btn-delete">삭제</button>
+    </form>
   </div>
 
-  <!-- 페이징 -->
-  <c:import url="/WEB-INF/views/layout/paging.jsp" />
+  <c:choose>
+ 	<c:when test="${empty volunteerList || volunteerList eq null || volunteerList eq ''}">
+  		<h2>봉사장소 데이터가 없습니다.</h2>
+ 	</c:when>
+ 	<c:otherwise>
+	  <!-- 테이블 -->
+	  <div class="table-wrapper">
+	    <table class="table-grid" id="volListTb">
+	    	<thead>
+	              <tr>
+	              	<th><input type="checkbox" id="checkAll"></th>
+					<th>봉사명</th>
+					<th>봉사장명</th>
+					<th>모집인원</th>
+					<th>봉사일자</th>
+	              </tr>
+	          </thead>
+	          <tbody>
+			   	<c:forEach var="vol" items="${volunteerList}">
+					<tr data-volcd="${vol.volunteerCd}">
+						<td><input type="checkbox" class="rowCheck"></td>
+						<td class="volunteerTitle">${vol.volunteerTitle}</td>
+						<td>${vol.placeNm}</td>
+				        <td>${vol.volunteerMaxCnt}</td>
+				        <td>${vol.volunteerDt}</td>
+			     	</tr>
+	 			</c:forEach>
+	        </tbody>
+	    </table>
+	  </div>
+	
+	  <!-- 페이징 -->
+	  <c:import url="/WEB-INF/views/layout/paging.jsp" />
+   	</c:otherwise>
+  </c:choose>
 </div>

@@ -10,10 +10,11 @@
 	<select id="adminLogin" parameterType="AdminDTO" resultType="AdminDTO">
 		/* LoginDao.adminLogin */
 	    SELECT ADMIN_ID
+	    		, ADMIN_NM
 	    		, ADMIN_DEL_YN
 	    		, ADMIN_TYPE
 	    		, REG_ID
-	    		, REG_DT
+	    		, REG_DT 
 	    		, UPD_ID
 	    		, UPD_DT
 	      FROM TB_ADMIN_USER_INFO

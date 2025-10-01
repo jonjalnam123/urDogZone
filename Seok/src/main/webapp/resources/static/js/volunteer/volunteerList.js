@@ -5,8 +5,13 @@
  */
 $(document).ready(function(){
 	
-	$('#datatablesSimple').DataTable();
-	
+	// 셀렉트 박스 이벤트
+	$('#param').select2({
+		allowClear: true,
+		width: 'resolve',
+		minimumResultsForSearch: Infinity // 셀렉트박스 검색창 숨기기
+	});
+
 	// 검색 버튼 이벤트
 	$('#searchBtn').on('click', function() {
 		var form = $('#seacrhForm');

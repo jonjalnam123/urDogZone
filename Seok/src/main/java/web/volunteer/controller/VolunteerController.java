@@ -93,7 +93,7 @@ public class VolunteerController {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("paging", paging);
 		paramMap.put("searchDTO", searchDTO);
-		
+		System.out.println("paramMap====" + paramMap);
 		List<VolunteerDTO> volunteerList = volunteerService.volunteerList(paramMap);
 		model.addAttribute("volunteerList", volunteerList);
 		model.addAttribute("searchDTO", searchDTO);
