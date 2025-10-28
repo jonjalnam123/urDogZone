@@ -27,4 +27,22 @@ $(document).ready(function(){
 		goToUri('/service/getVolunteerPlaceList.do');
 	});
 	
+	$('#delFileBtn').on('click', function() {
+		var url = '/service/delFile.do';
+		var placeCd = $('#placeCd').val();
+		var fileNo = $('#fileNo').val();
+		var params = {
+				placeCd : placeCd
+			  , fileNo : fileNo
+		}
+		var dataType = 'json'
+	 	ajaxStart(url, params, dataType, function(data) {
+			if ( data.resultCd === 'Y' ) {
+				goToUri('/service/getVolunteerList.do')
+			} else {
+				alert("삭제할 봉사 일정이 없습니다.");
+			}
+		});
+	})
+	
 });

@@ -6,7 +6,7 @@
 <div class="card">
   <h2 class="text-center mb-2">봉사장소 수정</h2>
 
-  <form action="/service/updVolunteerPlace.do" method="post" id="updVolunteerPlaceForm">
+  <form action="/service/updVolunteerPlace.do" method="post" id="updVolunteerPlaceForm" enctype="multipart/form-data">
   	<input type="hidden" id="flag" name="flag" value="U">
 	<input type="hidden" id="placeCd" name="placeCd" value="${volunteerPlace.placeCd}">
     <div class="form-group">
@@ -38,6 +38,25 @@
       <label for="placeNote">봉사장 특징</label>
       <textarea id="placeNote" name="placeNote" maxlength="333">${volunteerPlace.placeNote}</textarea>
     </div>
+    
+    <!-- file Upload-->
+	<div class="form-group">
+	  <label>첨부파일</label>
+	  <div id="fileInputs">
+	    <div class="file-row">
+	      <input type="file" id="files" name="files" multiple="multiple" />
+	      <button type="button" id="delFileBtn">삭제</button>
+	    </div>
+	    <c:forEach var="file" items="${fileList}">
+		    <div class="file-row">
+		    	<input type="hidden" id="fileNo" name="fileNo" value="${file.fileNo}" />
+		    	<input type="text" id="file" name="file" value="${file.fileOrgNm}" />
+		      	<button type="button" id="delFileBtn">삭제</button>
+		    </div>
+	    </c:forEach>
+	  </div>
+	  <input type="hidden" name="refType" value="volPlace"/>
+	</div>
 
     <div class="btn-group">
       <button type="button" class="btn" id="updBtn">수정</button>

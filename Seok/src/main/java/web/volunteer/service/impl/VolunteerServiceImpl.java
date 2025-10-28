@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import web.comm.dto.FileDTO;
 import web.util.Paging;
 import web.volunteer.dao.face.VolunteerDao;
 import web.volunteer.dto.VolunteerDTO;
@@ -122,7 +123,6 @@ public class VolunteerServiceImpl implements VolunteerService{
 	*/
 	@Override
 	public int delVolunteerList(VolunteerDTO volunteerDTO) {
-		System.out.println("volunteerDTO==" + volunteerDTO);
 		logger.info("=== 봉사 일정 삭제 임플 진입 ===");  
 		int result = volunteerDao.delVolunteerList(volunteerDTO);
 		return result;
@@ -242,6 +242,42 @@ public class VolunteerServiceImpl implements VolunteerService{
 	public int delVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO) {
 		logger.info("=== 봉사 장소 삭제 임플 진입 ===");  
 		int result = volunteerDao.delVolunteerPlace(volunteerPlaceDTO);
+		return result;
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : getFileList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.10.22
+	* @Comment : 봉사 장소 첨부파일 리스트 조회
+	* @return
+	*******************************************
+	*/
+	@Override
+	public List<FileDTO> getFileList(VolunteerPlaceDTO volunteerPlaceDTO) {
+		logger.info("=== 봉사 장소 첨부파일 리스트 임플 진입 ===");  
+		volunteerPlaceDTO.setPageGb("volPlace");
+		List<FileDTO> fileList = volunteerDao.getFileList(volunteerPlaceDTO);
+		if(fileList == null || fileList.isEmpty() ) {
+			fileList = null;
+		}
+		return fileList;
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : delFile
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.10.22
+	* @Comment : 첨부 파일 삭제
+	* @return
+	*******************************************
+	*/
+	@Override
+	public int delFile(FileDTO fileDto) {
+		logger.info("=== 첨부 파일 삭제 임플 진입 ===");  
+		int result = volunteerDao.delFile(fileDto);
 		return result;
 	}
 

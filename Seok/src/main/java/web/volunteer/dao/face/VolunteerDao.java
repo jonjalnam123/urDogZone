@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import web.comm.dto.FileDTO;
 import web.util.Paging;
 import web.volunteer.dto.SearchDTO;
 import web.volunteer.dto.VolunteerDTO;
@@ -157,5 +158,27 @@ public interface VolunteerDao {
 	*******************************************
 	*/
 	public int delVolunteerPlace(VolunteerPlaceDTO volunteerPlaceDTO);
+
+	/**
+	******************************************
+	* @MethodName    : getFileList
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.10.22
+	* @Comment : 봉사 장소 첨부파일 리스트 조회
+	* @return
+	*******************************************
+	*/
+	public List<FileDTO> getFileList(VolunteerPlaceDTO volunteerPlaceDTO);
+
+	/**
+	******************************************
+	* @MethodName    : delFile
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.10.22
+	* @Comment : 첨부 파일 삭제
+	* @return
+	*******************************************
+	*/
+	public int delFile(FileDTO fileDto);
 
 }

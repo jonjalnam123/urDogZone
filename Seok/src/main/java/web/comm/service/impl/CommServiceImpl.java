@@ -7,6 +7,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +27,8 @@ public class CommServiceImpl implements CommService{
 	
 	@Autowired CommDao commDao;
 	@Autowired HttpSession session;
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// 파일 업로드 경로
 	private final String uploadDir = "C:/upload/volunteer/";
@@ -149,6 +153,7 @@ public class CommServiceImpl implements CommService{
 	*/
 	@Override
 	public int saveFiles(List<MultipartFile> files, int refNo, String refType) throws IOException {
+		logger.info("=== 파일 업로드 진입 ===");  
 		int result = 0;
 	    for (MultipartFile file : files) {
 	        if (!file.isEmpty()) {

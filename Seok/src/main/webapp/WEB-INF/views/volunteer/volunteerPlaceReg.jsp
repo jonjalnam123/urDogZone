@@ -38,16 +38,15 @@
       <textarea id="placeNote" name="placeNote" maxlength="333"></textarea>
     </div>
     
-    <!-- 파일 업로드 -->
+    <!-- file Upload-->
 	<div class="form-group">
 	  <label>첨부파일</label>
 	  <div id="fileInputs">
 	    <div class="file-row">
-	      <input type="file" name="files" class="file-input"/>
-	      <button type="button" class="removeFileBtn">삭제</button>
+	      <input type="file" id="files" name="files" multiple="multiple" />
+	      <button type="button" id="delFileBtn">삭제</button>
 	    </div>
 	  </div>
-	  <button type="button" id="addFileBtn">+ 파일 추가</button>
 	  <input type="hidden" name="refType" value="volPlace"/>
 	</div>
 

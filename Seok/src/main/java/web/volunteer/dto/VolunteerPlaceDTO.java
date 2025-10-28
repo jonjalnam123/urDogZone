@@ -54,6 +54,9 @@ public class VolunteerPlaceDTO {
 	
 	// 체크 박스 리스트
 	private List<Integer> checkPlaceCdList; 
+	
+	// 첨부 파일 페이지 구분
+	private String pageGb;
 
 
 }

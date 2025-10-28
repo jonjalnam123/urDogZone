@@ -57,8 +57,6 @@
 	        </tbody>
 	    </table>
 	  </div>
-	
-	  <!-- 페이징 -->
 	  <c:import url="/WEB-INF/views/layout/paging.jsp" />
    	</c:otherwise>
   </c:choose>

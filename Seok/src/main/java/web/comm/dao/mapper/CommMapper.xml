@@ -47,11 +47,12 @@
 	<select id ="selectCntSearchAll" resultType="int" parameterType="SearchDTO">
 		/* CommDao.selectCntSearchAll */
 		SELECT COUNT(*) 
-	  	  FROM ${tbNm}
-		<if test="col != null and col != ''">
-			WHERE ${col} LIKE CONCAT('%', #{param}, '%')
+	  	  FROM ${tbNm}  
+	  	WHERE 1=1 
+		<if test="param != null and param != ''">
+			AND ${col} LIKE CONCAT('%', #{param}, '%')
 		</if>
-	  	 <if test="col1 != null and col1 != ''">
+	  	 <if test="param1 != null and param1 != ''">
 	  	 	AND ${col1} LIKE CONCAT('%', #{param1}, '%')
 	  	 </if> 
 	</select>

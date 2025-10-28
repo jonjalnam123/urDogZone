@@ -253,5 +253,25 @@
 	        #{placeCd}
 	    </foreach>
 	</update>
+	
+   	<select id="getFileList" parameterType="VolunteerPlaceDTO" resultType="FileDTO"> 
+		/* VolunteerDao.getFileList */
+		SELECT FILE_NO
+			 	  , FILE_REF_NO
+				  , FILE_REF_TYPE
+			      , FILE_ORG_NM
+			      , FILE_SAVE_NM
+			      , FILE_PATH
+			      , FILE_SIZE
+			      , FILE_CONTENT_TYPE
+			      , REG_ID
+			      , REG_DT
+			      , UPD_ID
+			      , UPD_DT
+		  FROM TB_FILE_INFO
+		WHERE 1=1
+			AND FILE_REF_NO = #{placeCd}
+			AND FILE_REF_TYPE = #{pageGb}
+	</select>
 
 </mapper>

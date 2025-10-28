@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.comm.dto.CommCityDTO;
+import web.comm.dto.FileDTO;
 import web.comm.service.face.CommService;
 import web.util.Paging;
 import web.volunteer.dto.SearchDTO;
@@ -93,7 +94,7 @@ public class VolunteerController {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("paging", paging);
 		paramMap.put("searchDTO", searchDTO);
-		System.out.println("paramMap====" + paramMap);
+
 		List<VolunteerDTO> volunteerList = volunteerService.volunteerList(paramMap);
 		model.addAttribute("volunteerList", volunteerList);
 		model.addAttribute("searchDTO", searchDTO);
@@ -327,9 +328,9 @@ public class VolunteerController {
 	*******************************************
 	*/
 	@RequestMapping(value = "/regVolunteerPlace.do")
-	public String regVolunteerPlace(Model model,
-	                                @ModelAttribute VolunteerPlaceDTO volunteerPlaceDTO,
-	                                @RequestParam(value = "files") List<MultipartFile> files) {
+	public String regVolunteerPlace( Model model
+								                  , @ModelAttribute VolunteerPlaceDTO volunteerPlaceDTO
+								                  , @RequestParam(value = "files") List<MultipartFile> files) {
 	    String uri = "";
 	    try {
 	        logger.info("=== 봉사 장소 등록 컨트롤러 진입 ===");
@@ -371,7 +372,9 @@ public class VolunteerController {
 	*******************************************
 	*/
 	@RequestMapping(value = "/updVolunteerPlace.do")
-	public String updVolunteerPlace( Model model, @ModelAttribute VolunteerPlaceDTO volunteerPlaceDTO) {
+	public String updVolunteerPlace( Model model
+												  , @ModelAttribute VolunteerPlaceDTO volunteerPlaceDTO
+												  , @RequestParam(value = "files", required = false) List<MultipartFile> files) {
 		
 		String uri = "";
 		String flag = volunteerPlaceDTO.getFlag();
@@ -388,12 +391,28 @@ public class VolunteerController {
 				VolunteerPlaceDTO volunteerPlace = volunteerService.getVolunteerPlaceDetail(volunteerPlaceDTO);
 				model.addAttribute("volunteerPlace", volunteerPlace);
 				
+				// 봉사 장소 첨부파일 조회
+				List<FileDTO> fileList = volunteerService.getFileList(volunteerPlaceDTO);
+				model.addAttribute("fileList", fileList);
+				
 				uri = "volunteer/volunteerPlaceUpd.admin";
 			} else {
 				if ( flag.equals("U") ) {
 					logger.info("=== 봉사 장소 수정 컨트롤러 진입 ===");
 					int result = volunteerService.updVolunteerPlace(volunteerPlaceDTO);
 					if ( result == 1 ) {
+						// 파일 업로드 처리 [S]
+						int placeCd = volunteerPlaceDTO.getPlaceCd(); 
+			            if (files != null && !files.isEmpty()) {
+			            	int fileResult = commService.saveFiles(files, placeCd, "volPlace");
+			            	if ( fileResult == 1 ) {
+			            		volunteerPlaceDTO.setPlaceFileYn("Y");
+			            		volunteerService.updFileYn(volunteerPlaceDTO);
+			            	} else {
+			            		uri = "redirect:/comm/getFailFilePage.do";
+			            	}
+			            }
+			            // 파일 업로드 처리 [E]
 						uri = "redirect:/service/getVolunteerPlaceList.do";
 					} else {
 						uri = "redirect:/comm/getFailPage.do";
@@ -405,6 +424,39 @@ public class VolunteerController {
 		}
 
 		return uri;
+	}
+	
+	/**
+	******************************************
+	* @MethodName    : delFile
+	* @Author        : Jung Seok Choi
+	* @Date        : 2025.10.22
+	* @Comment : 첨부 파일 삭제
+	* @return
+	*******************************************
+	*/
+	@RequestMapping(value = "/delFile.do")
+	@ResponseBody
+	public Map<String, Object> delFile( Model model 
+			  										  , @ModelAttribute FileDTO fileDTO
+			  										  , @RequestParam("placeCd") int placeCd ) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		System.out.println("fileDTO===" + fileDTO);
+		System.out.println("placeCd===" + placeCd);
+		try {
+			logger.info("=== 첨부 파일 삭제 컨트롤러 진입 ===");
+			int resultCnt = volunteerService.delFile(fileDTO);
+			if(resultCnt == 1 ) {
+				result.put("result", "SUCCESS");
+				result.put("resultCd", "Y");
+			} else {
+				result.put("resultCd", "N");
+			}
+		} catch (Exception e) {
+			logger.info("=== 첨부 파일 삭제 컨트롤러 실패 ===");
+			result.put("result", "FAIL");
+		}
+		return result;
 	}
 	
 	/**
