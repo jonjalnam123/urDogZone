@@ -69,7 +69,8 @@
 														, web.login.controller, web.login.service
 														, web.volunteer.controller, web.volunteer.service
 														, web.admlogin.controller, web.admlogin.service
-														, web.comm.controller, web.comm.service" />
+														, web.comm.controller, web.comm.service
+														, web.menu.controller, web.menu.service" />
 	
 	<!-- Tiles 뷰 리졸버 -->
 	<beans:bean id="tielsViewResolver"

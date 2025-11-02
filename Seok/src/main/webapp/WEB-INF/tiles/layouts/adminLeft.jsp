@@ -28,14 +28,13 @@
       <!-- Pages -->
       <li>
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-          <i class="fas fa-book-open"></i> 자료실
+          <i class="fas fa-book-open"></i> 관리자
           <span class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></span>
         </a>
         <div class="collapse" id="collapsePages" data-bs-parent="#sidenavAccordion">
           <ul>
-            <li><a class="nav-link" href="/pages/login.do">Login</a></li>
-            <li><a class="nav-link" href="/pages/register.do">Register</a></li>
-            <li><a class="nav-link" href="/pages/password.do">Forgot Password</a></li>
+            <li><a class="nav-link" href="/menu/fMenuList.do">대메뉴 설정</a></li>
+            <li><a class="nav-link" href="/menu/sMenuList.do">중메뉴 설정</a></li>
           </ul>
         </div>
       </li>

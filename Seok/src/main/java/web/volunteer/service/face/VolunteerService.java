@@ -5,7 +5,6 @@ import java.util.Map;
 
 import web.comm.dto.FileDTO;
 import web.util.Paging;
-import web.volunteer.dto.SearchDTO;
 import web.volunteer.dto.VolunteerDTO;
 import web.volunteer.dto.VolunteerPlaceDTO;
 

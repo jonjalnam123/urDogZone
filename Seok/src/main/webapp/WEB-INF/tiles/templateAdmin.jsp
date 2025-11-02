@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>URDOGZONE</title>
 
-<!-- jQuery 2.2.4 -->
+<!-- jQuery 3.6.0 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Bootstrap 5 -->
