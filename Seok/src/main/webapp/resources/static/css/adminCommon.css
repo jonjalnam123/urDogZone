@@ -306,6 +306,245 @@ button:disabled, .btn:disabled { background-color: #c8e6c9; cursor: not-allowed;
   border-color: #66bb6a;
 }
 
+/* =========================================================
+   ✨ 폼 컴포넌트 (추가) — adminCommon.css 맨 아래에 붙이기
+========================================================= */
+.form-card {
+  background: #fff;
+  border: 1px solid #e3e7e3;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  max-width: 980px;
+  margin: 10px auto 0;
+}
+.form-title {
+  font-size: 1.3rem;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+  color: #2e7d32;
+}
+.form-desc {
+  margin: 0 0 18px 0;
+  color: #567;
+  font-size: 0.95rem;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 16px;
+}
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 0.92rem; color: #425a4f; font-weight: 600; }
+.required::after { content: " *"; color: #ef5350; font-weight: 700; }
+
+/* 공통 입력 */
+.form-control,
+.form-select,
+textarea.form-control {
+  width: 100%;
+  border: 2px solid #a5d6a7;
+  border-radius: 8px;
+  padding: 9px 11px;
+  font-size: 0.95rem;
+  background: #fff;
+  outline: none;
+  transition: box-shadow .2s, border-color .2s, background-color .2s;
+  box-sizing: border-box;
+}
+.form-control:focus,
+.form-select:focus,
+textarea.form-control:focus {
+  border-color: #66bb6a;
+  box-shadow: 0 0 0 4px rgba(165,214,167,.35);
+}
+textarea.form-control { min-height: 110px; resize: vertical; }
+
+/* 도움말 / 에러 */
+.field .hint { font-size: 0.82rem; color: #6b7; }
+.field .error { display: none; font-size: 0.82rem; color: #e53935; font-weight: 600; }
+.field :is(input, select, textarea):invalid {
+  border-color: #ef5350;
+  background-color: #fffafa;
+}
+.field :is(input, select, textarea):invalid ~ .error { display: block; }
+
+/* 인라인 1열 강제 */
+.field.full { grid-column: 1 / -1; }
+
+/* 라디오 칩스 */
+.radio-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.radio-chips input[type="radio"] { display: none; }
+.radio-chips label {
+  border: 2px solid #a5d6a7;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.92rem;
+  cursor: pointer; user-select: none;
+  background: #fff;
+  transition: .2s;
+}
+.radio-chips input[type="radio"]:checked + label {
+  background: #a8e6cf; color: #1b5e20; border-color: #66bb6a;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+/* 스위치 */
+/* === Clickable Toggle Switch (override) === */
+.switch {
+  position: relative;
+  width: 46px;
+  height: 26px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* 체크박스를 토글 전체에 투명 오버레이로 배치 → 어디를 눌러도 토글 */
+.switch input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* 실제 비주얼 */
+.switch .track {
+  position: absolute;
+  inset: 0;
+  background: #c8e6c9;
+  border-radius: 999px;
+  transition: .2s;
+  pointer-events: none; /* 클릭 막지 않도록 */
+}
+.switch .thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  transition: .2s;
+  pointer-events: none;
+}
+
+/* 상태 */
+.switch input:checked ~ .track { background: #81c784; }
+.switch input:checked ~ .thumb { left: 23px; }
+
+/* 접근성: 키보드 포커스 링 */
+.switch input:focus-visible ~ .track {
+  outline: 3px solid rgba(102,187,106,.4);
+  outline-offset: 2px;
+}
+
+/* 파일 업로드 */
+.filebox { display: flex; align-items: center; gap: 10px; }
+.filebox input[type="file"] { display: none; }
+.filebox .btn-file {
+  background: #81c784; padding: 8px 14px; border-radius: 8px; font-size: 0.9rem; color: #fff;
+}
+.filebox .filename { font-size: 0.9rem; color: #555; }
+
+/* 액션 영역 */
+.form-actions { margin-top: 14px; display: flex; gap: 10px; justify-content: flex-end; }
+.btn-cancel { background: #b0bec5; color: #fff; }
+.btn-cancel:hover { background: #90a4ae; }
+
+/* 컨텐츠 스크롤 (메인 overflow hidden일 때 내부 스크롤 허용) */
+.content-scroll { height: 100%; overflow: auto; padding-right: 2px; }
+
+/* ==============================
+   Select2: ez-s2 스코프 한정 스킨
+============================== */
+.form-card { --control-h: 42px; } /* 필요시 40~44px에서 조절 */
+
+/* 컨테이너 폭 보정 */
+.select2-container.ez-s2 { width: 100% !important; }
+
+/* 싱글 셀렉트 박스 */
+.select2-container.ez-s2 .select2-selection--single {
+  height: var(--control-h) !important;
+  border: 2px solid #a5d6a7;
+  border-radius: 8px;
+  background: #fff;
+  display: flex; align-items: center;
+  box-sizing: border-box;
+}
+
+/* 렌더 텍스트 정렬/패딩 */
+.select2-container.ez-s2 .select2-selection--single .select2-selection__rendered {
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  line-height: normal !important;
+  padding-left: 10px;
+  padding-right: 32px; /* 화살표 공간 */
+  color: #333;
+}
+
+/* placeholder */
+.select2-container.ez-s2 .select2-selection--single .select2-selection__placeholder {
+  color: #8a8a8a;
+}
+
+/* 화살표 정렬 */
+.select2-container.ez-s2 .select2-selection--single .select2-selection__arrow {
+  height: 100% !important;
+  top: 0 !important; right: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* allowClear 'X' 위치 */
+.select2-container.ez-s2 .select2-selection--single .select2-selection__clear {
+  position: absolute;
+  right: 28px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #90a4ae;
+}
+
+/* 포커스(컨테이너/멀티 공통) */
+.select2-container--default.select2-container--focus.ez-s2 .select2-selection--single,
+.select2-container--default.select2-container--focus.ez-s2 .select2-selection--multiple {
+  border-color: #66bb6a;
+  box-shadow: 0 0 0 4px rgba(165,214,167,.35);
+}
+
+/* 드롭다운(경계/모서리/하이라이트) */
+.select2-dropdown.ez-s2 {
+  border: 2px solid #a5d6a7;
+  border-radius: 8px;
+}
+.select2-dropdown.ez-s2 .select2-results__option--highlighted {
+  background-color: #a8e6cf !important;
+  color: #333 !important;
+}
+
+/* ===== 멀티 셀렉트 ===== */
+.select2-container.ez-s2 .select2-selection--multiple {
+  min-height: var(--control-h);
+  border: 2px solid #a5d6a7;
+  border-radius: 8px;
+  background: #fff;
+  display: flex; align-items: center;
+  box-sizing: border-box;
+}
+.select2-container.ez-s2 .select2-selection--multiple .select2-selection__rendered {
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 8px; margin: 0;
+}
+.select2-container.ez-s2 .select2-selection--multiple .select2-selection__choice {
+  border: 1px solid #a5d6a7;
+  border-radius: 999px;
+  padding: 4px 8px;
+  background: #f4fbf4;
+}
+
 /* ==============================
    반응형
 ============================== */
@@ -336,3 +575,12 @@ button:disabled, .btn:disabled { background-color: #c8e6c9; cursor: not-allowed;
   .table-grid th, .table-grid td { padding: 6px; font-size: 0.8rem; }
   .pagination button { font-size: 0.8rem; padding: 4px 8px; }
 }
+
+/* 반응형: 폼은 모바일 1열, 태블릿 2열 */
+@media (max-width: 768px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .form-actions { flex-direction: column; }
+  .btn-cancel, .btn-insert { width: 100%; }
+}
+
+@media (max-width:480px){ .form-card { --control-h: 40px; } }

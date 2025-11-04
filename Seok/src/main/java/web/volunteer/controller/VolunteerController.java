@@ -169,7 +169,7 @@ public class VolunteerController {
 		String flag = volunteerDTO.getFlag();
 		
 		try {
-			if ( flag == null || flag.isBlank() || flag.isEmpty() ) {
+			if ( flag == null || flag.isEmpty() ) {
 				logger.info("=== 봉사 일정 상세 조회 컨트롤러 진입 ===");
 				
 				// 봉사 장소 조회
@@ -380,7 +380,7 @@ public class VolunteerController {
 		String flag = volunteerPlaceDTO.getFlag();
 		
 		try {
-			if ( flag == null || flag.isBlank() || flag.isEmpty() ) {
+			if ( flag == null || flag.isEmpty() ) {
 				logger.info("=== 봉사 장소 상세 조회 컨트롤러 진입 ===");
 				
 				// 메인 도시 조회
