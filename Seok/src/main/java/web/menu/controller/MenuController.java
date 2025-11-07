@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value="/menu")
 public class MenuController {
 	
-	@RequestMapping(value = "/fMenuList.do")
-	public String getFmenuList () {
-		return "menu/fMenuList.admin";
+	@RequestMapping(value = "/menuMng.do")
+	public String getMenuMng () {
+		return "menu/menuMng.admin";
 	}
 
 }

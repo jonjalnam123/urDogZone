@@ -33,8 +33,22 @@
         </a>
         <div class="collapse" id="collapsePages" data-bs-parent="#sidenavAccordion">
           <ul>
-            <li><a class="nav-link" href="/menu/fMenuList.do">대메뉴 설정</a></li>
-            <li><a class="nav-link" href="/menu/sMenuList.do">중메뉴 설정</a></li>
+            <li><a class="nav-link" href="/menu/menuMng.do">메뉴관리</a></li>
+          </ul>
+        </div>
+      </li>
+      
+      <!-- Pages -->
+      <li>
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSample" aria-expanded="false" aria-controls="collapseSample">
+          <i class="fas fa-book-open"></i> 샘플
+          <span class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></span>
+        </a>
+        <div class="collapse" id="collapseSample" data-bs-parent="#sidenavAccordion">
+          <ul>
+            <li><a class="nav-link" href="/sample/sampleForm">폼화면</a></li>
+            <li><a class="nav-link" href="/sample/sampleList">리스트화면</a></li>
+            <li><a class="nav-link" href="/sample/sampleTreeForm">트리폼화면</a></li>
           </ul>
         </div>
       </li>

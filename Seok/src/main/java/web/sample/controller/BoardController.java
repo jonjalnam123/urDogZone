@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,7 +16,7 @@ import web.sample.service.face.BoardService;
 import web.util.Paging;
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping("/sample")
 public class BoardController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -37,11 +38,14 @@ public class BoardController {
 		
 	}
 	
-	@RequestMapping("/test") 
-	public void test (@RequestParam String testData) {
-		
-		System.out.println("접속");
-		boardService.testList(testData);
+	@RequestMapping("/{path}") 
+	public String sampleView (@PathVariable String path) {
+		System.out.println("=======[샘플 진입]==========");
+		logger.info("path : {}", path);
+		String view = path;
+		String viewResult = "sample/" + view + ".admin";
+		logger.info("viewResult : {}", viewResult);
+		return viewResult;
 	}
 	
 }

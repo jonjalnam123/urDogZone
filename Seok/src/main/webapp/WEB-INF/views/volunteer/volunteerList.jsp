@@ -7,7 +7,7 @@
   <div class="page-header">
     <h2>봉사일정 목록</h2>
     <div class="breadcrumb">
-      <a href="#">봉사활동</a> &gt; <span>봉사일정 목록</span>
+      <a href="#">봉사활동</a>&nbsp;&gt;&nbsp;<span>봉사일정 목록</span>
     </div>
   </div>
   
